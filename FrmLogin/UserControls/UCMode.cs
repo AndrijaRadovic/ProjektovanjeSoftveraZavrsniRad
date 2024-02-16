@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Communication
+namespace FrmLogin.UserControls
 {
-    public enum Operation
+    public enum UCMode
     {
-        Login,
-        DodajProdavca
+        Create,
+        Update,
+        Delete
     }
 }

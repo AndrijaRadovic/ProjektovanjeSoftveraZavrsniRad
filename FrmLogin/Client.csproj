@@ -62,10 +62,27 @@
     </Compile>
     <Compile Include="GUIControllers\LoginGUIController.cs" />
     <Compile Include="GUIControllers\MainCoordinator.cs" />
+    <Compile Include="GUIControllers\ProdavacGUIController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\UCDefaultMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDefaultMain.Designer.cs">
+      <DependentUpon>UCDefaultMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCMode.cs" />
+    <Compile Include="UserControls\UCProdavac\UCProdavac.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProdavac\UCProdavac.Designer.cs">
+      <DependentUpon>UCProdavac.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +93,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\UCDefaultMain.resx">
+      <DependentUpon>UCDefaultMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProdavac\UCProdavac.resx">
+      <DependentUpon>UCProdavac.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

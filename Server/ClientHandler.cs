@@ -58,6 +58,12 @@ namespace Server
                             //response.IsSuccessful = true;
                         }
                         break;
+                    case Operation.DodajProdavca:
+                        {
+                            ServerController.Instance.DodajProdavca((Korisnik)request.Argument);
+                            response.Message = "Prodavac je uspesno dodat";
+                        }
+                        break;
                 }
             }
             catch(Exception ex)

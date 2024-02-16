@@ -1,5 +1,6 @@
 ﻿using Common.Domain;
 using Server.SystemOperations.SOLogin;
+using Server.SystemOperations.SORacun;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,12 @@ namespace Server
                     instance = new ServerController();
                 return instance;
             }
+        }
+
+        internal void DodajProdavca(Korisnik korisnik)
+        {
+            KreirajProdavcaSO so = new KreirajProdavcaSO(korisnik);
+            so.ExecuteTemplate();
         }
 
         //Login

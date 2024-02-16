@@ -38,7 +38,7 @@ namespace Common.Domain
 
         public string GetParameters()
         {
-            throw new NotImplementedException();
+            return "@ime, @prezime, @pol, @uloga, @username, @password, @jmbg";
         }
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
@@ -78,7 +78,13 @@ namespace Common.Domain
 
         public void PrepareCommand(SqlCommand command)
         {
-            throw new NotImplementedException();
+            command.Parameters.AddWithValue("@ime", Ime);
+            command.Parameters.AddWithValue("@prezime", Prezime);
+            command.Parameters.AddWithValue("@pol", Pol.ToString());
+            command.Parameters.AddWithValue("@uloga", Uloga.ToString());
+            command.Parameters.AddWithValue("@username", Username);
+            command.Parameters.AddWithValue("@password", Password);
+            command.Parameters.AddWithValue("@jmbg", Jmbg);
         }
 
         public List<IEntity> ReadAllSearch()

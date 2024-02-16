@@ -1,4 +1,6 @@
 ﻿using Common.Domain;
+using FrmLogin.GUIControllers;
+using FrmLogin.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +17,39 @@ namespace FrmLogin.Forms
     {
         private Uloga uloga;
 
-        public FrmMain()
-        {
-            InitializeComponent();
-        }
 
         public FrmMain(Uloga uloga)
         {
+            InitializeComponent();
             this.uloga = uloga;
+
+            kreirajNalogProdavcaToolStripMenuItem.Click += (s, e) =>
+                MainCoordinator.Instance.ShowProdavacPanel(UCMode.Create);
+
+
+            if (uloga != Uloga.Administrator)
+            {
+                //prodavacToolStripMenuItem.Enabled = false;
+                //kreirajProizvodToolStripMenuItem.Enabled = false;
+                //obrisiProizvodToolStripMenuItem.Enabled = false;
+                prodavacToolStripMenuItem.Visible = false;
+                kreirajProizvodToolStripMenuItem.Visible = false;
+                obrisiProizvodToolStripMenuItem.Visible = false;
+            }
+        }
+
+        internal void ChangePanel(Control control)
+        {
+            pnlMain.Controls.Clear();
+            pnlMain.Controls.Add(control);
+            control.Dock = DockStyle.Fill;
+            pnlMain.AutoSize = true;
+            pnlMain.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        }
+
+        private void prodavacToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

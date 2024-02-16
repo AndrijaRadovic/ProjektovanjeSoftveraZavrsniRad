@@ -16,6 +16,16 @@ namespace DBBroker
         {
             connection = new DBConnection();
         }
+
+        public void Add(IEntity entity)
+        {
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = $"insert into {entity.TableName} values({entity.GetParameters()})";
+            entity.PrepareCommand(command);
+            command.ExecuteNonQuery();
+            command.Dispose();
+        }
+
         public void BeginTransaction()
         {
             connection.BeginTransaction();

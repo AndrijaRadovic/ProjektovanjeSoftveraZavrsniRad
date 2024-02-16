@@ -61,5 +61,12 @@ namespace FrmLogin
 
             return (Korisnik)((Response)receiver.Receive()).Result;
         }
+
+        internal Response DodajProdavca(Korisnik korisnik)
+        {
+            Request request = new Request(Operation.DodajProdavca, korisnik);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
     }
 }
