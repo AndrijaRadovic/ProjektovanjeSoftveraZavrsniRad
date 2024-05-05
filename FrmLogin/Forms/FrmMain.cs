@@ -23,8 +23,14 @@ namespace FrmLogin.Forms
             InitializeComponent();
             this.uloga = uloga;
 
+            //prodavci
             kreirajNalogProdavcaToolStripMenuItem.Click += (s, e) =>
                 MainCoordinator.Instance.ShowProdavacPanel(UCMode.Create);
+            izmeniProdavcaToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
+
+            //proizvodi
+            kreirajProizvodToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowProizvodPanel(UCMode.Create);
+
 
 
             if (uloga != Uloga.Administrator)
@@ -38,6 +44,7 @@ namespace FrmLogin.Forms
             }
         }
 
+
         internal void ChangePanel(Control control)
         {
             pnlMain.Controls.Clear();
@@ -48,6 +55,16 @@ namespace FrmLogin.Forms
         }
 
         private void prodavacToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kreirajNalogProdavcaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void izmeniProdavcaToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

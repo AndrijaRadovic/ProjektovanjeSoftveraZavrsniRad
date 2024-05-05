@@ -59,7 +59,9 @@
     <Compile Include="ServerCommunication.cs" />
     <Compile Include="ServerController.cs" />
     <Compile Include="SystemOperations\SOLogin\LoginSO.cs" />
+    <Compile Include="SystemOperations\SOProdavac\IzmeniKorisnikaSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\ObrisiProdavcaSO.cs" />
+    <Compile Include="SystemOperations\SOProdavac\PronadjiKorisnikeSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\UcitajProdavcaSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\KreirajProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\ObrisiProizvodSO.cs" />
@@ -69,7 +71,7 @@
     <Compile Include="SystemOperations\SOProizvod\ZapamtiProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\KreirajProdavcaSO.cs" />
     <Compile Include="SystemOperations\SORacun\KreirajRacunSO.cs" />
-    <Compile Include="SystemOperations\SOProdavac\PronadjiProdavceSO.cs" />
+    <Compile Include="SystemOperations\SOProdavac\UcitajListuKorisnikaSO.cs" />
     <Compile Include="SystemOperations\SORacun\PronadjiRacuneSO.cs" />
     <Compile Include="SystemOperations\SORacun\StornirajRacunSO.cs" />
     <Compile Include="SystemOperations\SORacun\UcitajRacunSO.cs" />

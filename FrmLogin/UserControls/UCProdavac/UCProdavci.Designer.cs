@@ -1,6 +1,6 @@
 ﻿namespace FrmLogin.UserControls
 {
-    partial class UCProdavac
+    partial class UCProdavci
     {
         /// <summary> 
         /// Required designer variable.
@@ -125,7 +125,7 @@
             this.btnDodajProdavca.Name = "btnDodajProdavca";
             this.btnDodajProdavca.Size = new System.Drawing.Size(127, 64);
             this.btnDodajProdavca.TabIndex = 12;
-            this.btnDodajProdavca.Text = "Dodaj prodavca";
+            this.btnDodajProdavca.Text = "Sačuvaj";
             this.btnDodajProdavca.UseVisualStyleBackColor = true;
             // 
             // btnOdustani
@@ -143,7 +143,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(25, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(161, 39);
+            this.label7.Size = new System.Drawing.Size(156, 38);
             this.label7.TabIndex = 14;
             this.label7.Text = "Prodavac";
             // 
@@ -151,6 +151,7 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(120, 270);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '♣';
             this.txtPassword.Size = new System.Drawing.Size(203, 22);
             this.txtPassword.TabIndex = 19;
             // 
@@ -164,6 +165,7 @@
             // txtJmbg
             // 
             this.txtJmbg.Location = new System.Drawing.Point(120, 314);
+            this.txtJmbg.MaxLength = 13;
             this.txtJmbg.Name = "txtJmbg";
             this.txtJmbg.Size = new System.Drawing.Size(203, 22);
             this.txtJmbg.TabIndex = 21;
@@ -176,7 +178,7 @@
             this.cbPol.Size = new System.Drawing.Size(203, 24);
             this.cbPol.TabIndex = 22;
             // 
-            // UCProdavac
+            // UCProdavci
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,7 +197,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPrezime);
             this.Controls.Add(this.txtIme);
-            this.Name = "UCProdavac";
+            this.Name = "UCProdavci";
             this.Size = new System.Drawing.Size(373, 477);
             this.ResumeLayout(false);
             this.PerformLayout();

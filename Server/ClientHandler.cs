@@ -55,13 +55,46 @@ namespace Server
                     case Operation.Login:
                         {
                             response.Result = ServerController.Instance.Login((Korisnik)request.Argument);
-                            //response.IsSuccessful = true;
+                            
                         }
                         break;
+                    
                     case Operation.DodajProdavca:
                         {
                             ServerController.Instance.DodajProdavca((Korisnik)request.Argument);
                             response.Message = "Prodavac je uspesno dodat";
+                        }
+                        break;
+                    
+                    case Operation.VratiSveProdavce:
+                        {
+                            response.Result = ServerController.Instance.VratiSveProdavce();
+                        }
+                        break;
+
+                    case Operation.PretraziKorisnikePoImenu:
+                        {
+                            response.Result = ServerController.Instance.PretraziKorisnikePoImenu((string)request.Argument);
+                        }
+                        break;
+
+                    case Operation.ObrisiKorisnika:
+                        {
+                            ServerController.Instance.ObrisiKorisnika((Korisnik)request.Argument);
+                            response.Message = "Korisnik je uspesno obrisan!";
+                        }
+                        break;
+
+                    case Operation.NadjiKorisnikaPoId:
+                        {
+                            response.Result = ServerController.Instance.NadjiKorisnikaPoId((int)request.Argument);
+                        }
+                        break;
+
+                    case Operation.UpdateKorisnika:
+                        {
+                            ServerController.Instance.UpdateKorisnika((Korisnik)request.Argument);
+                            response.Message = "Korisnik je uspesno izmenjen";
                         }
                         break;
                 }
@@ -72,6 +105,8 @@ namespace Server
                 //response.IsSuccessful = false;
                 response.Message = ex.Message;
             }
+            //response.IsSuccessful = true;
+
             return response;
         }
     }

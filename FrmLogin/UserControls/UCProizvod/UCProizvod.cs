@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrmLogin.UserControls
+namespace FrmLogin.UserControls.UCProizvod
 {
-    public partial class UCProdavac : UserControl
+    public partial class UCProizvod : UserControl
     {
-        public UCProdavac()
+        public UCProizvod()
         {
             InitializeComponent();
         }

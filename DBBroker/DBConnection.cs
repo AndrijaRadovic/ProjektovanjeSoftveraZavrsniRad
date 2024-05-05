@@ -15,7 +15,6 @@ namespace DBBroker
 
         public DBConnection()
         {
-            //Proveri da li mora preko onog dbfactory-ja
             this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings["database"].ConnectionString);
         }
 

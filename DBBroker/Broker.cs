@@ -41,6 +41,17 @@ namespace DBBroker
             connection.Commit();
         }
 
+        public List<IEntity> GetAllByFilter(IEntity entity, string filter)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.TableName} where {entity.GetFilterQuery(filter)}";
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<IEntity> entities = entity.ReadAllSearch(reader);
+            reader.Close();
+            cmd.Dispose();
+            return entities;
+        }
+
         public IEntity GetEntityById(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
@@ -52,6 +63,14 @@ namespace DBBroker
             return entity;
         }
 
+        public void Obrisi(IEntity entity)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Delete from {entity.TableName} where {entity.GetByIdQuery()}";
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
         public void OpenConnection()
         {
             connection.OpenConnection();
@@ -60,6 +79,25 @@ namespace DBBroker
         public void Rollback()
         {
             connection.Rollback();
+        }
+
+        public void Update(IEntity entity)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Update {entity.TableName} set {entity.UpdateQuery()} where {entity.GetByIdQuery()}";
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+        public List<IEntity> VratiSve(IEntity entity)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.TableName} {entity.JoinQuery()}";
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<IEntity> entities = entity.ReadAllSearch(reader);
+            reader.Close();
+            cmd.Dispose();
+            return entities;
         }
     }
 }

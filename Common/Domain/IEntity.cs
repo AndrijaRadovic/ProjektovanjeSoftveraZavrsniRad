@@ -20,7 +20,7 @@ namespace Common
         string JoinQuery();
         string GetByIdQuery();
         string GetSearchAttributes();
-        string GetFilterQuery();
-        List<IEntity> ReadAllSearch();
+        string GetFilterQuery(string filter);
+        List<IEntity> ReadAllSearch(SqlDataReader reader);
     }
 }

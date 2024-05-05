@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 
 namespace Server.SystemOperations.SOProdavac
 {
-    internal class UcitajProdavcaSO : SystemOperationBase
+    internal class IzmeniKorisnikaSO : SystemOperationBase
     {
-        private int id;
+        private Korisnik korisnik;
 
-        public UcitajProdavcaSO(int id)
+        public IzmeniKorisnikaSO(Korisnik korisnik)
         {
-            this.id = id;
+            this.korisnik = korisnik;
         }
-
-        public Korisnik Result { get; internal set; }
 
         public override void ExecuteConcreteOperation()
         {
-            Result = (Korisnik)broker.GetEntityById(new Korisnik() { SifraKorisnika = id });
+            broker.Update(korisnik);
         }
     }
 }

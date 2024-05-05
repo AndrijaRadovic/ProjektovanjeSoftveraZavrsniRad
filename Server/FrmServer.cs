@@ -18,18 +18,17 @@ namespace Server
         public FrmServer()
         {
             InitializeComponent();
-            server = new ServerCommunication();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            server = new ServerCommunication();
+            server.StartServer();
 
-                server.StartServer();
-
-                btnStart.Enabled = false;
-                btnStop.Enabled = true;
-                lblStatus.Text = "Pokrenut";
-                lblStatus.ForeColor = Color.Green;
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            lblStatus.Text = "Pokrenut";
+            lblStatus.ForeColor = Color.Green;
 
         }
 

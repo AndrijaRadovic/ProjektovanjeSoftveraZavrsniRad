@@ -1,5 +1,6 @@
 ﻿using Common.Domain;
 using Server.SystemOperations.SOLogin;
+using Server.SystemOperations.SOProdavac;
 using Server.SystemOperations.SORacun;
 using System;
 using System.Collections.Generic;
@@ -36,5 +37,38 @@ namespace Server
             return (Korisnik)loginSO.result;
         }
 
+        internal Korisnik NadjiKorisnikaPoId(int id)
+        {
+            UcitajProdavcaSO so = new UcitajProdavcaSO(id);
+            so.ExecuteTemplate();
+            return so.Result;
+        }
+
+        internal void ObrisiKorisnika(Korisnik izabraniKorisnik)
+        {
+            ObrisiProdavcaSO so = new ObrisiProdavcaSO(izabraniKorisnik);
+            so.ExecuteTemplate();
+        }
+
+        internal List<Korisnik> PretraziKorisnikePoImenu(string ime)
+        {
+            PronadjiKorisnikeSO pretragaSO = new PronadjiKorisnikeSO(ime);
+            pretragaSO.ExecuteTemplate();
+            return pretragaSO.Result.Cast<Korisnik>().ToList();
+
+        }
+
+        internal void UpdateKorisnika(Korisnik korisnik)
+        {
+            IzmeniKorisnikaSO so = new IzmeniKorisnikaSO(korisnik);
+            so.ExecuteTemplate();
+        }
+
+        internal List<Korisnik> VratiSveProdavce()
+        {
+            UcitajListuKorisnikaSO so = new UcitajListuKorisnikaSO();
+            so.ExecuteTemplate();
+            return so.result.Cast<Korisnik>().ToList();
+        }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Communication\Sender.cs" />
     <Compile Include="Domain\Korisnik.cs" />
     <Compile Include="Domain\Pol.cs" />
+    <Compile Include="Domain\Proizvod.cs" />
     <Compile Include="Domain\Uloga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

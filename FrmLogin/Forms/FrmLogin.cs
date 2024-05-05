@@ -21,5 +21,10 @@ namespace FrmLogin
         {
 
         }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            txtPassword.Text = txtUsername.Text = "mika123";
+        }
     }
 }

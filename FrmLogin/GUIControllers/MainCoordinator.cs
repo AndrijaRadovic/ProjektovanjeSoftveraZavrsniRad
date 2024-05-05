@@ -52,5 +52,15 @@ namespace FrmLogin.GUIControllers
             //Dodati neku funkcionalnost ako zatreba
             frmMain.ChangePanel(main);
         }
+
+        internal void ShowProizvodPanel(UCMode mode)
+        {
+           // frmMain.ChangePanel();
+        }
+
+        internal void ShowPretragaProdavca()
+        {
+            frmMain.ChangePanel(prodavacGUIController.CreateUCIzmeniProdavca());
+        }
     }
 }

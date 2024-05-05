@@ -26,14 +26,14 @@ namespace Common.Domain
 
         public string PrimaryKey => SifraKorisnika.ToString();
 
-        public string GetByIdQuery()
+        public string LoginQuery()
         {
             return $"username='{Username}' and password='{Password}'";
         }
 
-        public string GetFilterQuery()
+        public string GetFilterQuery(string filter)
         {
-            throw new NotImplementedException();
+            return $"lower(ime) like concat('%',lower('{filter}'),'%')";
         }
 
         public string GetParameters()
@@ -68,12 +68,14 @@ namespace Common.Domain
 
         public string GetSearchAttributes()
         {
-            throw new NotImplementedException();
+            return "sifraKorisnika, ime, prezime, uloga";
+
+            //return "sifraKorisnika, ime, prezime, uloga, username, password";
         }
 
         public string JoinQuery()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public void PrepareCommand(SqlCommand command)
@@ -87,14 +89,36 @@ namespace Common.Domain
             command.Parameters.AddWithValue("@jmbg", Jmbg);
         }
 
-        public List<IEntity> ReadAllSearch()
+        public List<IEntity> ReadAllSearch(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> entities = new List<IEntity>();
+            while (reader.Read())
+            {
+                Korisnik korisnik = new Korisnik
+                {
+                    SifraKorisnika = (int)reader["sifraKorisnika"],
+                    Ime = (string)reader["ime"],
+                    Prezime = (string)reader["prezime"],
+                    Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
+                    //Username = (string)reader["username"],
+                    //Password = (string)reader["password"]
+                };
+                entities.Add(korisnik);
+            }
+            return entities;
         }
 
         public string UpdateQuery()
         {
-            throw new NotImplementedException();
+            return $"ime = '{Ime}', prezime = '{Prezime}', username = '{Username}', password = '{Password}'";
+        }
+
+        public string GetByIdQuery()
+        {
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+                return $"username='{Username}' and password='{Password}'";
+
+            return $"sifraKorisnika = {SifraKorisnika}";
         }
     }
 }

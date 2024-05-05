@@ -9,6 +9,11 @@ namespace Common.Communication
     public enum Operation
     {
         Login,
-        DodajProdavca
+        DodajProdavca,
+        VratiSveProdavce,
+        PretraziKorisnikePoImenu,
+        ObrisiKorisnika,
+        NadjiKorisnikaPoId,
+        UpdateKorisnika
     }
 }
