@@ -111,7 +111,7 @@
             this.btnOdustani.Name = "btnOdustani";
             this.btnOdustani.Size = new System.Drawing.Size(135, 50);
             this.btnOdustani.TabIndex = 20;
-            this.btnOdustani.Text = "Odustani";
+            this.btnOdustani.Text = "Nazad";
             this.btnOdustani.UseVisualStyleBackColor = true;
             // 
             // btnIzmeni

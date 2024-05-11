@@ -58,6 +58,12 @@ namespace Server
 
         }
 
+        internal void PromeniSifru(Korisnik prijavljeniKorisnik)
+        {
+            PromeniSifruSO so = new PromeniSifruSO(prijavljeniKorisnik);
+            so.ExecuteTemplate();
+        }
+
         internal void UpdateKorisnika(Korisnik korisnik)
         {
             IzmeniKorisnikaSO so = new IzmeniKorisnikaSO(korisnik);

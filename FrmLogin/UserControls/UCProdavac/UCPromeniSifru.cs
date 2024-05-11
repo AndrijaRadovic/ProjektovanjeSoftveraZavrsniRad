@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrmLogin.UserControls.UCProizvod
+namespace FrmLogin.UserControls.UCProdavac
 {
-    public partial class UCProizvod : UserControl
+    public partial class UCPromeniSifru : UserControl
     {
-        public UCProizvod()
+        public UCPromeniSifru()
         {
             InitializeComponent();
-        }
-
-        private void UCProizvod_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

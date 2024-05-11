@@ -14,10 +14,13 @@ using System.Windows.Forms;
 
 namespace FrmLogin.GUIControllers
 {
-    internal class ProdavacGUIController
+    internal class KorisnikGUIController
     {
         private UCProdavci ucProdavac;
         private UCIzmeniProdavca ucIzmeniProdavca;
+        private UCPromeniSifru ucPromenaSifre;
+
+        private Korisnik korisnikZaIzmenu;
         internal Control CreateUCProdavac(UCMode mode, Korisnik korisnik = null)
         {
             ucProdavac = new UCProdavci();
@@ -31,6 +34,8 @@ namespace FrmLogin.GUIControllers
             }
             else if (mode == UCMode.Update)
             {
+                korisnikZaIzmenu = korisnik;
+                ucProdavac.btnOdustani.Text = "Nazad";
                 ucProdavac.btnDodajProdavca.Click += SacuvajIzmene;
                 ucProdavac.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
             }
@@ -48,6 +53,7 @@ namespace FrmLogin.GUIControllers
 
             Korisnik korisnik = new Korisnik()
             {
+                SifraKorisnika = korisnikZaIzmenu.SifraKorisnika,
                 Ime = ucProdavac.txtIme.Text.Trim(),
                 Prezime = ucProdavac.txtPrezime.Text.Trim(),
                 Pol = (Pol)ucProdavac.cbPol.SelectedItem,
@@ -285,6 +291,27 @@ namespace FrmLogin.GUIControllers
             //    MessageBox.Show("Neuspesna pretraga korisnika");
             //}
 
+        }
+
+        internal Control createUCPromenaSifre()
+        {
+            ucPromenaSifre = new UCPromeniSifru();
+            ucPromenaSifre.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
+            ucPromenaSifre.btnPotvrdi.Click += PromeniSifru;
+
+            return ucPromenaSifre;
+        }
+
+        private void PromeniSifru(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ucPromenaSifre.txtNovaSifra.Text) || ucPromenaSifre.txtNovaSifra.Text.Length < 8)
+            {
+                MessageBox.Show("Uneta šifra mora imati bar 8 karaktera!", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Response response = Communication.Instance.PromeniSifru(ucPromenaSifre.txtStaraSifra.Text, ucPromenaSifre.txtNovaSifra.Text);
+            MessageBox.Show(response.Message, (response.IsSuccessful?"asd":"dsa"));
         }
     }
 }

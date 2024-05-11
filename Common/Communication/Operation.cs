@@ -14,6 +14,7 @@ namespace Common.Communication
         PretraziKorisnikePoImenu,
         ObrisiKorisnika,
         NadjiKorisnikaPoId,
-        UpdateKorisnika
+        UpdateKorisnika,
+        PromeniSifru
     }
 }

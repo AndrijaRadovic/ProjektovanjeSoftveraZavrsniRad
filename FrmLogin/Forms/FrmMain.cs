@@ -27,6 +27,7 @@ namespace FrmLogin.Forms
             kreirajNalogProdavcaToolStripMenuItem.Click += (s, e) =>
                 MainCoordinator.Instance.ShowProdavacPanel(UCMode.Create);
             izmeniProdavcaToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
+            promeniSifruToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPromenaSifre();
 
             //proizvodi
             kreirajProizvodToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowProizvodPanel(UCMode.Create);
@@ -38,7 +39,9 @@ namespace FrmLogin.Forms
                 //prodavacToolStripMenuItem.Enabled = false;
                 //kreirajProizvodToolStripMenuItem.Enabled = false;
                 //obrisiProizvodToolStripMenuItem.Enabled = false;
-                prodavacToolStripMenuItem.Visible = false;
+                //prodavacToolStripMenuItem.Visible = false;
+                kreirajNalogProdavcaToolStripMenuItem.Visible = false;
+                izmeniProdavcaToolStripMenuItem.Visible = false;
                 kreirajProizvodToolStripMenuItem.Visible = false;
                 obrisiProizvodToolStripMenuItem.Visible = false;
             }
@@ -65,6 +68,11 @@ namespace FrmLogin.Forms
         }
 
         private void izmeniProdavcaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
         {
 
         }

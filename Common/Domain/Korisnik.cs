@@ -115,10 +115,12 @@ namespace Common.Domain
 
         public string GetByIdQuery()
         {
-            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-                return $"username='{Username}' and password='{Password}'";
-
             return $"sifraKorisnika = {SifraKorisnika}";
+        }
+
+        public string PromenaSifreQuery()
+        {
+            return $"password = '{Password}'";
         }
     }
 }

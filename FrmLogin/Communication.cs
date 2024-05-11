@@ -121,5 +121,12 @@ namespace FrmLogin
             sender.Send(request);
             return (Response)receiver.Receive();
         }
+
+        internal Response PromeniSifru(string staraSifra, string novaSifra)
+        {
+            Request request = new Request(Operation.PromeniSifru, new string[] { staraSifra, novaSifra });
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
     }
 }

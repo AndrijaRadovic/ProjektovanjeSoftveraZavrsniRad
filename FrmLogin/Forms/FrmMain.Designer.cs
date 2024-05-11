@@ -41,6 +41,7 @@
             this.pronadjiRacuneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stornirajRacunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.promeniSifruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             this.racunToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -61,23 +62,24 @@
             // 
             this.prodavacToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kreirajNalogProdavcaToolStripMenuItem,
-            this.izmeniProdavcaToolStripMenuItem});
+            this.izmeniProdavcaToolStripMenuItem,
+            this.promeniSifruToolStripMenuItem});
             this.prodavacToolStripMenuItem.Name = "prodavacToolStripMenuItem";
-            this.prodavacToolStripMenuItem.Size = new System.Drawing.Size(84, 26);
-            this.prodavacToolStripMenuItem.Text = "Prodavac";
+            this.prodavacToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.prodavacToolStripMenuItem.Text = "Korisnik";
             this.prodavacToolStripMenuItem.Click += new System.EventHandler(this.prodavacToolStripMenuItem_Click);
             // 
             // kreirajNalogProdavcaToolStripMenuItem
             // 
             this.kreirajNalogProdavcaToolStripMenuItem.Name = "kreirajNalogProdavcaToolStripMenuItem";
-            this.kreirajNalogProdavcaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.kreirajNalogProdavcaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.kreirajNalogProdavcaToolStripMenuItem.Text = "Kreiraj prodavca";
             this.kreirajNalogProdavcaToolStripMenuItem.Click += new System.EventHandler(this.kreirajNalogProdavcaToolStripMenuItem_Click);
             // 
             // izmeniProdavcaToolStripMenuItem
             // 
             this.izmeniProdavcaToolStripMenuItem.Name = "izmeniProdavcaToolStripMenuItem";
-            this.izmeniProdavcaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.izmeniProdavcaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.izmeniProdavcaToolStripMenuItem.Text = "Izmeni prodavca";
             this.izmeniProdavcaToolStripMenuItem.Click += new System.EventHandler(this.izmeniProdavcaToolStripMenuItem_Click);
             // 
@@ -88,7 +90,7 @@
             this.obrisiProizvodToolStripMenuItem,
             this.pronadjiProizvodeToolStripMenuItem});
             this.proizvodToolStripMenuItem.Name = "proizvodToolStripMenuItem";
-            this.proizvodToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
+            this.proizvodToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.proizvodToolStripMenuItem.Text = "Proizvod";
             // 
             // kreirajProizvodToolStripMenuItem
@@ -116,7 +118,7 @@
             this.pronadjiRacuneToolStripMenuItem,
             this.stornirajRacunToolStripMenuItem});
             this.racunToolStripMenuItem.Name = "racunToolStripMenuItem";
-            this.racunToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
+            this.racunToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.racunToolStripMenuItem.Text = "Racun";
             // 
             // kreirajRacunToolStripMenuItem
@@ -142,10 +144,16 @@
             this.pnlMain.AutoSize = true;
             this.pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 30);
+            this.pnlMain.Location = new System.Drawing.Point(0, 28);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(800, 420);
+            this.pnlMain.Size = new System.Drawing.Size(800, 422);
             this.pnlMain.TabIndex = 1;
+            // 
+            // promeniSifruToolStripMenuItem
+            // 
+            this.promeniSifruToolStripMenuItem.Name = "promeniSifruToolStripMenuItem";
+            this.promeniSifruToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.promeniSifruToolStripMenuItem.Text = "Promeni šifru";
             // 
             // FrmMain
             // 
@@ -157,6 +165,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
             this.Text = "FrmMain";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -179,5 +188,6 @@
         private System.Windows.Forms.ToolStripMenuItem pronadjiRacuneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stornirajRacunToolStripMenuItem;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.ToolStripMenuItem promeniSifruToolStripMenuItem;
     }
 }

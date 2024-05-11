@@ -63,6 +63,17 @@ namespace DBBroker
             return entity;
         }
 
+        public IEntity Login(Korisnik korisnik)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"select * from {korisnik.TableName} where {korisnik.LoginQuery()}";
+            SqlDataReader reader = cmd.ExecuteReader();
+            korisnik = (Korisnik)korisnik.GetReaderResult(reader);
+            reader.Close();
+            cmd.Dispose();
+            return korisnik;
+        }
+
         public void Obrisi(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
@@ -74,6 +85,14 @@ namespace DBBroker
         public void OpenConnection()
         {
             connection.OpenConnection();
+        }
+
+        public void PromeniSifru(Korisnik prijavljeniKorisnik)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Update {prijavljeniKorisnik.TableName} set {prijavljeniKorisnik.PromenaSifreQuery()} where {prijavljeniKorisnik.GetByIdQuery()}";
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
         }
 
         public void Rollback()

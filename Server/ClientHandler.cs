@@ -16,6 +16,8 @@ namespace Server
         private Sender sender;
         private Receiver receiver;
 
+        private Korisnik prijavljeniKorisnik;
+
         public ClientHandler(Socket client)
         {
             this.socket = client;
@@ -55,17 +57,17 @@ namespace Server
                     case Operation.Login:
                         {
                             response.Result = ServerController.Instance.Login((Korisnik)request.Argument);
-                            
+                            this.prijavljeniKorisnik = (Korisnik)response.Result;
                         }
                         break;
-                    
+
                     case Operation.DodajProdavca:
                         {
                             ServerController.Instance.DodajProdavca((Korisnik)request.Argument);
                             response.Message = "Prodavac je uspesno dodat";
                         }
                         break;
-                    
+
                     case Operation.VratiSveProdavce:
                         {
                             response.Result = ServerController.Instance.VratiSveProdavce();
@@ -97,9 +99,26 @@ namespace Server
                             response.Message = "Korisnik je uspesno izmenjen";
                         }
                         break;
+
+                    case Operation.PromeniSifru:
+                        {
+                            if (((string[])request.Argument)[0] == prijavljeniKorisnik.Password)
+                            {
+                                prijavljeniKorisnik.Password = ((string[])request.Argument)             [1];
+                                ServerController.Instance.PromeniSifru(prijavljeniKorisnik);
+                                response.IsSuccessful = true;
+                                response.Message = "Lozinka je uspešno promenjena";
+                            }
+                            else
+                            {
+                                response.IsSuccessful = false;
+                                response.Message = "Stara lozinka se ne poklapa sa unetom";
+                            }
+                        }
+                        break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(">>> " + ex.Message);
                 //response.IsSuccessful = false;

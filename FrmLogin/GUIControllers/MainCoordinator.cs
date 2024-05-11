@@ -27,11 +27,11 @@ namespace FrmLogin.GUIControllers
         public MainCoordinator()
         {
             //instancirati sve GUI kontrolere osim logina
-            prodavacGUIController = new ProdavacGUIController();
+            korisnikGUIController = new KorisnikGUIController();
         }
 
         private FrmMain frmMain;
-        private ProdavacGUIController prodavacGUIController;
+        private KorisnikGUIController korisnikGUIController;
 
         internal void ShowFrmMain(Uloga uloga)
         {
@@ -43,7 +43,7 @@ namespace FrmLogin.GUIControllers
 
         internal void ShowProdavacPanel(UCMode mode, Korisnik korisnik = null)
         {
-            frmMain.ChangePanel(prodavacGUIController.CreateUCProdavac(mode, korisnik));
+            frmMain.ChangePanel(korisnikGUIController.CreateUCProdavac(mode, korisnik));
         }
 
         internal void ShowDefault()
@@ -60,7 +60,12 @@ namespace FrmLogin.GUIControllers
 
         internal void ShowPretragaProdavca()
         {
-            frmMain.ChangePanel(prodavacGUIController.CreateUCIzmeniProdavca());
+            frmMain.ChangePanel(korisnikGUIController.CreateUCIzmeniProdavca());
+        }
+
+        internal void ShowPromenaSifre()
+        {
+            frmMain.ChangePanel(korisnikGUIController.createUCPromenaSifre());
         }
     }
 }

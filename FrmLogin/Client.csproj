@@ -62,7 +62,7 @@
     </Compile>
     <Compile Include="GUIControllers\LoginGUIController.cs" />
     <Compile Include="GUIControllers\MainCoordinator.cs" />
-    <Compile Include="GUIControllers\ProdavacGUIController.cs" />
+    <Compile Include="GUIControllers\KorisnikGUIController.cs" />
     <Compile Include="GUIControllers\ProizvodGUIController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +84,30 @@
     </Compile>
     <Compile Include="UserControls\UCProdavac\UCIzmeniProdavca.Designer.cs">
       <DependentUpon>UCIzmeniProdavca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProdavac\UCPromeniSifru.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProdavac\UCPromeniSifru.Designer.cs">
+      <DependentUpon>UCPromeniSifru.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCAlat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCAlat.Designer.cs">
+      <DependentUpon>UCAlat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCFarba.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCFarba.Designer.cs">
+      <DependentUpon>UCFarba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCPlocice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCPlocice.Designer.cs">
+      <DependentUpon>UCPlocice.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCProizvod\UCProizvod.cs">
       <SubType>UserControl</SubType>
@@ -114,6 +138,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCProdavac\UCProdavci.resx">
       <DependentUpon>UCProdavci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProdavac\UCPromeniSifru.resx">
+      <DependentUpon>UCPromeniSifru.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProizvod\UCAlat.resx">
+      <DependentUpon>UCAlat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProizvod\UCFarba.resx">
+      <DependentUpon>UCFarba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProizvod\UCPlocice.resx">
+      <DependentUpon>UCPlocice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCProizvod\UCProizvod.resx">
       <DependentUpon>UCProizvod.cs</DependentUpon>

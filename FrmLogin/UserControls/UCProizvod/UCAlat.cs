@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace FrmLogin.UserControls.UCProizvod
 {
-    public partial class UCProizvod : UserControl
+    public partial class UCAlat : UserControl
     {
-        public UCProizvod()
+        public UCAlat()
         {
             InitializeComponent();
-        }
-
-        private void UCProizvod_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
