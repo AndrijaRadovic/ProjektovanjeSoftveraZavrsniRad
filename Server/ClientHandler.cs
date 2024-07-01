@@ -104,7 +104,7 @@ namespace Server
                         {
                             if (((string[])request.Argument)[0] == prijavljeniKorisnik.Password)
                             {
-                                prijavljeniKorisnik.Password = ((string[])request.Argument)             [1];
+                                prijavljeniKorisnik.Password = ((string[])request.Argument)[1];
                                 ServerController.Instance.PromeniSifru(prijavljeniKorisnik);
                                 response.IsSuccessful = true;
                                 response.Message = "Lozinka je uspešno promenjena";
@@ -116,15 +116,24 @@ namespace Server
                             }
                         }
                         break;
+
+                    case Operation.DodajProizvod:
+                        {
+                            ServerController.Instance.DodajProizvod((Proizvod)request.Argument);
+                            response.Message = "Proizvod je uspesno dodat";
+                        }
+
+                        break;
                 }
             }
             catch (Exception ex)
             {
+
                 Debug.WriteLine(">>> " + ex.Message);
-                //response.IsSuccessful = false;
+                response.IsSuccessful = false;
                 response.Message = ex.Message;
             }
-            //response.IsSuccessful = true;
+            response.IsSuccessful = true;
 
             return response;
         }

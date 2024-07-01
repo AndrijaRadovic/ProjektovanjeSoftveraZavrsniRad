@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Common.Domain
 {
-    internal class Proizvod : IEntity
+    [Serializable]
+    public class Proizvod : IEntity
     {
         public int SifraProizvoda { get; set; }
         public string NazivProizvoda { get; set; }
@@ -17,6 +18,8 @@ namespace Common.Domain
         public string DisplayValue => NazivProizvoda;
 
         public string PrimaryKey => SifraProizvoda.ToString();
+
+        public object IdColumn => "sifraProizvoda";
 
         public string GetByIdQuery()
         {
@@ -28,9 +31,9 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string GetParameters()
+        public virtual string GetParameters(bool parent = false)
         {
-            throw new NotImplementedException();
+            return "@nazivProizvoda, @cena";
         }
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
@@ -48,14 +51,25 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
+        public virtual string GetTableName(bool parent = false)
+        {
+            return TableName;
+        }
+
         public string JoinQuery()
         {
             throw new NotImplementedException();
         }
 
-        public void PrepareCommand(SqlCommand command)
+        public string LoginQuery()
         {
             throw new NotImplementedException();
+        }
+
+        public virtual void PrepareCommand(SqlCommand command, bool parent = false)
+        {
+            command.Parameters.AddWithValue("@nazivProizvoda", NazivProizvoda);
+            command.Parameters.AddWithValue("@cena", Cena);
         }
 
         public List<IEntity> ReadAllSearch(SqlDataReader reader)

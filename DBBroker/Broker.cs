@@ -17,11 +17,11 @@ namespace DBBroker
             connection = new DBConnection();
         }
 
-        public void Add(IEntity entity)
+        public void Add(IEntity entity, bool parent = false)
         {
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = $"insert into {entity.TableName} values({entity.GetParameters()})";
-            entity.PrepareCommand(command);
+            command.CommandText = $"insert into {entity.GetTableName(parent)} values({entity.GetParameters(parent)})";
+            entity.PrepareCommand(command, parent);
             command.ExecuteNonQuery();
             command.Dispose();
         }
@@ -63,15 +63,15 @@ namespace DBBroker
             return entity;
         }
 
-        public IEntity Login(Korisnik korisnik)
+        public IEntity Login(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"select * from {korisnik.TableName} where {korisnik.LoginQuery()}";
+            cmd.CommandText = $"select * from {entity.TableName} where {entity.LoginQuery()}";
             SqlDataReader reader = cmd.ExecuteReader();
-            korisnik = (Korisnik)korisnik.GetReaderResult(reader);
+            entity = (Korisnik)entity.GetReaderResult(reader);
             reader.Close();
             cmd.Dispose();
-            return korisnik;
+            return entity;
         }
 
         public void Obrisi(IEntity entity)
@@ -87,6 +87,7 @@ namespace DBBroker
             connection.OpenConnection();
         }
 
+        //Mora genericka
         public void PromeniSifru(Korisnik prijavljeniKorisnik)
         {
             SqlCommand cmd = connection.CreateCommand();
@@ -117,6 +118,15 @@ namespace DBBroker
             reader.Close();
             cmd.Dispose();
             return entities;
+        }
+
+        public int GetLastId(IEntity entity)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Select max({entity.IdColumn}) from {entity.GetTableName(true)}";
+            int maxId = (int) cmd.ExecuteScalar();
+            cmd.Dispose();
+            return maxId;
         }
     }
 }

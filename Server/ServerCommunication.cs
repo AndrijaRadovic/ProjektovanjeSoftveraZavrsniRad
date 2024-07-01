@@ -46,6 +46,8 @@ namespace Server
             }
             catch (Exception ex)
             {
+                // Nzm sto imam ovaj throw
+                //throw ex;
                 Debug.WriteLine(">>> " + ex.Message);
             }
         }

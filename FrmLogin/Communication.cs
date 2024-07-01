@@ -68,13 +68,16 @@ namespace FrmLogin
             try
             {
                 Request request = new Request(Operation.Login, korisnik);
-                sender.Send(request);
+                if (sender != null)
+                {
+                    sender.Send(request);
+                    return (Korisnik)((Response)receiver.Receive()).Result;
+                }
 
-                return (Korisnik)((Response)receiver.Receive()).Result;
+                return null;
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Greska sa povezivanjem!", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return null;
             }
@@ -125,6 +128,13 @@ namespace FrmLogin
         internal Response PromeniSifru(string staraSifra, string novaSifra)
         {
             Request request = new Request(Operation.PromeniSifru, new string[] { staraSifra, novaSifra });
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
+
+        internal Response DodajProizvod(Proizvod proizvod)
+        {
+            Request request = new Request(Operation.DodajProizvod, proizvod);
             sender.Send(request);
             return (Response)receiver.Receive();
         }

@@ -1,6 +1,7 @@
 ﻿using Common.Domain;
 using Server.SystemOperations.SOLogin;
 using Server.SystemOperations.SOProdavac;
+using Server.SystemOperations.SOProizvod;
 using Server.SystemOperations.SORacun;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,15 @@ namespace Server
         {
             KreirajProdavcaSO so = new KreirajProdavcaSO(korisnik);
             so.ExecuteTemplate();
+        }
+
+        internal void DodajProizvod(Proizvod proizvod)
+        {
+            KreirajNadredjeniProizvodSO nadredjeniSo = new KreirajNadredjeniProizvodSO(proizvod);
+            nadredjeniSo.ExecuteTemplate();
+
+            KreirajPodredjeniProizvod podredjeniSo = new KreirajPodredjeniProizvod(proizvod);
+            podredjeniSo.ExecuteTemplate();
         }
 
         //Login

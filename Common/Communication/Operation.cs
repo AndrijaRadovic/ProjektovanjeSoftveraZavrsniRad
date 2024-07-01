@@ -15,6 +15,7 @@ namespace Common.Communication
         ObrisiKorisnika,
         NadjiKorisnikaPoId,
         UpdateKorisnika,
-        PromeniSifru
+        PromeniSifru,
+        DodajProizvod
     }
 }

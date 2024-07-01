@@ -28,10 +28,12 @@ namespace FrmLogin.GUIControllers
         {
             //instancirati sve GUI kontrolere osim logina
             korisnikGUIController = new KorisnikGUIController();
+            proizvodGUIController = new ProizvodGUIController();
         }
 
         private FrmMain frmMain;
         private KorisnikGUIController korisnikGUIController;
+        private ProizvodGUIController proizvodGUIController;
 
         internal void ShowFrmMain(Uloga uloga)
         {
@@ -55,7 +57,7 @@ namespace FrmLogin.GUIControllers
 
         internal void ShowProizvodPanel(UCMode mode)
         {
-           // frmMain.ChangePanel();
+            frmMain.ChangePanel(proizvodGUIController.CreateUCProizvod(UCMode.Create));
         }
 
         internal void ShowPretragaProdavca()
@@ -66,6 +68,11 @@ namespace FrmLogin.GUIControllers
         internal void ShowPromenaSifre()
         {
             frmMain.ChangePanel(korisnikGUIController.createUCPromenaSifre());
+        }
+
+        internal void ShowOdgovarajuciProizvodPanel(TipProizvoda tipProizvoda)
+        {
+            frmMain.ChangePanelProizvoda(proizvodGUIController.createUCTipProizvoda(tipProizvoda));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace FrmLogin.GUIControllers
             else if (mode == UCMode.Update)
             {
                 korisnikZaIzmenu = korisnik;
-                ucProdavac.btnOdustani.Text = "Nazad";
+                //ucProdavac.btnOdustani.Text = "Nazad";
                 ucProdavac.btnDodajProdavca.Click += SacuvajIzmene;
                 ucProdavac.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
             }
@@ -133,7 +133,7 @@ namespace FrmLogin.GUIControllers
                 controls.Add(ucProdavac.txtUsername);
             }
 
-            //Mozda dodati neki regex uslov i/ili hash
+            //Mozda dodati neki regex uslov i/ili hash - dodaj mejl i telefon
             if (string.IsNullOrEmpty(ucProdavac.txtPassword.Text) || ucProdavac.txtPassword.Text.Length < 8)
             {
                 errors.Add("Uneta šifra mora imati bar 8 karaktera!");
@@ -265,6 +265,7 @@ namespace FrmLogin.GUIControllers
         {
             ucIzmeniProdavca.dgvKorisnici.DataSource = korisnici;
 
+            ucIzmeniProdavca.dgvKorisnici.Columns["SifraKorisnika"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["Pol"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["Username"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["Password"].Visible = false;

@@ -45,12 +45,17 @@
     <Compile Include="Communication\Operation.cs" />
     <Compile Include="Communication\Request.cs" />
     <Compile Include="Communication\Response.cs" />
+    <Compile Include="Domain\Alat.cs" />
+    <Compile Include="Domain\Farba.cs" />
     <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Communication\Receiver.cs" />
     <Compile Include="Communication\Sender.cs" />
     <Compile Include="Domain\Korisnik.cs" />
+    <Compile Include="Domain\Plocice.cs" />
     <Compile Include="Domain\Pol.cs" />
     <Compile Include="Domain\Proizvod.cs" />
+    <Compile Include="Domain\TipAlata.cs" />
+    <Compile Include="Domain\TipProizvoda.cs" />
     <Compile Include="Domain\Uloga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

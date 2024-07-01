@@ -12,15 +12,20 @@ namespace Common
         string TableName { get; }
         string DisplayValue { get; }
         string PrimaryKey { get; }
+        object IdColumn { get; }
+
         List<IEntity> GetReaderList(SqlDataReader reader);
         IEntity GetReaderResult(SqlDataReader reader);
-        string GetParameters();
-        void PrepareCommand(SqlCommand command);
+        string GetParameters(bool parent = false);
+        void PrepareCommand(SqlCommand command, bool parent = false);
         string UpdateQuery();
         string JoinQuery();
         string GetByIdQuery();
         string GetSearchAttributes();
         string GetFilterQuery(string filter);
         List<IEntity> ReadAllSearch(SqlDataReader reader);
+        string LoginQuery();
+        string GetTableName(bool parent = false);
+
     }
 }

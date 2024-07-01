@@ -31,9 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtMaterijal = new System.Windows.Forms.TextBox();
-            this.txtSirina = new System.Windows.Forms.TextBox();
-            this.txtDuzina = new System.Windows.Forms.TextBox();
+            this.txtMaterijalPlocice = new System.Windows.Forms.TextBox();
+            this.txtSirinaPlocice = new System.Windows.Forms.TextBox();
+            this.txtDuzinaPlocice = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 44);
+            this.label1.Location = new System.Drawing.Point(25, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 20);
             this.label1.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(26, 87);
+            this.label2.Location = new System.Drawing.Point(25, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 1;
@@ -62,41 +62,42 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(26, 129);
+            this.label3.Location = new System.Drawing.Point(25, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Dužina";
             // 
-            // txtMaterijal
+            // txtMaterijalPlocice
             // 
-            this.txtMaterijal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaterijal.Location = new System.Drawing.Point(105, 44);
-            this.txtMaterijal.Name = "txtMaterijal";
-            this.txtMaterijal.Size = new System.Drawing.Size(152, 27);
-            this.txtMaterijal.TabIndex = 3;
+            this.txtMaterijalPlocice.BackColor = System.Drawing.SystemColors.Window;
+            this.txtMaterijalPlocice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaterijalPlocice.Location = new System.Drawing.Point(104, 29);
+            this.txtMaterijalPlocice.Name = "txtMaterijalPlocice";
+            this.txtMaterijalPlocice.Size = new System.Drawing.Size(152, 27);
+            this.txtMaterijalPlocice.TabIndex = 3;
             // 
-            // txtSirina
+            // txtSirinaPlocice
             // 
-            this.txtSirina.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSirina.Location = new System.Drawing.Point(105, 84);
-            this.txtSirina.Name = "txtSirina";
-            this.txtSirina.Size = new System.Drawing.Size(152, 27);
-            this.txtSirina.TabIndex = 4;
+            this.txtSirinaPlocice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSirinaPlocice.Location = new System.Drawing.Point(104, 69);
+            this.txtSirinaPlocice.Name = "txtSirinaPlocice";
+            this.txtSirinaPlocice.Size = new System.Drawing.Size(152, 27);
+            this.txtSirinaPlocice.TabIndex = 4;
             // 
-            // txtDuzina
+            // txtDuzinaPlocice
             // 
-            this.txtDuzina.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDuzina.Location = new System.Drawing.Point(105, 126);
-            this.txtDuzina.Name = "txtDuzina";
-            this.txtDuzina.Size = new System.Drawing.Size(152, 27);
-            this.txtDuzina.TabIndex = 5;
+            this.txtDuzinaPlocice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDuzinaPlocice.Location = new System.Drawing.Point(104, 111);
+            this.txtDuzinaPlocice.Name = "txtDuzinaPlocice";
+            this.txtDuzinaPlocice.Size = new System.Drawing.Size(152, 27);
+            this.txtDuzinaPlocice.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(263, 87);
+            this.label4.Location = new System.Drawing.Point(262, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 20);
             this.label4.TabIndex = 6;
@@ -106,7 +107,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(263, 129);
+            this.label5.Location = new System.Drawing.Point(262, 114);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 20);
             this.label5.TabIndex = 7;
@@ -116,16 +117,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtDuzina);
-            this.Controls.Add(this.txtSirina);
-            this.Controls.Add(this.txtMaterijal);
+            this.Controls.Add(this.txtDuzinaPlocice);
+            this.Controls.Add(this.txtSirinaPlocice);
+            this.Controls.Add(this.txtMaterijalPlocice);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UCPlocice";
-            this.Size = new System.Drawing.Size(310, 218);
+            this.Size = new System.Drawing.Size(310, 165);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,8 +140,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.TextBox txtMaterijal;
-        internal System.Windows.Forms.TextBox txtSirina;
-        internal System.Windows.Forms.TextBox txtDuzina;
+        internal System.Windows.Forms.TextBox txtMaterijalPlocice;
+        internal System.Windows.Forms.TextBox txtSirinaPlocice;
+        internal System.Windows.Forms.TextBox txtDuzinaPlocice;
     }
 }

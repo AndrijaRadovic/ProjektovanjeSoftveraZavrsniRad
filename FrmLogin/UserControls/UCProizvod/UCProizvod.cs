@@ -21,5 +21,10 @@ namespace FrmLogin.UserControls.UCProizvod
         {
 
         }
+
+        private void cbTip_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

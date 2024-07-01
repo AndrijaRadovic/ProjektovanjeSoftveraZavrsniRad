@@ -19,12 +19,13 @@ namespace Common.Domain
         public string Username { get; set; }
         public string Password { get; set; }
         public string Jmbg { get; set; }
-
         public string TableName => "Korisnik1";
 
         public string DisplayValue => Username;
 
         public string PrimaryKey => SifraKorisnika.ToString();
+
+        public object IdColumn => "sifraKorisnika";
 
         public string LoginQuery()
         {
@@ -36,7 +37,7 @@ namespace Common.Domain
             return $"lower(ime) like concat('%',lower('{filter}'),'%')";
         }
 
-        public string GetParameters()
+        public string GetParameters(bool parent = false)
         {
             return "@ime, @prezime, @pol, @uloga, @username, @password, @jmbg";
         }
@@ -78,7 +79,7 @@ namespace Common.Domain
             return "";
         }
 
-        public void PrepareCommand(SqlCommand command)
+        public void PrepareCommand(SqlCommand command, bool parent = false)
         {
             command.Parameters.AddWithValue("@ime", Ime);
             command.Parameters.AddWithValue("@prezime", Prezime);
@@ -121,6 +122,11 @@ namespace Common.Domain
         public string PromenaSifreQuery()
         {
             return $"password = '{Password}'";
+        }
+
+        public string GetTableName(bool parent = false)
+        {
+            return TableName;
         }
     }
 }
