@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace FrmLogin.UserControls.UCProizvod
 {
-    public partial class UCFarba : UserControl
+    public partial class UCPrikazProizvoda : UserControl
     {
-        public UCFarba()
+        public UCPrikazProizvoda()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

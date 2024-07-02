@@ -18,13 +18,13 @@ namespace FrmLogin.Forms
 {
     public partial class FrmMain : Form
     {
-        public static Uloga uloga;
+        public Uloga uloga;
 
 
         public FrmMain(Uloga uloga)
         {
             InitializeComponent();
-            FrmMain.uloga = uloga;
+            this.uloga = uloga;
 
             //prodavci
             kreirajNalogProdavcaToolStripMenuItem.Click += (s, e) =>
@@ -35,6 +35,7 @@ namespace FrmLogin.Forms
 
             //proizvodi
             kreirajProizvodToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowProizvodPanel(UCMode.Create);
+            prikaziProizvodeToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPrikazProizvodaPanel();
 
 
 

@@ -74,10 +74,10 @@ namespace DBBroker
             return entity;
         }
 
-        public void Obrisi(IEntity entity)
+        public void Delete(IEntity entity, bool parent = false)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Delete from {entity.TableName} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"Delete from {entity.GetTableName(parent)} where {entity.GetByIdQuery()}";
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
@@ -112,7 +112,7 @@ namespace DBBroker
         public List<IEntity> VratiSve(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.TableName} {entity.JoinQuery()}";
+            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.GetTableName()} {entity.JoinQuery()}";
             SqlDataReader reader = cmd.ExecuteReader();
             List<IEntity> entities = entity.ReadAllSearch(reader);
             reader.Close();

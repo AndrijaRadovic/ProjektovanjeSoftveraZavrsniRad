@@ -2,9 +2,11 @@
 using Common.Domain;
 using FrmLogin.Forms;
 using FrmLogin.UserControls;
+using FrmLogin.UserControls.UCProdavac;
 using FrmLogin.UserControls.UCProizvod;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,9 @@ namespace FrmLogin.GUIControllers
         private UCFarba ucFarba;
         private UCPlocice ucPlocice;
         private TipProizvoda? izabraniTip = null;
+        private UCPrikazProizvoda ucPrikazProizvoda;
+
+        private BindingList<Proizvod> listaProizvoda;
 
         internal Control CreateUCProizvod(UCMode mode, Proizvod proizvod = null)
         {
@@ -132,7 +137,7 @@ namespace FrmLogin.GUIControllers
                 controls.Add(ucProizvod.cbTip);
             }
 
-            if (!double.TryParse(ucProizvod.txtCena.Text, out double a) || a <= 0 )
+            if (!double.TryParse(ucProizvod.txtCena.Text, out double a) || a <= 0)
             {
                 errors.Add("Cena mora biti broj veći od 0");
                 controls.Add(ucProizvod.txtCena);
@@ -172,18 +177,18 @@ namespace FrmLogin.GUIControllers
                     errors.Add("Morate uneti boju farbe");
                     controls.Add(ucFarba.txtBojaFarbe);
                 }
-                if(!double.TryParse(ucFarba.txtVelicinaPakovanja.Text, out a))
+                if (!double.TryParse(ucFarba.txtVelicinaPakovanja.Text, out a))
                 {
                     errors.Add("Velicina pakovanja mora biti broj");
                     controls.Add(ucFarba.txtVelicinaPakovanja);
                 }
             }
 
-            if(izabraniTip == TipProizvoda.Alat)
+            if (izabraniTip == TipProizvoda.Alat)
             {
                 ucAlat.cbTipAlata.BackColor = Color.White;
 
-                if(ucAlat.cbTipAlata.SelectedIndex < 0)
+                if (ucAlat.cbTipAlata.SelectedIndex < 0)
                 {
                     errors.Add("Morate izabrati tip alata");
                     controls.Add(ucAlat.cbTipAlata);
@@ -251,6 +256,125 @@ namespace FrmLogin.GUIControllers
             }
 
             return null;
+        }
+
+        internal Control createUCPrikazProizvoda(Uloga uloga)
+        {
+            ucPrikazProizvoda = new UCPrikazProizvoda();
+
+            if (uloga == Uloga.Prodavac)
+            {
+                ucPrikazProizvoda.btnIzmeni.Visible = false;
+                ucPrikazProizvoda.btnObrisi.Visible = false;
+            }
+
+            ucPrikazProizvoda.Load += UcitajProizvode;
+            ucPrikazProizvoda.Load += prepareCbTip;
+            ucPrikazProizvoda.btnNazad.Click
+                += (s, e) => MainCoordinator.Instance.ShowDefault();
+            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu;
+            ucPrikazProizvoda.btnObrisi.Click += ObrisiProizvod;
+            ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu;
+            ucPrikazProizvoda.cbTip.SelectedIndexChanged += FiltrirajProizvode;
+
+            return ucPrikazProizvoda;
+        }
+
+        private void prepareCbTip(object sender, EventArgs e)
+        {
+            List<TipProizvoda> cbLista = new List<TipProizvoda>();
+            cbLista.AddRange(Enum.GetValues(typeof(TipProizvoda)).Cast<TipProizvoda>().ToList());
+            cbLista.Insert(0, (TipProizvoda)(-1));
+
+            ucPrikazProizvoda.cbTip.DataSource = cbLista;
+            ucPrikazProizvoda.cbTip.Format += CbTipFormat;
+
+            //ucPrikazProizvoda.cbTip.DataSource = Enum.GetValues(typeof(TipProizvoda));
+            ucPrikazProizvoda.cbTip.SelectedIndex = 0;
+        }
+
+        private void FiltrirajProizvode(object sender, EventArgs e)
+        {
+            if (ucPrikazProizvoda.cbTip.SelectedIndex == 0)
+            {
+                ucPrikazProizvoda.dgvProizvodi.DataSource = listaProizvoda;
+                return;
+            }
+
+            ucPrikazProizvoda.dgvProizvodi.DataSource = listaProizvoda.Where(p => p.TipProizvoda == (TipProizvoda)ucPrikazProizvoda.cbTip.SelectedItem).ToList();
+        }
+
+        private void PretraziPoNazivu(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ucPrikazProizvoda.txtPretraga.Text))
+            {
+                //List<Korisnik> korisnici = Communication.Instance.PretraziKorisnikePoImenu(ucIzmeniProdavca.txtPretraga.Text);
+                //if (korisnici == null || korisnici.Count == 0)
+                //{
+                //    MessageBox.Show("Ne postoje korisnici sa tim imenom");
+                //    return;
+                //}
+                //else prepareDgv(korisnici);
+            }
+            else
+            {
+                UcitajProizvode(sender, e);
+            }
+        }
+
+        private void ObrisiProizvod(object sender, EventArgs e)
+        {
+            if (ucPrikazProizvoda.dgvProizvodi.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Mora biti izabran tacno jedan proizvod", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (MessageBox.Show("Da li ste sigurni da zelite da obrisete izabrani proizvod?", "Brisanje proizvoda", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            Proizvod izabraniProizvod = (Proizvod)ucPrikazProizvoda.dgvProizvodi.SelectedRows[0].DataBoundItem;
+            Response response = Communication.Instance.ObrisiProizvod(izabraniProizvod);
+            ucPrikazProizvoda.btnPretraga.PerformClick();
+            MessageBox.Show(response.Message);
+        }
+
+        private void BtnObrisi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nije implementirano");
+        }
+
+        private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nije implementirano");
+        }
+
+        private void UcitajProizvode(object sender, EventArgs e)
+        {
+            List<Proizvod> proizvodi = Communication.Instance.VratiSveProizvode();
+            listaProizvoda = new BindingList<Proizvod>(proizvodi);
+            prepareDgv(proizvodi);
+        }
+
+        private void CbTipFormat(object sender, ListControlConvertEventArgs e)
+        {
+            if ((int)e.Value == -1)
+            {
+                e.Value = "Sve";
+            }
+        }
+
+        private void prepareDgv(List<Proizvod> proizvodi)
+        {
+            ucPrikazProizvoda.dgvProizvodi.DataSource = proizvodi;
+
+            ucPrikazProizvoda.dgvProizvodi.Columns["SifraProizvoda"].Visible = false;
+            ucPrikazProizvoda.dgvProizvodi.Columns["TableName"].Visible = false;
+            ucPrikazProizvoda.dgvProizvodi.Columns["DisplayValue"].Visible = false;
+            ucPrikazProizvoda.dgvProizvodi.Columns["PrimaryKey"].Visible = false;
+            ucPrikazProizvoda.dgvProizvodi.Columns["IdColumn"].Visible = false;
         }
     }
 }

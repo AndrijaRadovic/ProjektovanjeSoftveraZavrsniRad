@@ -122,7 +122,19 @@ namespace Server
                             ServerController.Instance.DodajProizvod((Proizvod)request.Argument);
                             response.Message = "Proizvod je uspesno dodat";
                         }
+                        break;
 
+                    case Operation.VratiSveProizvode:
+                        {
+                            response.Result = ServerController.Instance.VratiSveProizvode();
+                        }
+                        break;
+
+                    case Operation.ObrisiProizvod:
+                        {
+                            ServerController.Instance.ObrisiProizvod((Proizvod)request.Argument);
+                            response.Message = "Proizvod je uspesno obrisan";
+                        }
                         break;
                 }
             }

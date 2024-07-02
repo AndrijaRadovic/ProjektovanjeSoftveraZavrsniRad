@@ -60,6 +60,12 @@ namespace Server
             so.ExecuteTemplate();
         }
 
+        internal void ObrisiProizvod(Proizvod izabraniProizvod)
+        {
+            ObrisiProizvodSO so = new ObrisiProizvodSO(izabraniProizvod);
+            so.ExecuteTemplate();
+        }
+
         internal List<Korisnik> PretraziKorisnikePoImenu(string ime)
         {
             PronadjiKorisnikeSO pretragaSO = new PronadjiKorisnikeSO(ime);
@@ -85,6 +91,13 @@ namespace Server
             UcitajListuKorisnikaSO so = new UcitajListuKorisnikaSO();
             so.ExecuteTemplate();
             return so.result.Cast<Korisnik>().ToList();
+        }
+
+        internal List<Proizvod> VratiSveProizvode()
+        {
+            UcitajProizvodeSO so = new UcitajProizvodeSO();
+            so.ExecuteTemplate();
+            return so.result.Cast<Proizvod>().ToList();
         }
     }
 }

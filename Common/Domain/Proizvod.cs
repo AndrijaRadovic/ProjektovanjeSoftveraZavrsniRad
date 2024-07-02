@@ -14,7 +14,7 @@ namespace Common.Domain
         public string NazivProizvoda { get; set; }
         public double Cena { get; set; }
         public string TableName => "Proizvod";
-
+        public TipProizvoda TipProizvoda { get; set; }
         public string DisplayValue => NazivProizvoda;
 
         public string PrimaryKey => SifraProizvoda.ToString();
@@ -23,7 +23,7 @@ namespace Common.Domain
 
         public string GetByIdQuery()
         {
-            throw new NotImplementedException();
+            return $"sifraProizvoda = {SifraProizvoda}";
         }
 
         public string GetFilterQuery(string filter)
@@ -46,7 +46,7 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string GetSearchAttributes()
+        public virtual string GetSearchAttributes()
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace Common.Domain
             return TableName;
         }
 
-        public string JoinQuery()
+        public virtual string JoinQuery()
         {
             throw new NotImplementedException();
         }
@@ -72,7 +72,7 @@ namespace Common.Domain
             command.Parameters.AddWithValue("@cena", Cena);
         }
 
-        public List<IEntity> ReadAllSearch(SqlDataReader reader)
+        public virtual List<IEntity> ReadAllSearch(SqlDataReader reader)
         {
             throw new NotImplementedException();
         }

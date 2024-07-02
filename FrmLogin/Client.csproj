@@ -103,6 +103,12 @@
     <Compile Include="UserControls\UCProizvod\UCFarba.Designer.cs">
       <DependentUpon>UCFarba.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCProizvod\UCPrikazProizvoda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCProizvod\UCPrikazProizvoda.Designer.cs">
+      <DependentUpon>UCPrikazProizvoda.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCProizvod\UCPlocice.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCProizvod\UCFarba.resx">
       <DependentUpon>UCFarba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCProizvod\UCPrikazProizvoda.resx">
+      <DependentUpon>UCPrikazProizvoda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCProizvod\UCPlocice.resx">
       <DependentUpon>UCPlocice.cs</DependentUpon>

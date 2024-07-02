@@ -39,5 +39,33 @@ namespace Common.Domain
                 command.Parameters.AddWithValue("@velicinaPakovanja", VelicinaPakovanja);
             }
         }
+
+        public override string GetSearchAttributes()
+        {
+            return "Proizvod.sifraProizvoda, nazivProizvoda, cena, boja, velicinaPakovanja";
+        }
+        public override string JoinQuery()
+        {
+            return " inner join Proizvod on Farba.sifraProizvoda = Proizvod.sifraProizvoda";
+        }
+
+        public override List<IEntity> ReadAllSearch(SqlDataReader reader)
+        {
+            List<IEntity> entities = new List<IEntity>();
+            while (reader.Read())
+            {
+                Farba farba = new Farba
+                {
+                    SifraProizvoda = (int)reader["sifraProizvoda"],
+                    Cena = (double)reader["cena"],
+                    NazivProizvoda = (string)reader["nazivProizvoda"],
+                    Boja = (string)reader["boja"],
+                    VelicinaPakovanja = (double)reader["velicinaPakovanja"],
+                    TipProizvoda = TipProizvoda.Farba
+                };
+                entities.Add(farba);
+            }
+            return entities;
+        }
     }
 }

@@ -38,5 +38,32 @@ namespace Common.Domain
                 command.Parameters.AddWithValue("@tipAlata", TipAlata.ToString());
             }
         }
+        public override string GetSearchAttributes()
+        {
+            return "Proizvod.sifraProizvoda, nazivProizvoda, cena, tipAlata";
+        }
+
+        public override string JoinQuery()
+        {
+            return " inner join Proizvod on Alat.sifraProizvoda = Proizvod.sifraProizvoda";
+        }
+
+        public override List<IEntity> ReadAllSearch(SqlDataReader reader)
+        {
+            List<IEntity> entities = new List<IEntity>();
+            while (reader.Read())
+            {
+                Alat alat = new Alat
+                {
+                    SifraProizvoda = (int)reader["sifraProizvoda"],
+                    Cena = (double)reader["cena"],
+                    NazivProizvoda = (string)reader["nazivProizvoda"],
+                    TipAlata = (TipAlata)Enum.Parse(typeof(TipAlata), (string)reader["tipAlata"]),
+                    TipProizvoda = TipProizvoda.Alat
+                };
+                entities.Add(alat);
+            }
+            return entities;
+        }
     }
 }

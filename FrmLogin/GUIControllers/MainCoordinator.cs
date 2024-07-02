@@ -74,5 +74,10 @@ namespace FrmLogin.GUIControllers
         {
             frmMain.ChangePanelProizvoda(proizvodGUIController.createUCTipProizvoda(tipProizvoda));
         }
+
+        internal void ShowPrikazProizvodaPanel()
+        {
+            frmMain.ChangePanel(proizvodGUIController.createUCPrikazProizvoda(frmMain.uloga));
+        }
     }
 }

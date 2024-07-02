@@ -257,7 +257,7 @@ namespace FrmLogin.GUIControllers
 
         private void UcitajProdavce(object sender, EventArgs e)
         {
-            List<Korisnik> korisnici = Communication.Instance.PretraziSveProdavce();
+            List<Korisnik> korisnici = Communication.Instance.VratiSveProdavce();
             prepareDgv(korisnici);
         }
 

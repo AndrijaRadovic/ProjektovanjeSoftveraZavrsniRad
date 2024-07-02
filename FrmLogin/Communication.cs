@@ -90,7 +90,7 @@ namespace FrmLogin
             return (Response)receiver.Receive();
         }
 
-        internal List<Korisnik> PretraziSveProdavce()
+        internal List<Korisnik> VratiSveProdavce()
         {
             Request request = new Request(Operation.VratiSveProdavce, null);
             sender.Send(request);
@@ -135,6 +135,20 @@ namespace FrmLogin
         internal Response DodajProizvod(Proizvod proizvod)
         {
             Request request = new Request(Operation.DodajProizvod, proizvod);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
+
+        internal List<Proizvod> VratiSveProizvode()
+        {
+            Request request = new Request(Operation.VratiSveProizvode, null);
+            sender.Send(request);
+            return (List<Proizvod>)((Response)receiver.Receive()).Result;
+        }
+
+        internal Response ObrisiProizvod(Proizvod izabraniProizvod)
+        {
+            Request request = new Request(Operation.ObrisiProizvod, izabraniProizvod);
             sender.Send(request);
             return (Response)receiver.Receive();
         }
