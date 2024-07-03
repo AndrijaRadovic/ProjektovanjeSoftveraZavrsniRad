@@ -74,6 +74,13 @@ namespace Server
 
         }
 
+        internal List<Proizvod> PretraziProizvodePoNazivu(string naziv)
+        {
+            PronadjiProizvodeSO so = new PronadjiProizvodeSO(naziv);
+            so.ExecuteTemplate();
+            return so.Result.Cast<Proizvod>().ToList();
+        }
+
         internal void PromeniSifru(Korisnik prijavljeniKorisnik)
         {
             PromeniSifruSO so = new PromeniSifruSO(prijavljeniKorisnik);

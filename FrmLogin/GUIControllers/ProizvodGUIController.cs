@@ -272,9 +272,9 @@ namespace FrmLogin.GUIControllers
             ucPrikazProizvoda.Load += prepareCbTip;
             ucPrikazProizvoda.btnNazad.Click
                 += (s, e) => MainCoordinator.Instance.ShowDefault();
-            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu;
+            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu; // implementiraj
             ucPrikazProizvoda.btnObrisi.Click += ObrisiProizvod;
-            ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu;
+            ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu; // implementiraj
             ucPrikazProizvoda.cbTip.SelectedIndexChanged += FiltrirajProizvode;
 
             return ucPrikazProizvoda;
@@ -308,13 +308,15 @@ namespace FrmLogin.GUIControllers
         {
             if (!string.IsNullOrEmpty(ucPrikazProizvoda.txtPretraga.Text))
             {
-                //List<Korisnik> korisnici = Communication.Instance.PretraziKorisnikePoImenu(ucIzmeniProdavca.txtPretraga.Text);
-                //if (korisnici == null || korisnici.Count == 0)
-                //{
-                //    MessageBox.Show("Ne postoje korisnici sa tim imenom");
-                //    return;
-                //}
-                //else prepareDgv(korisnici);
+                List<Proizvod> proizvodi = Communication.Instance.PretraziProizvodePoNazivu(ucPrikazProizvoda.txtPretraga.Text);
+
+                if (proizvodi == null || proizvodi.Count == 0)
+                {
+                    MessageBox.Show("Ne postoje proizvodi sa unetim nazivom");
+                    return;
+                }
+                else
+                    prepareDgv(proizvodi);
             }
             else
             {
@@ -354,7 +356,6 @@ namespace FrmLogin.GUIControllers
         private void UcitajProizvode(object sender, EventArgs e)
         {
             List<Proizvod> proizvodi = Communication.Instance.VratiSveProizvode();
-            listaProizvoda = new BindingList<Proizvod>(proizvodi);
             prepareDgv(proizvodi);
         }
 
@@ -369,6 +370,7 @@ namespace FrmLogin.GUIControllers
         private void prepareDgv(List<Proizvod> proizvodi)
         {
             ucPrikazProizvoda.dgvProizvodi.DataSource = proizvodi;
+            listaProizvoda = new BindingList<Proizvod>(proizvodi);
 
             ucPrikazProizvoda.dgvProizvodi.Columns["SifraProizvoda"].Visible = false;
             ucPrikazProizvoda.dgvProizvodi.Columns["TableName"].Visible = false;

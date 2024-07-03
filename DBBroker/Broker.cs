@@ -44,7 +44,7 @@ namespace DBBroker
         public List<IEntity> GetAllByFilter(IEntity entity, string filter)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.TableName} where {entity.GetFilterQuery(filter)}";
+            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.GetTableName()} {entity.JoinQuery()} where {entity.GetFilterQuery(filter)}";
             SqlDataReader reader = cmd.ExecuteReader();
             List<IEntity> entities = entity.ReadAllSearch(reader);
             reader.Close();

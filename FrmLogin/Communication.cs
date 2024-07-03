@@ -152,5 +152,12 @@ namespace FrmLogin
             sender.Send(request);
             return (Response)receiver.Receive();
         }
+
+        internal List<Proizvod> PretraziProizvodePoNazivu(string text)
+        {
+            Request request = new Request(Operation.PretraziProizvodePoNazivu, text);
+            sender.Send(request);
+            return (List<Proizvod>)((Response)receiver.Receive()).Result;
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace Common.Domain
 
         public string GetFilterQuery(string filter)
         {
-            throw new NotImplementedException();
+            return $"lower(nazivProizvoda) like concat('%',lower('{filter}'),'%')";
         }
 
         public virtual string GetParameters(bool parent = false)

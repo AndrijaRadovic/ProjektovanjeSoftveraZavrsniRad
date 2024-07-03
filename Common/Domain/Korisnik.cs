@@ -27,11 +27,6 @@ namespace Common.Domain
 
         public object IdColumn => "sifraKorisnika";
 
-        //public string LoginQuery()
-        //{
-        //    return $"username='{Username}' and password='{Password}'";
-        //}
-
         public string GetFilterQuery(string filter)
         {
             return $"lower(ime) like concat('%',lower('{filter}'),'%')";

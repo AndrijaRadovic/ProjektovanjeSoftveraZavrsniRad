@@ -136,6 +136,12 @@ namespace Server
                             response.Message = "Proizvod je uspesno obrisan";
                         }
                         break;
+
+                    case Operation.PretraziProizvodePoNazivu:
+                        {
+                            response.Result = ServerController.Instance.PretraziProizvodePoNazivu((string)request.Argument);
+                        }
+                        break;
                 }
             }
             catch (Exception ex)
