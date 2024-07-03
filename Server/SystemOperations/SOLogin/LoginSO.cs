@@ -20,7 +20,7 @@ namespace Server.SystemOperations.SOLogin
 
         public override void ExecuteConcreteOperation()
         {
-            result = (Korisnik)broker.Login(korisnik);
+            result = (Korisnik)broker.GetEntityById(korisnik, "login");
         }
     }
 }

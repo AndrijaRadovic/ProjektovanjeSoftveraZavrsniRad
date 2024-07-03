@@ -13,9 +13,9 @@ namespace Server.SystemOperations.SOProizvod
         public List<IEntity> result = new List<IEntity>();
         public override void ExecuteConcreteOperation()
         {
-            result = broker.VratiSve(new Alat());
-            result.AddRange(broker.VratiSve(new Farba()));
-            result.AddRange(broker.VratiSve(new Plocice()));
+            result = broker.GetAll(new Alat());
+            result.AddRange(broker.GetAll(new Farba()));
+            result.AddRange(broker.GetAll(new Plocice()));
         }
     }
 }

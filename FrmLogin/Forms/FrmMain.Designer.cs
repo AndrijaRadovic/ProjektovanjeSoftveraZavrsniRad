@@ -81,7 +81,7 @@
             // 
             this.izmeniProdavcaToolStripMenuItem.Name = "izmeniProdavcaToolStripMenuItem";
             this.izmeniProdavcaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.izmeniProdavcaToolStripMenuItem.Text = "Izmeni prodavca";
+            this.izmeniProdavcaToolStripMenuItem.Text = "Prikaži prodavce";
             this.izmeniProdavcaToolStripMenuItem.Click += new System.EventHandler(this.izmeniProdavcaToolStripMenuItem_Click);
             // 
             // promeniSifruToolStripMenuItem
@@ -130,13 +130,13 @@
             // kreirajRacunToolStripMenuItem
             // 
             this.kreirajRacunToolStripMenuItem.Name = "kreirajRacunToolStripMenuItem";
-            this.kreirajRacunToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.kreirajRacunToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.kreirajRacunToolStripMenuItem.Text = "Kreiraj račun";
             // 
             // pronadjiRacuneToolStripMenuItem
             // 
             this.pronadjiRacuneToolStripMenuItem.Name = "pronadjiRacuneToolStripMenuItem";
-            this.pronadjiRacuneToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.pronadjiRacuneToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.pronadjiRacuneToolStripMenuItem.Text = "Prikaži račune";
             // 
             // pnlMain

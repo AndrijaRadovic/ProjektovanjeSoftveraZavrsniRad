@@ -273,6 +273,8 @@ namespace FrmLogin.GUIControllers
             ucIzmeniProdavca.dgvKorisnici.Columns["TableName"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["DisplayValue"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["PrimaryKey"].Visible = false;
+            ucIzmeniProdavca.dgvKorisnici.Columns["IdColumn"].Visible = false;
+
 
             //ucIzmeniProdavca.dgvKorisnici.Rows.Clear();
             //ucIzmeniProdavca.dgvKorisnici.Columns.Add("id", "ID");

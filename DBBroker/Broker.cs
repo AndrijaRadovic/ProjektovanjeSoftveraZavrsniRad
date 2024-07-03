@@ -52,23 +52,12 @@ namespace DBBroker
             return entities;
         }
 
-        public IEntity GetEntityById(IEntity entity)
+        public IEntity GetEntityById(IEntity entity, string use = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"select * from {entity.TableName} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"select * from {entity.TableName} where {entity.GetByIdQuery(use)}";
             SqlDataReader reader = cmd.ExecuteReader();
             entity = entity.GetReaderResult(reader);
-            reader.Close();
-            cmd.Dispose();
-            return entity;
-        }
-
-        public IEntity Login(IEntity entity)
-        {
-            SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"select * from {entity.TableName} where {entity.LoginQuery()}";
-            SqlDataReader reader = cmd.ExecuteReader();
-            entity = (Korisnik)entity.GetReaderResult(reader);
             reader.Close();
             cmd.Dispose();
             return entity;
@@ -87,29 +76,20 @@ namespace DBBroker
             connection.OpenConnection();
         }
 
-        //Mora genericka
-        public void PromeniSifru(Korisnik prijavljeniKorisnik)
-        {
-            SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Update {prijavljeniKorisnik.TableName} set {prijavljeniKorisnik.PromenaSifreQuery()} where {prijavljeniKorisnik.GetByIdQuery()}";
-            cmd.ExecuteNonQuery();
-            cmd.Dispose();
-        }
-
         public void Rollback()
         {
             connection.Rollback();
         }
 
-        public void Update(IEntity entity)
+        public void Update(IEntity entity, string field = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Update {entity.TableName} set {entity.UpdateQuery()} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"Update {entity.TableName} set {entity.UpdateQuery(field)} where {entity.GetByIdQuery()}";
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
 
-        public List<IEntity> VratiSve(IEntity entity)
+        public List<IEntity> GetAll(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.GetTableName()} {entity.JoinQuery()}";

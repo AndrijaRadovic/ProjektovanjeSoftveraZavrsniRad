@@ -13,7 +13,7 @@ namespace Server.SystemOperations.SORacun
         public List<IEntity> result { get; set; }
         public override void ExecuteConcreteOperation()
         {
-            result = broker.VratiSve(new Korisnik());
+            result = broker.GetAll(new Korisnik());
         }
     }
 }

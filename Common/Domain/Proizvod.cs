@@ -26,6 +26,11 @@ namespace Common.Domain
             return $"sifraProizvoda = {SifraProizvoda}";
         }
 
+        public string GetByIdQuery(string use = "")
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetFilterQuery(string filter)
         {
             throw new NotImplementedException();
@@ -77,7 +82,7 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string UpdateQuery()
+        public string UpdateQuery(string field = "")
         {
             throw new NotImplementedException();
         }

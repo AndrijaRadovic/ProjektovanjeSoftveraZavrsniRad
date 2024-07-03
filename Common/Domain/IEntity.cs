@@ -18,13 +18,13 @@ namespace Common
         IEntity GetReaderResult(SqlDataReader reader);
         string GetParameters(bool parent = false);
         void PrepareCommand(SqlCommand command, bool parent = false);
-        string UpdateQuery();
+        string UpdateQuery(string field = "");
         string JoinQuery();
-        string GetByIdQuery();
+        string GetByIdQuery(string use = "");
         string GetSearchAttributes();
         string GetFilterQuery(string filter);
         List<IEntity> ReadAllSearch(SqlDataReader reader);
-        string LoginQuery();
+        //string LoginQuery();
         string GetTableName(bool parent = false);
 
     }

@@ -18,7 +18,7 @@ namespace Server.SystemOperations.SOProdavac
 
         public override void ExecuteConcreteOperation()
         {
-            broker.PromeniSifru(prijavljeniKorisnik);
+            broker.Update(prijavljeniKorisnik, "sifra");
         }
     }
 }

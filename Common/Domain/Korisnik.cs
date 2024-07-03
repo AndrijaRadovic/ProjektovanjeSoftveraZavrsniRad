@@ -27,10 +27,10 @@ namespace Common.Domain
 
         public object IdColumn => "sifraKorisnika";
 
-        public string LoginQuery()
-        {
-            return $"username='{Username}' and password='{Password}'";
-        }
+        //public string LoginQuery()
+        //{
+        //    return $"username='{Username}' and password='{Password}'";
+        //}
 
         public string GetFilterQuery(string filter)
         {
@@ -109,24 +109,31 @@ namespace Common.Domain
             return entities;
         }
 
-        public string UpdateQuery()
+        public string UpdateQuery(string field = "")
         {
+            if (field == "sifra")
+                return $"password = '{Password}'";
+
             return $"ime = '{Ime}', prezime = '{Prezime}', username = '{Username}', password = '{Password}'";
         }
 
-        public string GetByIdQuery()
+        public string GetByIdQuery(string use = "")
         {
-            return $"sifraKorisnika = {SifraKorisnika}";
-        }
+            if(use == "login")
+                return $"username='{Username}' and password='{Password}'";
 
-        public string PromenaSifreQuery()
-        {
-            return $"password = '{Password}'";
+            return $"sifraKorisnika = {SifraKorisnika}";
         }
 
         public string GetTableName(bool parent = false)
         {
             return TableName;
         }
+
+        public string UpdateQuery()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
