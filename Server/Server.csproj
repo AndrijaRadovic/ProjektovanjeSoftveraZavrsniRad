@@ -64,6 +64,7 @@
     <Compile Include="SystemOperations\SOProdavac\PromeniSifruSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\PronadjiKorisnikeSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\UcitajProdavcaSO.cs" />
+    <Compile Include="SystemOperations\SOProizvod\IzmeniProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\KreirajNadredjeniProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\KreirajPodredjeniProizvod.cs" />
     <Compile Include="SystemOperations\SOProizvod\ObrisiProizvodSO.cs" />

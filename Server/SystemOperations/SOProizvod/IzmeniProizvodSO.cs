@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Server.SystemOperations.SOProizvod
 {
-    internal class KreirajPodredjeniProizvod : SystemOperationBase
+    internal class IzmeniProizvodSO : SystemOperationBase
     {
         private Proizvod proizvod;
 
-        public KreirajPodredjeniProizvod(Proizvod proizvod)
+        public IzmeniProizvodSO(Proizvod proizvod)
         {
             this.proizvod = proizvod;
         }
 
         public override void ExecuteConcreteOperation()
         {
-            proizvod.SifraProizvoda = broker.GetLastId(proizvod);
-            broker.Add(proizvod);
+            broker.Update(proizvod, "parent");
+            broker.Update(proizvod);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Server.SystemOperations.SOProizvod
 
         public override void ExecuteConcreteOperation()
         {
-            broker.Add(proizvod, true);
+            broker.Add(proizvod, "parent");
             //proizvod.SifraProizvoda = broker.GetLastId(proizvod);
             //broker.Add(proizvod, false);
         }

@@ -159,5 +159,17 @@ namespace FrmLogin
             sender.Send(request);
             return (List<Proizvod>)((Response)receiver.Receive()).Result;
         }
+
+        internal Response UpdateProizvod(Proizvod proizvod)
+        {
+            Request request = new Request(Operation.UpdateProizvod, proizvod);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
+
+        internal Proizvod PretraziProizvodPoId(int sifraProizvoda)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

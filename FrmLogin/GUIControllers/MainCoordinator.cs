@@ -55,9 +55,9 @@ namespace FrmLogin.GUIControllers
             frmMain.ChangePanel(main);
         }
 
-        internal void ShowProizvodPanel(UCMode mode)
+        internal void ShowProizvodPanel(UCMode mode, Proizvod proizvod = null)
         {
-            frmMain.ChangePanel(proizvodGUIController.CreateUCProizvod(UCMode.Create));
+            frmMain.ChangePanel(proizvodGUIController.CreateUCProizvod(mode, proizvod));
         }
 
         internal void ShowPretragaProdavca()

@@ -25,11 +25,12 @@ namespace FrmLogin.GUIControllers
         private UCPrikazProizvoda ucPrikazProizvoda;
 
         private BindingList<Proizvod> listaProizvoda;
+        private Proizvod proizvodZaIzmenu;
 
         internal Control CreateUCProizvod(UCMode mode, Proizvod proizvod = null)
         {
             ucProizvod = new UCProizvod();
-            PrepareFormProizvod(mode);
+            PrepareFormProizvod(mode, proizvod);
 
             if (mode == UCMode.Create)
             {
@@ -37,14 +38,109 @@ namespace FrmLogin.GUIControllers
                 ucProizvod.btnSacuvaj.Click += SacuvajProizvod;
                 ucProizvod.cbTip.SelectedIndexChanged += ZameniUCProizvoda;
             }
-            else if (mode == UCMode.Update) { }
+            else if (mode == UCMode.Update)
+            {
+                proizvodZaIzmenu = proizvod;
+                ucProizvod.btnSacuvaj.Click += SacuvajIzmene;
+                ucProizvod.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowPrikazProizvodaPanel();
+                ucProizvod.Load += PrikazDetalja;
+            }
 
             return ucProizvod;
         }
 
+        private void PrikazDetalja(object sender, EventArgs e)
+        {
+            ZameniUCProizvoda(sender, e);
+
+            switch (proizvodZaIzmenu.TipProizvoda)
+            {
+                case TipProizvoda.Alat:
+                    {
+                        ucAlat.cbTipAlata.SelectedItem = ((Alat)proizvodZaIzmenu).TipAlata;
+                    }
+                    break;
+
+                case TipProizvoda.Farba:
+                    {
+                        ucFarba.txtBojaFarbe.Text = ((Farba)proizvodZaIzmenu).Boja;
+                        ucFarba.txtVelicinaPakovanja.Text = ((Farba)proizvodZaIzmenu).VelicinaPakovanja.ToString();
+                    }
+                    break;
+
+                case TipProizvoda.Plocice:
+                    {
+                        ucPlocice.txtMaterijalPlocice.Text = ((Plocice)proizvodZaIzmenu).Materijal;
+                        ucPlocice.txtSirinaPlocice.Text = ((Plocice)proizvodZaIzmenu).Sirina.ToString();
+                        ucPlocice.txtDuzinaPlocice.Text = ((Plocice)proizvodZaIzmenu).Duzina.ToString();
+                    }
+                    break;
+            }
+        }
+
+        private void SacuvajIzmene(object sender, EventArgs e)
+        {
+            if (!ValidationProizvod()) return;
+
+            if (izabraniTip == TipProizvoda.Plocice)
+            {
+                Plocice plocice = new Plocice
+                {
+                    SifraProizvoda = proizvodZaIzmenu.SifraProizvoda,
+                    Cena = double.Parse(ucProizvod.txtCena.Text),
+                    NazivProizvoda = ucProizvod.txtNaziv.Text,
+                    Materijal = ucPlocice.txtMaterijalPlocice.Text,
+                    Duzina = double.Parse(ucPlocice.txtDuzinaPlocice.Text),
+                    Sirina = double.Parse(ucPlocice.txtSirinaPlocice.Text)
+                };
+
+                Response response = Communication.Instance.UpdateProizvod(plocice);
+                MessageBox.Show(response.Message);
+
+                ucPlocice.txtMaterijalPlocice.BackColor = Color.White;
+                ucPlocice.txtMaterijalPlocice.Clear();
+                ucPlocice.txtDuzinaPlocice.BackColor = Color.White;
+                ucPlocice.txtDuzinaPlocice.Clear();
+                ucPlocice.txtSirinaPlocice.BackColor = Color.White;
+                ucPlocice.txtSirinaPlocice.Clear();
+            }
+            else if (izabraniTip == TipProizvoda.Farba)
+            {
+                Farba farba = new Farba
+                {
+                    SifraProizvoda = proizvodZaIzmenu.SifraProizvoda,
+                    NazivProizvoda = ucProizvod.txtNaziv.Text,
+                    Cena = double.Parse(ucProizvod.txtCena.Text),
+                    Boja = ucFarba.txtBojaFarbe.Text,
+                    VelicinaPakovanja = double.Parse(ucFarba.txtVelicinaPakovanja.Text)
+                };
+                Response response = Communication.Instance.UpdateProizvod(farba);
+                MessageBox.Show(response.Message);
+
+                ucFarba.txtBojaFarbe.Clear();
+                ucFarba.txtBojaFarbe.BackColor = Color.White;
+                ucFarba.txtVelicinaPakovanja.Clear();
+                ucFarba.txtVelicinaPakovanja.BackColor = Color.White;
+            }
+            else if (izabraniTip == TipProizvoda.Alat)
+            {
+                Alat alat = new Alat
+                {
+                    SifraProizvoda = proizvodZaIzmenu.SifraProizvoda,
+                    NazivProizvoda = ucProizvod.txtNaziv.Text,
+                    Cena = double.Parse(ucProizvod.txtCena.Text),
+                    TipAlata = (TipAlata)ucAlat.cbTipAlata.SelectedItem
+                };
+                Response response = Communication.Instance.UpdateProizvod(alat);
+                MessageBox.Show(response.Message);
+
+                ucAlat.cbTipAlata.BackColor = Color.White;
+                ucAlat.cbTipAlata.SelectedIndex = -1;
+            }
+        }
+
         private void ZameniUCProizvoda(object sender, EventArgs e)
         {
-
             MainCoordinator.Instance.ShowOdgovarajuciProizvodPanel((TipProizvoda)Enum.Parse(typeof(TipProizvoda), ucProizvod.cbTip.SelectedItem.ToString()));
         }
 
@@ -228,11 +324,13 @@ namespace FrmLogin.GUIControllers
             else if (mode == UCMode.Update)
             {
                 ucProizvod.txtNaziv.Text = proizvod.NazivProizvoda;
+                ucProizvod.txtCena.Text = proizvod.Cena.ToString();
+                ucProizvod.cbTip.SelectedItem = proizvod.TipProizvoda;
+                ucProizvod.cbTip.Enabled = false;
             }
         }
 
 
-        //Mozda dodaj mod poziva kao parametar zbog update-a kasnije
         internal Control createUCTipProizvoda(TipProizvoda tipProizvoda)
         {
             switch (tipProizvoda)
@@ -272,9 +370,9 @@ namespace FrmLogin.GUIControllers
             ucPrikazProizvoda.Load += prepareCbTip;
             ucPrikazProizvoda.btnNazad.Click
                 += (s, e) => MainCoordinator.Instance.ShowDefault();
-            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu; // implementiraj
+            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu; 
             ucPrikazProizvoda.btnObrisi.Click += ObrisiProizvod;
-            ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu; // implementiraj
+            ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu;
             ucPrikazProizvoda.cbTip.SelectedIndexChanged += FiltrirajProizvode;
 
             return ucPrikazProizvoda;
@@ -343,14 +441,12 @@ namespace FrmLogin.GUIControllers
             MessageBox.Show(response.Message);
         }
 
-        private void BtnObrisi_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Nije implementirano");
-        }
-
+        // Da li dodati da vuce podatke iz baze umesto iz liste?? (kao kod korisnika)
         private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
         {
-            MessageBox.Show("Nije implementirano");
+            Proizvod proizvod = (Proizvod)ucPrikazProizvoda.dgvProizvodi.SelectedRows[0].DataBoundItem;
+            //proizvod = Communication.Instance.PretraziProizvodPoId(proizvod.SifraProizvoda);
+            MainCoordinator.Instance.ShowProizvodPanel(UCMode.Update, proizvod);
         }
 
         private void UcitajProizvode(object sender, EventArgs e)

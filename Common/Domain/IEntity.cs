@@ -16,8 +16,8 @@ namespace Common
 
         List<IEntity> GetReaderList(SqlDataReader reader);
         IEntity GetReaderResult(SqlDataReader reader);
-        string GetParameters(bool parent = false);
-        void PrepareCommand(SqlCommand command, bool parent = false);
+        string GetParameters(string use = "");
+        void PrepareCommand(SqlCommand command, string use = "");
         string UpdateQuery(string field = "");
         string JoinQuery();
         string GetByIdQuery(string use = "");
@@ -25,7 +25,7 @@ namespace Common
         string GetFilterQuery(string filter);
         List<IEntity> ReadAllSearch(SqlDataReader reader);
         //string LoginQuery();
-        string GetTableName(bool parent = false);
+        string GetTableName(string use = "");
 
     }
 }

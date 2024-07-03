@@ -19,7 +19,7 @@ namespace Server.SystemOperations.SOProizvod
         public override void ExecuteConcreteOperation()
         {
             broker.Delete(izabraniProizvod);
-            broker.Delete(izabraniProizvod, true);
+            broker.Delete(izabraniProizvod, "parent");
         }
     }
 }

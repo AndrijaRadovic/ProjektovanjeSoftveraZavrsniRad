@@ -17,11 +17,11 @@ namespace DBBroker
             connection = new DBConnection();
         }
 
-        public void Add(IEntity entity, bool parent = false)
+        public void Add(IEntity entity, string use = "")
         {
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = $"insert into {entity.GetTableName(parent)} values({entity.GetParameters(parent)})";
-            entity.PrepareCommand(command, parent);
+            command.CommandText = $"insert into {entity.GetTableName(use)} values({entity.GetParameters(use)})";
+            entity.PrepareCommand(command, use);
             command.ExecuteNonQuery();
             command.Dispose();
         }
@@ -63,10 +63,10 @@ namespace DBBroker
             return entity;
         }
 
-        public void Delete(IEntity entity, bool parent = false)
+        public void Delete(IEntity entity, string use = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Delete from {entity.GetTableName(parent)} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"Delete from {entity.GetTableName(use)} where {entity.GetByIdQuery()}";
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
@@ -84,7 +84,7 @@ namespace DBBroker
         public void Update(IEntity entity, string field = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Update {entity.TableName} set {entity.UpdateQuery(field)} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"Update {entity.GetTableName(field)} set {entity.UpdateQuery(field)} where {entity.GetByIdQuery()}";
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
@@ -103,7 +103,7 @@ namespace DBBroker
         public int GetLastId(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Select max({entity.IdColumn}) from {entity.GetTableName(true)}";
+            cmd.CommandText = $"Select max({entity.IdColumn}) from {entity.GetTableName("parent")}";
             int maxId = (int) cmd.ExecuteScalar();
             cmd.Dispose();
             return maxId;

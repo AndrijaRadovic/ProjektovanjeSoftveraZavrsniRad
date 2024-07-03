@@ -32,7 +32,7 @@ namespace Common.Domain
             return $"lower(ime) like concat('%',lower('{filter}'),'%')";
         }
 
-        public string GetParameters(bool parent = false)
+        public string GetParameters(string use = "")
         {
             return "@ime, @prezime, @pol, @uloga, @username, @password, @jmbg";
         }
@@ -74,7 +74,7 @@ namespace Common.Domain
             return "";
         }
 
-        public void PrepareCommand(SqlCommand command, bool parent = false)
+        public void PrepareCommand(SqlCommand command, string use = "")
         {
             command.Parameters.AddWithValue("@ime", Ime);
             command.Parameters.AddWithValue("@prezime", Prezime);
@@ -120,7 +120,7 @@ namespace Common.Domain
             return $"sifraKorisnika = {SifraKorisnika}";
         }
 
-        public string GetTableName(bool parent = false)
+        public string GetTableName( string use = "")
         {
             return TableName;
         }

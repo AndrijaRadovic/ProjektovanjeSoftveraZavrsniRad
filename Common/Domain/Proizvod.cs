@@ -28,7 +28,7 @@ namespace Common.Domain
 
         public string GetByIdQuery(string use = "")
         {
-            throw new NotImplementedException();
+            return $"sifraProizvoda = {SifraProizvoda}";
         }
 
         public string GetFilterQuery(string filter)
@@ -36,7 +36,7 @@ namespace Common.Domain
             return $"lower(nazivProizvoda) like concat('%',lower('{filter}'),'%')";
         }
 
-        public virtual string GetParameters(bool parent = false)
+        public virtual string GetParameters(string use = "")
         {
             return "@nazivProizvoda, @cena";
         }
@@ -56,7 +56,7 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public virtual string GetTableName(bool parent = false)
+        public virtual string GetTableName(string use = "")
         {
             return TableName;
         }
@@ -71,7 +71,7 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public virtual void PrepareCommand(SqlCommand command, bool parent = false)
+        public virtual void PrepareCommand(SqlCommand command, string use = "")
         {
             command.Parameters.AddWithValue("@nazivProizvoda", NazivProizvoda);
             command.Parameters.AddWithValue("@cena", Cena);
@@ -82,9 +82,9 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string UpdateQuery(string field = "")
+        public virtual string UpdateQuery(string field = "")
         {
-            throw new NotImplementedException();
+            return $"nazivProizvoda = '{NazivProizvoda}', cena = {Cena}";
         }
     }
 }

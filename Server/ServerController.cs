@@ -93,6 +93,12 @@ namespace Server
             so.ExecuteTemplate();
         }
 
+        internal void UpdateProizvod(Proizvod proizvod)
+        {
+            IzmeniProizvodSO so = new IzmeniProizvodSO(proizvod);
+            so.ExecuteTemplate();
+        }
+
         internal List<Korisnik> VratiSveProdavce()
         {
             UcitajListuKorisnikaSO so = new UcitajListuKorisnikaSO();

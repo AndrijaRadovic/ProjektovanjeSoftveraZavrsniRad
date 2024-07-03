@@ -142,6 +142,13 @@ namespace Server
                             response.Result = ServerController.Instance.PretraziProizvodePoNazivu((string)request.Argument);
                         }
                         break;
+
+                    case Operation.UpdateProizvod:
+                        {
+                            ServerController.Instance.UpdateProizvod((Proizvod)request.Argument);
+                            response.Message = "Proizvod je uspesno izmenjen";
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

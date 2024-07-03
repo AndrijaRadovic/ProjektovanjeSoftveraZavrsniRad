@@ -14,24 +14,22 @@ namespace Common.Domain
         public string Materijal { get; set; }
         public double Duzina { get; set; }
         public double Sirina { get; set; }
-        public override string GetTableName(bool parent = false)
+        public override string GetTableName(string use = "")
         {
-            if (parent)
+            if (use == "parent")
                 return base.GetTableName();
-
             return this.TableName;
         }
-        public override string GetParameters(bool parent = false)
+        public override string GetParameters(string use = "")
         {
-            if (parent)
-                return base.GetParameters(parent);
-
+            if (use == "parent")
+                return base.GetParameters(use);
             return "@sifraProizvoda, @materijal, @duzina, @sirina";
         }
-        public override void PrepareCommand(SqlCommand command, bool parent = false)
+        public override void PrepareCommand(SqlCommand command, string use = "")
         {
-            if(parent)
-                base.PrepareCommand(command, parent);
+            if(use == "parent")
+                base.PrepareCommand(command, use);
 
             else
             {
@@ -68,6 +66,14 @@ namespace Common.Domain
                 entities.Add(plocice);
             }
             return entities;
+        }
+
+        public override string UpdateQuery(string field = "")
+        {
+            if (field == "parent")
+                return base.UpdateQuery();
+
+            return $"materijal = '{Materijal}', duzina = {Duzina}, sirina = {Sirina}";
         }
     }
 }
