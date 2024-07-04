@@ -149,6 +149,12 @@ namespace Server
                             response.Message = "Proizvod je uspesno izmenjen";
                         }
                         break;
+
+                    case Operation.NadjiProizvodPoId:
+                        {
+                            response.Result = ServerController.Instance.NadjiProizvodPoId((int)request.Argument);
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

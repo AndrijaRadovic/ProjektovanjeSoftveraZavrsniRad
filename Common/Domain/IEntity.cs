@@ -24,8 +24,7 @@ namespace Common
         string GetSearchAttributes();
         string GetFilterQuery(string filter);
         List<IEntity> ReadAllSearch(SqlDataReader reader);
-        //string LoginQuery();
         string GetTableName(string use = "");
-
+        string AddColumn();
     }
 }

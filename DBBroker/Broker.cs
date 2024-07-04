@@ -55,7 +55,7 @@ namespace DBBroker
         public IEntity GetEntityById(IEntity entity, string use = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"select * from {entity.TableName} where {entity.GetByIdQuery(use)}";
+            cmd.CommandText = $"select * {entity.AddColumn()} from {entity.TableName} {entity.JoinQuery()} where {entity.GetByIdQuery(use)}";
             SqlDataReader reader = cmd.ExecuteReader();
             entity = entity.GetReaderResult(reader);
             reader.Close();
@@ -92,7 +92,7 @@ namespace DBBroker
         public List<IEntity> GetAll(IEntity entity)
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Select {entity.GetSearchAttributes()} from {entity.GetTableName()} {entity.JoinQuery()}";
+            cmd.CommandText = $"Select {entity.GetSearchAttributes()} {entity.AddColumn()} from {entity.GetTableName()} {entity.JoinQuery()}";
             SqlDataReader reader = cmd.ExecuteReader();
             List<IEntity> entities = entity.ReadAllSearch(reader);
             reader.Close();

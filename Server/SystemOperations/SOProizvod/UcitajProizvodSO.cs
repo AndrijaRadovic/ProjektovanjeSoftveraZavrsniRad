@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,17 @@ namespace Server.SystemOperations.SOProizvod
 {
     internal class UcitajProizvodSO : SystemOperationBase
     {
+        private int id;
+        public Proizvod Result { get; set; }
+
+        public UcitajProizvodSO(int id)
+        {
+            this.id = id;
+        }
+
         public override void ExecuteConcreteOperation()
         {
-            throw new NotImplementedException();
+            Result = (Proizvod)broker.GetEntityById(new Proizvod { SifraProizvoda = id }, "specijalizacija");
         }
     }
 }

@@ -137,6 +137,8 @@ namespace FrmLogin.GUIControllers
                 ucAlat.cbTipAlata.BackColor = Color.White;
                 ucAlat.cbTipAlata.SelectedIndex = -1;
             }
+
+            ucProizvod.btnNazad.PerformClick();
         }
 
         private void ZameniUCProizvoda(object sender, EventArgs e)
@@ -445,7 +447,7 @@ namespace FrmLogin.GUIControllers
         private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
         {
             Proizvod proizvod = (Proizvod)ucPrikazProizvoda.dgvProizvodi.SelectedRows[0].DataBoundItem;
-            //proizvod = Communication.Instance.PretraziProizvodPoId(proizvod.SifraProizvoda);
+            proizvod = Communication.Instance.PretraziProizvodPoId(proizvod.SifraProizvoda);
             MainCoordinator.Instance.ShowProizvodPanel(UCMode.Update, proizvod);
         }
 

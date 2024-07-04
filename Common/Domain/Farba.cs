@@ -74,5 +74,10 @@ namespace Common.Domain
 
             return $"boja = '{Boja}', velicinaPakovanja = {VelicinaPakovanja}";
         }
+
+        public override string AddColumn()
+        {
+            return "";
+        }
     }
 }

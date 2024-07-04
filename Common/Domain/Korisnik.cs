@@ -130,5 +130,9 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
+        public string AddColumn()
+        {
+            return "";
+        }
     }
 }

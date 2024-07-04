@@ -20,6 +20,7 @@ namespace Common.Communication
         VratiSveProizvode,
         ObrisiProizvod,
         PretraziProizvodePoNazivu,
-        UpdateProizvod
+        UpdateProizvod,
+        NadjiProizvodPoId
     }
 }

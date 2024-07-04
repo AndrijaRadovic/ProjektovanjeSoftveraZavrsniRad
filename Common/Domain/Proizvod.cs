@@ -21,13 +21,16 @@ namespace Common.Domain
 
         public object IdColumn => "sifraProizvoda";
 
-        public string GetByIdQuery()
+        public virtual string AddColumn()
         {
-            return $"sifraProizvoda = {SifraProizvoda}";
+            return ", CASE WHEN Alat.sifraProizvoda IS NOT NULL THEN 'Alat' WHEN Plocice.sifraProizvoda IS NOT NULL THEN 'Plocice' WHEN Farba.sifraProizvoda IS NOT NULL THEN 'Farba' ELSE 'Proizvod' END AS TableName ";
         }
 
         public string GetByIdQuery(string use = "")
         {
+            if (use == "specijalizacija")
+                return $"Proizvod.sifraProizvoda = {SifraProizvoda}";
+
             return $"sifraProizvoda = {SifraProizvoda}";
         }
 
@@ -48,12 +51,61 @@ namespace Common.Domain
 
         public IEntity GetReaderResult(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            if (reader.Read())
+            {
+                string tipProizvoda = (string)reader["TableName"];
+
+                if (tipProizvoda == "Alat")
+                {
+                    Alat alat = new Alat
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipAlata = (TipAlata)Enum.Parse(typeof(TipAlata), (string)reader["tipAlata"]),
+                        TipProizvoda = TipProizvoda.Alat
+                    };
+                    return alat;
+                }
+
+                if(tipProizvoda == "Farba")
+                {
+                    Farba farba = new Farba
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipProizvoda = TipProizvoda.Farba,
+                        Boja = (string)reader["boja"],
+                        VelicinaPakovanja = (double)reader["velicinaPakovanja"]
+                    };
+                    return farba;
+                }
+
+                if(tipProizvoda == "Plocice")
+                {
+                    Plocice plocice = new Plocice
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipProizvoda = TipProizvoda.Plocice,
+                        Materijal = (string)reader["materijal"],
+                        Sirina = (double)reader["sirina"],
+                        Duzina = (double)reader["duzina"]
+                    };
+                    return plocice;
+                }
+            }
+
+            return null;
         }
 
         public virtual string GetSearchAttributes()
         {
-            throw new NotImplementedException();
+            return "*";
+
+            //throw new NotImplementedException();
         }
 
         public virtual string GetTableName(string use = "")
@@ -63,7 +115,7 @@ namespace Common.Domain
 
         public virtual string JoinQuery()
         {
-            throw new NotImplementedException();
+            return " left join Alat on Proizvod.sifraProizvoda = Alat.sifraProizvoda left join Farba on Proizvod.sifraProizvoda = Farba.sifraProizvoda left join Plocice on Proizvod.sifraProizvoda = Plocice.sifraProizvoda ";
         }
 
         public string LoginQuery()
@@ -79,7 +131,55 @@ namespace Common.Domain
 
         public virtual List<IEntity> ReadAllSearch(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> proizvodi = new List<IEntity>();
+            while (reader.Read())
+            {
+                string tipProizvoda = (string)reader["TableName"];
+
+                if (tipProizvoda == "Alat")
+                {
+                    Alat alat = new Alat
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipAlata = (TipAlata)Enum.Parse(typeof(TipAlata), (string)reader["tipAlata"]),
+                        TipProizvoda = TipProizvoda.Alat
+                    };
+                    proizvodi.Add(alat);
+                }
+
+                if (tipProizvoda == "Farba")
+                {
+                    Farba farba = new Farba
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipProizvoda = TipProizvoda.Farba,
+                        Boja = (string)reader["boja"],
+                        VelicinaPakovanja = (double)reader["velicinaPakovanja"]
+                    };
+                    proizvodi.Add(farba);
+                }
+
+                if (tipProizvoda == "Plocice")
+                {
+                    Plocice plocice = new Plocice
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"],
+                        Cena = (double)reader["cena"],
+                        TipProizvoda = TipProizvoda.Plocice,
+                        Materijal = (string)reader["materijal"],
+                        Sirina = (double)reader["sirina"],
+                        Duzina = (double)reader["duzina"]
+                    };
+                    proizvodi.Add(plocice);
+                }
+            }
+
+            return proizvodi;
         }
 
         public virtual string UpdateQuery(string field = "")

@@ -73,5 +73,10 @@ namespace Common.Domain
 
             return $"tipAlata = '{TipAlata.ToString()}'";
         }
+
+        public override string AddColumn()
+        {
+            return "";
+        }
     }
 }

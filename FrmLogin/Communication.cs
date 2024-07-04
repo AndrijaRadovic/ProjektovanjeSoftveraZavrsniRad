@@ -169,7 +169,9 @@ namespace FrmLogin
 
         internal Proizvod PretraziProizvodPoId(int sifraProizvoda)
         {
-            throw new NotImplementedException();
+            Request request = new Request(Operation.NadjiProizvodPoId, sifraProizvoda);
+            sender.Send(request);
+            return (Proizvod)((Response)receiver.Receive()).Result;
         }
     }
 }

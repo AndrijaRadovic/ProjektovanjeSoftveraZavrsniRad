@@ -54,6 +54,13 @@ namespace Server
             return so.Result;
         }
 
+        internal Proizvod NadjiProizvodPoId(int id)
+        {
+            UcitajProizvodSO so = new UcitajProizvodSO(id);
+            so.ExecuteTemplate();
+            return so.Result;
+        }
+
         internal void ObrisiKorisnika(Korisnik izabraniKorisnik)
         {
             ObrisiProdavcaSO so = new ObrisiProdavcaSO(izabraniKorisnik);

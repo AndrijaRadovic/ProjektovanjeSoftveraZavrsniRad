@@ -75,5 +75,10 @@ namespace Common.Domain
 
             return $"materijal = '{Materijal}', duzina = {Duzina}, sirina = {Sirina}";
         }
+
+        public override string AddColumn()
+        {
+            return "";
+        }
     }
 }
