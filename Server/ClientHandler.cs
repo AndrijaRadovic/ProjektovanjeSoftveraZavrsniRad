@@ -168,6 +168,13 @@ namespace Server
                             response.Result = ServerController.Instance.VratiSveRacune();
                         }
                         break;
+
+                    case Operation.StornirajRacun:
+                        {
+                            ServerController.Instance.StornirajRacun((Racun)request.Argument);
+                            response.Message = "Racun je uspesno storniran";
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

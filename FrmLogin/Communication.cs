@@ -187,5 +187,12 @@ namespace FrmLogin
             sender.Send(request);
             return (List<Racun>)((Response)receiver.Receive()).Result;
         }
+
+        internal Response StornirajRacun(Racun stornoRacun)
+        {
+            Request request = new Request(Operation.StornirajRacun, stornoRacun);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
     }
 }

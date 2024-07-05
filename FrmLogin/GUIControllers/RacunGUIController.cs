@@ -217,7 +217,6 @@ namespace FrmLogin.GUIControllers
             ucPrikazRacuna.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
             // nije odradjeno
             ucPrikazRacuna.btnIzmeni.Click += PrikaziFormuZaIzmenu;
-            // nije odradjeno
             ucPrikazRacuna.btnStorniraj.Click += StornirajRacun;
             
             return ucPrikazRacuna;
@@ -250,7 +249,9 @@ namespace FrmLogin.GUIControllers
                     StavkeRacuna = noveStavke
                 };
 
-                Response response = Communication.Instance.DodajRacun(stornoRacun);
+                //Response response = Communication.Instance.DodajRacun(stornoRacun);
+                //MessageBox.Show(response.Message);
+                Response response = Communication.Instance.StornirajRacun(stornoRacun);
                 MessageBox.Show(response.Message);
             }
 
@@ -277,7 +278,10 @@ namespace FrmLogin.GUIControllers
 
         private void PretraziRacunePoDatumu(object sender, EventArgs e)
         {
-            MessageBox.Show("Nije implementirano");
+            DateTime dt = ucPrikazRacuna.dtpDatumRacuna.Value;
+            MessageBox.Show(dt.ToShortDateString());
+
+            //Communication.Instance.PretraziRacune
         }
 
         private void UcitajRacune(object sender, EventArgs e)

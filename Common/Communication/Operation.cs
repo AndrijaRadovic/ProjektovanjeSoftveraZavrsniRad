@@ -23,6 +23,7 @@ namespace Common.Communication
         UpdateProizvod,
         NadjiProizvodPoId,
         DodajRacun,
-        VratiSveRacune
+        VratiSveRacune,
+        StornirajRacun
     }
 }

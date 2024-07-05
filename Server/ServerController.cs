@@ -97,6 +97,12 @@ namespace Server
             so.ExecuteTemplate();
         }
 
+        internal void StornirajRacun(Racun racun)
+        {
+            StornirajRacunSO so = new StornirajRacunSO(racun);
+            so.ExecuteTemplate();
+        }
+
         internal void UpdateKorisnika(Korisnik korisnik)
         {
             IzmeniKorisnikaSO so = new IzmeniKorisnikaSO(korisnik);
