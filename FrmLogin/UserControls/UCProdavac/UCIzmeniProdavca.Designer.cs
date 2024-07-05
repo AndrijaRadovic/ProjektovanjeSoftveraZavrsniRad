@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCIzmeniProdavca));
             this.label7 = new System.Windows.Forms.Label();
             this.txtPretraga = new System.Windows.Forms.TextBox();
-            this.btnPretraga = new System.Windows.Forms.Button();
+            this.btnPretragaIme = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvKorisnici = new System.Windows.Forms.DataGridView();
             this.btnOdustani = new System.Windows.Forms.Button();
             this.btnIzmeni = new System.Windows.Forms.Button();
             this.btnObrisi = new System.Windows.Forms.Button();
+            this.cbPretraga = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKorisnici)).BeginInit();
             this.SuspendLayout();
@@ -48,27 +48,27 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(25, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(145, 38);
+            this.label7.Size = new System.Drawing.Size(141, 38);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Prodavci";
+            this.label7.Text = "Korisnici";
             // 
             // txtPretraga
             // 
             this.txtPretraga.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPretraga.Location = new System.Drawing.Point(70, 111);
+            this.txtPretraga.Location = new System.Drawing.Point(256, 112);
             this.txtPretraga.Name = "txtPretraga";
             this.txtPretraga.Size = new System.Drawing.Size(210, 27);
             this.txtPretraga.TabIndex = 16;
             // 
-            // btnPretraga
+            // btnPretragaIme
             // 
-            this.btnPretraga.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPretraga.BackgroundImage")));
-            this.btnPretraga.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPretraga.Location = new System.Drawing.Point(286, 111);
-            this.btnPretraga.Name = "btnPretraga";
-            this.btnPretraga.Size = new System.Drawing.Size(56, 27);
-            this.btnPretraga.TabIndex = 17;
-            this.btnPretraga.UseVisualStyleBackColor = true;
+            this.btnPretragaIme.BackgroundImage = global::FrmLogin.Properties.Resources.search;
+            this.btnPretragaIme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPretragaIme.Location = new System.Drawing.Point(472, 112);
+            this.btnPretragaIme.Name = "btnPretragaIme";
+            this.btnPretragaIme.Size = new System.Drawing.Size(56, 27);
+            this.btnPretragaIme.TabIndex = 17;
+            this.btnPretragaIme.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -76,9 +76,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(28, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 20);
+            this.label1.Size = new System.Drawing.Size(73, 20);
             this.label1.TabIndex = 18;
-            this.label1.Text = "Ime";
+            this.label1.Text = "Pretraga";
             // 
             // panel1
             // 
@@ -134,16 +134,25 @@
             this.btnObrisi.Text = "Obriši";
             this.btnObrisi.UseVisualStyleBackColor = true;
             // 
+            // cbPretraga
+            // 
+            this.cbPretraga.FormattingEnabled = true;
+            this.cbPretraga.Location = new System.Drawing.Point(129, 115);
+            this.cbPretraga.Name = "cbPretraga";
+            this.cbPretraga.Size = new System.Drawing.Size(121, 24);
+            this.cbPretraga.TabIndex = 23;
+            // 
             // UCIzmeniProdavca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbPretraga);
             this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.btnIzmeni);
             this.Controls.Add(this.btnOdustani);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnPretraga);
+            this.Controls.Add(this.btnPretragaIme);
             this.Controls.Add(this.txtPretraga);
             this.Controls.Add(this.label7);
             this.Name = "UCIzmeniProdavca";
@@ -160,11 +169,12 @@
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtPretraga;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.Button btnPretraga;
+        internal System.Windows.Forms.Button btnPretragaIme;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Button btnOdustani;
         internal System.Windows.Forms.Button btnIzmeni;
         internal System.Windows.Forms.Button btnObrisi;
         internal System.Windows.Forms.DataGridView dgvKorisnici;
+        internal System.Windows.Forms.ComboBox cbPretraga;
     }
 }

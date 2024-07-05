@@ -42,6 +42,7 @@ namespace FrmLogin.Forms
             // Racuni
 
             kreirajRacunToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowRacunPanel(UCMode.Create);
+            prikaziRacuneToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPrikazRacunaPanel();
 
 
             if (uloga != Uloga.Administrator)

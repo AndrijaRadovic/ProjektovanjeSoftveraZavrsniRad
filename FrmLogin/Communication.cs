@@ -97,9 +97,9 @@ namespace FrmLogin
             return (List<Korisnik>)((Response)receiver.Receive()).Result;
         }
 
-        internal List<Korisnik> PretraziKorisnikePoImenu(string text)
+        internal List<Korisnik> PretraziKorisnike(string[] vrednosti)
         {
-            Request request = new Request(Operation.PretraziKorisnikePoImenu, text);
+            Request request = new Request(Operation.PretraziKorisnike, vrednosti);
             sender.Send(request);
             return (List<Korisnik>)((Response)receiver.Receive()).Result;
         }
@@ -179,6 +179,13 @@ namespace FrmLogin
             Request request = new Request(Operation.DodajRacun, racun);
             sender.Send(request);
             return (Response)receiver.Receive();
+        }
+
+        internal List<Racun> VratiSveRacune()
+        {
+            Request request = new Request(Operation.VratiSveRacune, null);
+            sender.Send(request);
+            return (List<Racun>)((Response)receiver.Receive()).Result;
         }
     }
 }

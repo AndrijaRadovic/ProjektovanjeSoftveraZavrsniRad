@@ -16,10 +16,13 @@ namespace FrmLogin.GUIControllers
     internal class RacunGUIController
     {
         private UCRacun ucRacun;
+        private UCPrikazRacuna ucPrikazRacuna;
 
         private BindingList<StavkaRacuna> stavkeRacuna = new BindingList<StavkaRacuna>();
         private int trenutniIndeks = 1;
         private double ukupnaCena;
+
+        private BindingList<Racun> racuni = new BindingList<Racun>();
 
         internal Control createUCRacun(UCMode mode, Racun racun)
         {
@@ -174,24 +177,113 @@ namespace FrmLogin.GUIControllers
                 stavkeRacuna = new BindingList<StavkaRacuna>(racun.StavkeRacuna);
             }
 
-            prepareDgv();
+            prepareDgv(ucRacun.dgvStavkeRacuna);
         }
 
-        private void prepareDgv()
+        private void prepareDgv(Control control)
         {
-            ucRacun.dgvStavkeRacuna.DataSource = stavkeRacuna;
+            ((DataGridView)control).DataSource = stavkeRacuna;
 
-            ucRacun.dgvStavkeRacuna.Columns["Racun"].Visible = false;
-            ucRacun.dgvStavkeRacuna.Columns["TableName"].Visible = false;
-            ucRacun.dgvStavkeRacuna.Columns["DisplayValue"].Visible = false;
-            ucRacun.dgvStavkeRacuna.Columns["PrimaryKey"].Visible = false;
-            ucRacun.dgvStavkeRacuna.Columns["IdColumn"].Visible = false;
+            //((DataGridView)control).Columns.Remove("Racun");
+            ((DataGridView)control).Columns["TableName"].Visible = false;
+            ((DataGridView)control).Columns["Racun"].Visible = false;
+            ((DataGridView)control).Columns["DisplayValue"].Visible = false;
+            ((DataGridView)control).Columns["PrimaryKey"].Visible = false;
+            ((DataGridView)control).Columns["IdColumn"].Visible = false;
 
-            ucRacun.dgvStavkeRacuna.Columns["RedniBroj"].HeaderText = "Redni broj";
-            ucRacun.dgvStavkeRacuna.Columns["UkupnaCenaStavke"].HeaderText = "Ukupna cena stavke";
+            ((DataGridView)control).Columns["RedniBroj"].HeaderText = "Redni broj";
+            ((DataGridView)control).Columns["UkupnaCenaStavke"].HeaderText = "Ukupna cena stavke";
 
-            ucRacun.dgvStavkeRacuna.Columns["UkupnaCenaStavke"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            ((DataGridView)control).Columns["UkupnaCenaStavke"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
+        }
+
+        internal Control createUCPrikazRacuna(Uloga uloga)
+        {
+            ucPrikazRacuna = new UCPrikazRacuna();
+            
+            if(uloga == Uloga.Prodavac)
+            {
+                ucPrikazRacuna.btnIzmeni.Visible = false;
+                ucPrikazRacuna.btnStorniraj.Visible = false;
+            }
+
+            prepareDgv(ucPrikazRacuna.dgvStavkeRacuna);
+
+            ucPrikazRacuna.Load += UcitajRacune;
+            // nije odradjeno
+            ucPrikazRacuna.dtpDatumRacuna.ValueChanged += PretraziRacunePoDatumu; 
+            ucPrikazRacuna.cbRacuni.SelectedIndexChanged += PrikaziStavkeIzabranogRacuna; 
+            ucPrikazRacuna.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
+            // nije odradjeno
+            ucPrikazRacuna.btnIzmeni.Click += PrikaziFormuZaIzmenu;
+            // nije odradjeno
+            ucPrikazRacuna.btnStorniraj.Click += StornirajRacun;
+            
+            return ucPrikazRacuna;
+        }
+
+        private void StornirajRacun(object sender, EventArgs e)
+        {
+            if(ucPrikazRacuna.cbRacuni.SelectedIndex == -1)
+            {
+                MessageBox.Show("Morate izabrati neki od racuna", "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if(MessageBox.Show("Da li ste sigurni da želite da stornirate račun?", "Storniranje računa", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                Racun izabraniRacun = (Racun)ucPrikazRacuna.cbRacuni.SelectedItem;
+                List<StavkaRacuna> noveStavke = new List<StavkaRacuna>(izabraniRacun.StavkeRacuna);
+
+                foreach (StavkaRacuna stavka in noveStavke)
+                {
+                    stavka.Kolicina *= -1;
+                    stavka.UkupnaCenaStavke *= -1;
+                }
+
+                Racun stornoRacun = new Racun
+                {
+                    DatumVreme = DateTime.Now,
+                    UkupnaCenaRacuna = izabraniRacun.UkupnaCenaRacuna * -1,
+                    Korisnik = MainCoordinator.Instance.Korisnik,
+                    StavkeRacuna = noveStavke
+                };
+
+                Response response = Communication.Instance.DodajRacun(stornoRacun);
+                MessageBox.Show(response.Message);
+            }
+
+           
+        }
+
+        private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nije implementirano");
+        }
+
+        private void PrikaziStavkeIzabranogRacuna(object sender, EventArgs e)
+        {
+            if(ucPrikazRacuna.cbRacuni.SelectedIndex == -1)
+            {
+                ucPrikazRacuna.dgvStavkeRacuna.DataSource = null;
+                return;
+            }
+
+            stavkeRacuna = new BindingList<StavkaRacuna>(((Racun)ucPrikazRacuna.cbRacuni.SelectedItem).StavkeRacuna);
+
+            prepareDgv(ucPrikazRacuna.dgvStavkeRacuna);
+        }
+
+        private void PretraziRacunePoDatumu(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nije implementirano");
+        }
+
+        private void UcitajRacune(object sender, EventArgs e)
+        {
+            ucPrikazRacuna.cbRacuni.DataSource = Communication.Instance.VratiSveRacune();
+            ucPrikazRacuna.cbRacuni.SelectedIndex = -1;
         }
     }
 }

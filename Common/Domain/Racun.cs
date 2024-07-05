@@ -25,7 +25,7 @@ namespace Common.Domain
 
         public string AddColumn()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public string GetByIdQuery(string use = "")
@@ -33,7 +33,7 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string GetFilterQuery(string filter)
+        public string GetFilterQuery(string filter, string field = "")
         {
             throw new NotImplementedException();
         }
@@ -55,7 +55,7 @@ namespace Common.Domain
 
         public string GetSearchAttributes()
         {
-            throw new NotImplementedException();
+            return "*";
         }
 
         public string GetTableName(string use = "")
@@ -65,7 +65,7 @@ namespace Common.Domain
 
         public string JoinQuery()
         {
-            throw new NotImplementedException();
+            return " inner join Korisnik on Racun.sifraKorisnika = Korisnik.sifraKorisnika";
         }
 
         public void PrepareCommand(SqlCommand command, string use = "")
@@ -77,12 +77,41 @@ namespace Common.Domain
 
         public List<IEntity> ReadAllSearch(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> entities = new List<IEntity>();
+
+            while (reader.Read())
+            {
+                Racun racun = new Racun
+                {
+                    SifraRacuna = (int)reader["sifraRacuna"],
+                    DatumVreme = (DateTime)reader["datumVreme"],
+                    UkupnaCenaRacuna = (double)reader["ukupnaCenaRacuna"],
+                    Korisnik = new Korisnik
+                    {
+                        SifraKorisnika = (int)reader["sifraKorisnika"],
+                        Ime = (string)reader["ime"],
+                        Prezime = (string)reader["prezime"],
+                        Pol = (Pol)Enum.Parse(typeof(Pol), (string)reader["pol"]),
+                        Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
+                        Username = (string)reader["username"],
+                        Password = null,
+                        Jmbg = (string)reader["jmbg"]
+                    }
+                };
+                entities.Add(racun);
+            }
+
+            return entities;
         }
 
         public string UpdateQuery(string field = "")
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return DatumVreme.ToString() + " " + Korisnik.Ime + " " + Korisnik.Prezime;
         }
     }
 }

@@ -34,9 +34,9 @@ namespace Common.Domain
             throw new NotImplementedException();
         }
 
-        public string GetFilterQuery(string filter)
+        public string GetFilterQuery(string filter, string field = "")
         {
-            throw new NotImplementedException();
+            return $"{field} = {filter}";
         }
 
         public string GetParameters(string use = "")
@@ -56,7 +56,7 @@ namespace Common.Domain
 
         public string GetSearchAttributes()
         {
-            throw new NotImplementedException();
+            return "*";
         }
 
         public string GetTableName(string use = "")
@@ -66,7 +66,7 @@ namespace Common.Domain
 
         public string JoinQuery()
         {
-            throw new NotImplementedException();
+            return " inner join Proizvod on StavkaRacuna.sifraProizvoda = Proizvod.sifraProizvoda";
         }
 
         public void PrepareCommand(SqlCommand command, string use = "")
@@ -81,12 +81,33 @@ namespace Common.Domain
 
         public List<IEntity> ReadAllSearch(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            List<IEntity> entities = new List<IEntity>();
+            while (reader.Read())
+            {
+                StavkaRacuna stavkaRacuna = new StavkaRacuna
+                {
+                    Racun = new Racun
+                    {
+                        SifraRacuna = (int)reader["sifraRacuna"]
+                    },
+                    RedniBroj = (int)reader["redniBroj"],
+                    Kolicina = (int)reader["kolicina"],
+                    UkupnaCenaStavke = (double)reader["ukupnaCenaStavke"],
+                    Proizvod = new Proizvod
+                    {
+                        SifraProizvoda = (int)reader["sifraProizvoda"],
+                        NazivProizvoda = (string)reader["nazivProizvoda"]
+                    }
+                };
+                entities.Add(stavkaRacuna);
+            }
+            return entities;
         }
 
         public string UpdateQuery(string field = "")
         {
             throw new NotImplementedException();
         }
+
     }
 }

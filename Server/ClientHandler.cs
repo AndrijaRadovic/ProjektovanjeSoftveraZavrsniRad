@@ -74,9 +74,9 @@ namespace Server
                         }
                         break;
 
-                    case Operation.PretraziKorisnikePoImenu:
+                    case Operation.PretraziKorisnike:
                         {
-                            response.Result = ServerController.Instance.PretraziKorisnikePoImenu((string)request.Argument);
+                            response.Result = ServerController.Instance.PretraziKorisnike((string[])request.Argument);
                         }
                         break;
 
@@ -160,6 +160,12 @@ namespace Server
                         {
                             ServerController.Instance.DodajRacun((Racun)request.Argument);
                             response.Message = "Racun je uspesno dodat";
+                        }
+                        break;
+
+                    case Operation.VratiSveRacune:
+                        {
+                            response.Result = ServerController.Instance.VratiSveRacune();
                         }
                         break;
                 }

@@ -14,10 +14,6 @@ namespace Server.SystemOperations.SOProizvod
         public override void ExecuteConcreteOperation()
         {
             result = broker.GetAll(new Proizvod());
-
-            //result = broker.GetAll(new Alat());
-            //result.AddRange(broker.GetAll(new Farba()));
-            //result.AddRange(broker.GetAll(new Plocice()));
         }
     }
 }

@@ -122,6 +122,12 @@
     <Compile Include="UserControls\UCProizvod\UCProizvod.Designer.cs">
       <DependentUpon>UCProizvod.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCRacun\UCPrikazRacuna.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCRacun\UCPrikazRacuna.Designer.cs">
+      <DependentUpon>UCPrikazRacuna.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCRacun\UCRacun.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -142,6 +148,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UserControls\UCDefaultMain.resx">
       <DependentUpon>UCDefaultMain.cs</DependentUpon>
@@ -170,6 +177,9 @@
     <EmbeddedResource Include="UserControls\UCProizvod\UCProizvod.resx">
       <DependentUpon>UCProizvod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCRacun\UCPrikazRacuna.resx">
+      <DependentUpon>UCPrikazRacuna.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCRacun\UCRacun.resx">
       <DependentUpon>UCRacun.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +201,11 @@
       <Project>{BE5DB978-FB1C-4E77-9567-01043AEC3E32}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\Kolor-Tim-Logo.png" />
+    <None Include="Resources\img\Kolor-Tim-Logo-stampa.png" />
+    <Content Include="Resources\img\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

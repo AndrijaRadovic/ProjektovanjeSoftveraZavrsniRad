@@ -76,9 +76,9 @@ namespace Server
             so.ExecuteTemplate();
         }
 
-        internal List<Korisnik> PretraziKorisnikePoImenu(string ime)
+        internal List<Korisnik> PretraziKorisnike(string[] vrednosti)
         {
-            PronadjiKorisnikeSO pretragaSO = new PronadjiKorisnikeSO(ime);
+            PronadjiKorisnikeSO pretragaSO = new PronadjiKorisnikeSO(vrednosti);
             pretragaSO.ExecuteTemplate();
             return pretragaSO.Result.Cast<Korisnik>().ToList();
 
@@ -121,6 +121,13 @@ namespace Server
             UcitajProizvodeSO so = new UcitajProizvodeSO();
             so.ExecuteTemplate();
             return so.result.Cast<Proizvod>().ToList();
+        }
+
+        internal object VratiSveRacune()
+        {
+            UcitajRacuneSO so = new UcitajRacuneSO();
+            so.ExecuteTemplate();
+            return so.result.Cast<Racun>().ToList();
         }
     }
 }

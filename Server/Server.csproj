@@ -76,6 +76,7 @@
     <Compile Include="SystemOperations\SOProdavac\UcitajListuKorisnikaSO.cs" />
     <Compile Include="SystemOperations\SORacun\PronadjiRacuneSO.cs" />
     <Compile Include="SystemOperations\SORacun\StornirajRacunSO.cs" />
+    <Compile Include="SystemOperations\SORacun\UcitajRacuneSO.cs" />
     <Compile Include="SystemOperations\SORacun\UcitajRacunSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\ZapamtiProdavcaSO.cs" />
     <Compile Include="SystemOperations\SORacun\ZapamtiRacunSO.cs" />

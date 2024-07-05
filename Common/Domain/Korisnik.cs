@@ -27,8 +27,14 @@ namespace Common.Domain
 
         public object IdColumn => "sifraKorisnika";
 
-        public string GetFilterQuery(string filter)
+        public string GetFilterQuery(string filter, string field = "")
         {
+            if (field == "ime")
+                return $"lower(ime) like concat('%',lower('{filter}'),'%')";
+
+            if(field == "prezime")
+                return $"lower(prezime) like concat('%',lower('{filter}'),'%')";
+
             return $"lower(ime) like concat('%',lower('{filter}'),'%')";
         }
 
@@ -114,13 +120,13 @@ namespace Common.Domain
 
         public string GetByIdQuery(string use = "")
         {
-            if(use == "login")
+            if (use == "login")
                 return $"username='{Username}' and password='{Password}'";
 
             return $"sifraKorisnika = {SifraKorisnika}";
         }
 
-        public string GetTableName( string use = "")
+        public string GetTableName(string use = "")
         {
             return TableName;
         }

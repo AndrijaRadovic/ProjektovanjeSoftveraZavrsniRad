@@ -2,6 +2,7 @@
 using Common.Domain;
 using FrmLogin.UserControls;
 using FrmLogin.UserControls.UCProdavac;
+using FrmLogin.UserControls.UCRacun;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,11 @@ namespace FrmLogin.GUIControllers
         internal Control CreateUCProdavac(UCMode mode, Korisnik korisnik = null)
         {
             ucProdavac = new UCProdavci();
+            //setTabs();
+            //ucProdavac.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //ucProdavac.Dock = DockStyle.Right;
+            //ucProdavac.Dock = DockStyle.Top;
+            //ucProdavac.Dock = DockStyle.Right;
 
             PrepareFormProdavac(mode, korisnik);
 
@@ -41,6 +47,18 @@ namespace FrmLogin.GUIControllers
             }
 
             return ucProdavac;
+        }
+
+        private void setTabs()
+        {
+            ucProdavac.txtIme.TabIndex = 0;
+            ucProdavac.txtPrezime.TabIndex = 0;
+            ucProdavac.cbPol.TabIndex = 0;
+            ucProdavac.txtUsername.TabIndex = 0;
+            ucProdavac.txtPassword.TabIndex = 0;
+            ucProdavac.txtJmbg.TabIndex = 0;
+            ucProdavac.btnDodajProdavca.TabIndex = 0;
+            ucProdavac.btnOdustani.TabIndex = 0;
         }
 
         private void SacuvajIzmene(object sender, EventArgs e)
@@ -180,7 +198,7 @@ namespace FrmLogin.GUIControllers
                 ucProdavac.cbPol.SelectedIndex = -1;
 
             }
-            else if(mode == UCMode.Update)
+            else if (mode == UCMode.Update)
             {
                 ucProdavac.txtIme.Text = korisnik.Ime;
                 ucProdavac.txtPrezime.Text = korisnik.Prezime;
@@ -191,7 +209,8 @@ namespace FrmLogin.GUIControllers
 
                 ucProdavac.txtJmbg.Enabled = false;
                 ucProdavac.cbPol.Enabled = false;
-                
+                ucProdavac.txtPassword.Enabled = false;
+
             }
         }
 
@@ -199,7 +218,8 @@ namespace FrmLogin.GUIControllers
         {
             ucIzmeniProdavca = new UCIzmeniProdavca();
             ucIzmeniProdavca.Load += UcitajProdavce;
-            ucIzmeniProdavca.btnPretraga.Click += PretraziPoImenu;
+            ucIzmeniProdavca.Load += UcitajCBPretraga;
+            ucIzmeniProdavca.btnPretragaIme.Click += PretraziKorisnike;
             ucIzmeniProdavca.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
             ucIzmeniProdavca.btnIzmeni.Click += PrikaziFormuZaIzmenu;
             ucIzmeniProdavca.btnObrisi.Click += ObrisiProdavca;
@@ -207,22 +227,31 @@ namespace FrmLogin.GUIControllers
             return ucIzmeniProdavca;
         }
 
+        private void UcitajCBPretraga(object sender, EventArgs e)
+        {
+            List<string> cbPretraga = new List<string>();
+            cbPretraga.Add("Ime");
+            cbPretraga.Add("Prezime");
+
+            ucIzmeniProdavca.cbPretraga.DataSource = cbPretraga;
+        }
+
         private void ObrisiProdavca(object sender, EventArgs e)
         {
-            if(ucIzmeniProdavca.dgvKorisnici.SelectedRows.Count != 1)
+            if (ucIzmeniProdavca.dgvKorisnici.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Mora biti izabran tacno jedan korisnik", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if(MessageBox.Show("Da li ste sigurni da zelite da obrisete izabranog korisnika?", "Brisanje korisnika", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBox.Show("Da li ste sigurni da zelite da obrisete izabranog korisnika?", "Brisanje korisnika", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             Korisnik izabraniKorisnik = (Korisnik)ucIzmeniProdavca.dgvKorisnici.SelectedRows[0].DataBoundItem;
             Response response = Communication.Instance.ObrisiKorisnika(izabraniKorisnik);
-            ucIzmeniProdavca.btnPretraga.PerformClick();
+            ucIzmeniProdavca.btnPretragaIme.PerformClick();
             MessageBox.Show(response.Message);
         }
 
@@ -233,14 +262,19 @@ namespace FrmLogin.GUIControllers
             MainCoordinator.Instance.ShowProdavacPanel(UCMode.Update, korisnik);
         }
 
-        private void PretraziPoImenu(object sender, EventArgs e)
+        private void PretraziKorisnike(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(ucIzmeniProdavca.txtPretraga.Text))
             {
-                List<Korisnik> korisnici = Communication.Instance.PretraziKorisnikePoImenu(ucIzmeniProdavca.txtPretraga.Text);
+                List<Korisnik> korisnici = Communication.Instance.PretraziKorisnike(new string[] { ucIzmeniProdavca.txtPretraga.Text, ucIzmeniProdavca.cbPretraga.SelectedItem.ToString().ToLower() });
                 if (korisnici == null || korisnici.Count == 0)
                 {
-                    MessageBox.Show("Ne postoje korisnici sa tim imenom");
+                    if (ucIzmeniProdavca.cbPretraga.SelectedItem.ToString() == "Ime")
+                        MessageBox.Show("Ne postoje korisnici sa tim imenom");
+
+                    if (ucIzmeniProdavca.cbPretraga.SelectedItem.ToString() == "Prezime")
+                        MessageBox.Show("Ne postoje korisnici sa tim prezimenom");
+
                     return;
                 }
                 else prepareDgv(korisnici);
@@ -310,7 +344,7 @@ namespace FrmLogin.GUIControllers
             }
 
             Response response = Communication.Instance.PromeniSifru(ucPromenaSifre.txtStaraSifra.Text, ucPromenaSifre.txtNovaSifra.Text);
-            MessageBox.Show(response.Message, (response.IsSuccessful?"asd":"dsa"));
+            MessageBox.Show(response.Message, (response.IsSuccessful ? "asd" : "dsa"));
         }
     }
 }

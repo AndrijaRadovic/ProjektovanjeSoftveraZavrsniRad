@@ -43,7 +43,7 @@ namespace FrmLogin.GUIControllers
             Korisnik = korisnik;
             frmMain = new FrmMain(korisnik.Uloga);
             frmMain.AutoSize = true;
-            //ShowDefault();
+            ShowDefault();
             frmMain.ShowDialog();
         }
 
@@ -87,6 +87,11 @@ namespace FrmLogin.GUIControllers
         internal void ShowRacunPanel(UCMode mode, Racun racun = null)
         {
             frmMain.ChangePanel(racunGUIController.createUCRacun(mode, racun));
+        }
+
+        internal void ShowPrikazRacunaPanel()
+        {
+            frmMain.ChangePanel(racunGUIController.createUCPrikazRacuna(frmMain.uloga));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Common.Communication
         Login,
         DodajProdavca,
         VratiSveProdavce,
-        PretraziKorisnikePoImenu,
+        PretraziKorisnike,
         ObrisiKorisnika,
         NadjiKorisnikaPoId,
         UpdateKorisnika,
@@ -22,6 +22,7 @@ namespace Common.Communication
         PretraziProizvodePoNazivu,
         UpdateProizvod,
         NadjiProizvodPoId,
-        DodajRacun
+        DodajRacun,
+        VratiSveRacune
     }
 }

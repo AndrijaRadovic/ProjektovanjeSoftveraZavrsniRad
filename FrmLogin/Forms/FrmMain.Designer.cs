@@ -130,19 +130,21 @@
             // kreirajRacunToolStripMenuItem
             // 
             this.kreirajRacunToolStripMenuItem.Name = "kreirajRacunToolStripMenuItem";
-            this.kreirajRacunToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.kreirajRacunToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.kreirajRacunToolStripMenuItem.Text = "Kreiraj račun";
             // 
             // prikaziRacuneToolStripMenuItem
             // 
             this.prikaziRacuneToolStripMenuItem.Name = "prikaziRacuneToolStripMenuItem";
-            this.prikaziRacuneToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.prikaziRacuneToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.prikaziRacuneToolStripMenuItem.Text = "Prikaži račune";
             // 
             // pnlMain
             // 
             this.pnlMain.AutoSize = true;
             this.pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlMain.BackgroundImage = global::FrmLogin.Properties.Resources.Kolor_Tim_Logo;
+            this.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 28);
             this.pnlMain.Name = "pnlMain";
@@ -159,7 +161,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
-            this.Text = "FrmMain";
+            this.Text = "Kolor Tim";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

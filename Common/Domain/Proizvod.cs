@@ -34,7 +34,7 @@ namespace Common.Domain
             return $"sifraProizvoda = {SifraProizvoda}";
         }
 
-        public string GetFilterQuery(string filter)
+        public string GetFilterQuery(string filter, string field = "")
         {
             return $"lower(nazivProizvoda) like concat('%',lower('{filter}'),'%')";
         }

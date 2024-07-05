@@ -124,7 +124,7 @@
             this.btnDodajProdavca.Location = new System.Drawing.Point(196, 381);
             this.btnDodajProdavca.Name = "btnDodajProdavca";
             this.btnDodajProdavca.Size = new System.Drawing.Size(127, 64);
-            this.btnDodajProdavca.TabIndex = 12;
+            this.btnDodajProdavca.TabIndex = 6;
             this.btnDodajProdavca.Text = "Sačuvaj";
             this.btnDodajProdavca.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +133,7 @@
             this.btnOdustani.Location = new System.Drawing.Point(32, 381);
             this.btnOdustani.Name = "btnOdustani";
             this.btnOdustani.Size = new System.Drawing.Size(127, 64);
-            this.btnOdustani.TabIndex = 13;
+            this.btnOdustani.TabIndex = 7;
             this.btnOdustani.Text = "Nazad";
             this.btnOdustani.UseVisualStyleBackColor = true;
             // 
@@ -153,14 +153,14 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '♣';
             this.txtPassword.Size = new System.Drawing.Size(203, 22);
-            this.txtPassword.TabIndex = 19;
+            this.txtPassword.TabIndex = 4;
             // 
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(120, 226);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(203, 22);
-            this.txtUsername.TabIndex = 18;
+            this.txtUsername.TabIndex = 3;
             // 
             // txtJmbg
             // 
@@ -168,7 +168,7 @@
             this.txtJmbg.MaxLength = 13;
             this.txtJmbg.Name = "txtJmbg";
             this.txtJmbg.Size = new System.Drawing.Size(203, 22);
-            this.txtJmbg.TabIndex = 21;
+            this.txtJmbg.TabIndex = 5;
             // 
             // cbPol
             // 
@@ -176,7 +176,7 @@
             this.cbPol.Location = new System.Drawing.Point(120, 182);
             this.cbPol.Name = "cbPol";
             this.cbPol.Size = new System.Drawing.Size(203, 24);
-            this.cbPol.TabIndex = 22;
+            this.cbPol.TabIndex = 2;
             // 
             // UCProdavci
             // 

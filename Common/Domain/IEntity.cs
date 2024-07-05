@@ -22,7 +22,7 @@ namespace Common
         string JoinQuery();
         string GetByIdQuery(string use = "");
         string GetSearchAttributes();
-        string GetFilterQuery(string filter);
+        string GetFilterQuery(string filter, string field = "");
         List<IEntity> ReadAllSearch(SqlDataReader reader);
         string GetTableName(string use = "");
         string AddColumn();
