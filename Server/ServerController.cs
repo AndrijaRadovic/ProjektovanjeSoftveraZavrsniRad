@@ -32,13 +32,8 @@ namespace Server
 
         internal void DodajProizvod(Proizvod proizvod)
         {
-            // Ako uspe ono za racun, zameni to i ovde
-
-            KreirajNadredjeniProizvodSO nadredjeniSo = new KreirajNadredjeniProizvodSO(proizvod);
-            nadredjeniSo.ExecuteTemplate();
-
-            KreirajPodredjeniProizvod podredjeniSo = new KreirajPodredjeniProizvod(proizvod);
-            podredjeniSo.ExecuteTemplate();
+            KreirajProizvodSO so = new KreirajProizvodSO(proizvod);
+            so.ExecuteTemplate();
         }
 
         internal void DodajRacun(Racun racun)

@@ -104,17 +104,17 @@ namespace DBBroker
         {
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandText = $"Select max({entity.IdColumn}) from {entity.GetTableName("parent")}";
-            int maxId = (int) cmd.ExecuteScalar();
+            int maxId = (int)cmd.ExecuteScalar();
             cmd.Dispose();
             return maxId;
         }
 
-        public int AddWithId(IEntity entity)
+        public int AddWithId(IEntity entity, string use = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Insert into {entity.TableName} output inserted.{entity.PrimaryKey} values ({entity.GetParameters()})";
-            entity.PrepareCommand(cmd);
-            int id = (int) cmd.ExecuteScalar();
+            cmd.CommandText = $"Insert into {entity.GetTableName(use)} output inserted.{entity.PrimaryKey} values ({entity.GetParameters(use)})";
+            entity.PrepareCommand(cmd, use);
+            int id = (int)cmd.ExecuteScalar();
             cmd.Dispose();
             return id;
         }

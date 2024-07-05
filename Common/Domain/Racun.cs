@@ -60,7 +60,7 @@ namespace Common.Domain
 
         public string GetTableName(string use = "")
         {
-            throw new NotImplementedException();
+            return TableName;
         }
 
         public string JoinQuery()

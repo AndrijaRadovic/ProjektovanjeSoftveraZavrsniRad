@@ -17,7 +17,7 @@ namespace Common.Domain
         public TipProizvoda TipProizvoda { get; set; }
         public string DisplayValue => NazivProizvoda;
 
-        public string PrimaryKey => SifraProizvoda.ToString();
+        public string PrimaryKey => "sifraProizvoda";
 
         public object IdColumn => "sifraProizvoda";
 
