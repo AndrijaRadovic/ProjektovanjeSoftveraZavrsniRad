@@ -21,6 +21,7 @@ namespace Common.Communication
         ObrisiProizvod,
         PretraziProizvodePoNazivu,
         UpdateProizvod,
-        NadjiProizvodPoId
+        NadjiProizvodPoId,
+        DodajRacun
     }
 }

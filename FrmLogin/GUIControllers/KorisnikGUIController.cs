@@ -39,10 +39,6 @@ namespace FrmLogin.GUIControllers
                 ucProdavac.btnDodajProdavca.Click += SacuvajIzmene;
                 ucProdavac.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
             }
-            else if (mode == UCMode.Delete)
-            {
-
-            }
 
             return ucProdavac;
         }

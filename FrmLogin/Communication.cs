@@ -173,5 +173,12 @@ namespace FrmLogin
             sender.Send(request);
             return (Proizvod)((Response)receiver.Receive()).Result;
         }
+
+        internal Response DodajRacun(Racun racun)
+        {
+            Request request = new Request(Operation.DodajRacun, racun);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
     }
 }

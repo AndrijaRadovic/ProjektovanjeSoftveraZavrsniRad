@@ -48,9 +48,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(25, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(267, 38);
+            this.label7.Size = new System.Drawing.Size(145, 38);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Izmena prodavca";
+            this.label7.Text = "Prodavci";
             // 
             // txtPretraga
             // 

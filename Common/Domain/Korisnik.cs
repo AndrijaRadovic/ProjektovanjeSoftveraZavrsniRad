@@ -19,7 +19,7 @@ namespace Common.Domain
         public string Username { get; set; }
         public string Password { get; set; }
         public string Jmbg { get; set; }
-        public string TableName => "Korisnik1";
+        public string TableName => "Korisnik";
 
         public string DisplayValue => Username;
 

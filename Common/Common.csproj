@@ -54,6 +54,8 @@
     <Compile Include="Domain\Plocice.cs" />
     <Compile Include="Domain\Pol.cs" />
     <Compile Include="Domain\Proizvod.cs" />
+    <Compile Include="Domain\Racun.cs" />
+    <Compile Include="Domain\StavkaRacuna.cs" />
     <Compile Include="Domain\TipAlata.cs" />
     <Compile Include="Domain\TipProizvoda.cs" />
     <Compile Include="Domain\Uloga.cs" />

@@ -46,7 +46,7 @@ namespace FrmLogin.GUIControllers
             if(k != null)
             {
                 frmLogin.Hide();
-                MainCoordinator.Instance.ShowFrmMain(k.Uloga);
+                MainCoordinator.Instance.ShowFrmMain(k);
                 frmLogin.Close();
             }
             else

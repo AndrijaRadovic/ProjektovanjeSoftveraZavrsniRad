@@ -186,5 +186,10 @@ namespace Common.Domain
         {
             return $"nazivProizvoda = '{NazivProizvoda}', cena = {Cena}";
         }
+
+        public override string ToString()
+        {
+            return NazivProizvoda;
+        }
     }
 }

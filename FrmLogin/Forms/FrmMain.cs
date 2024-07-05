@@ -26,17 +26,22 @@ namespace FrmLogin.Forms
             InitializeComponent();
             this.uloga = uloga;
 
-            //prodavci
+            // Prodavci
+
             kreirajNalogProdavcaToolStripMenuItem.Click += (s, e) =>
                 MainCoordinator.Instance.ShowProdavacPanel(UCMode.Create);
             izmeniProdavcaToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
             promeniSifruToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPromenaSifre();
             odjaviSeToolStripMenuItem.Click += (s, e) => Odjava();
 
-            //proizvodi
+            // Proizvodi
+
             kreirajProizvodToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowProizvodPanel(UCMode.Create);
             prikaziProizvodeToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowPrikazProizvodaPanel();
 
+            // Racuni
+
+            kreirajRacunToolStripMenuItem.Click += (s, e) => MainCoordinator.Instance.ShowRacunPanel(UCMode.Create);
 
 
             if (uloga != Uloga.Administrator)

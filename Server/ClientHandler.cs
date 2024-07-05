@@ -155,6 +155,13 @@ namespace Server
                             response.Result = ServerController.Instance.NadjiProizvodPoId((int)request.Argument);
                         }
                         break;
+
+                    case Operation.DodajRacun:
+                        {
+                            ServerController.Instance.DodajRacun((Racun)request.Argument);
+                            response.Message = "Racun je uspesno dodat";
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

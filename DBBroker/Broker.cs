@@ -108,5 +108,15 @@ namespace DBBroker
             cmd.Dispose();
             return maxId;
         }
+
+        public int AddWithId(IEntity entity)
+        {
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = $"Insert into {entity.TableName} output inserted.{entity.PrimaryKey} values ({entity.GetParameters()})";
+            entity.PrepareCommand(cmd);
+            int id = (int) cmd.ExecuteScalar();
+            cmd.Dispose();
+            return id;
+        }
     }
 }

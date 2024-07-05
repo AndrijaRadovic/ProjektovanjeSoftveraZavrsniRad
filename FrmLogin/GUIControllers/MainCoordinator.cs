@@ -1,6 +1,7 @@
 ﻿using Common.Domain;
 using FrmLogin.Forms;
 using FrmLogin.UserControls;
+using FrmLogin.UserControls.UCRacun;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace FrmLogin.GUIControllers
     internal class MainCoordinator
     {
         private static MainCoordinator instance;
+        public Korisnik Korisnik { get; set; }
         public static MainCoordinator Instance
         {
             get
@@ -24,20 +26,22 @@ namespace FrmLogin.GUIControllers
             }
         }
 
+        private FrmMain frmMain;
+        private KorisnikGUIController korisnikGUIController;
+        private ProizvodGUIController proizvodGUIController;
+        private RacunGUIController racunGUIController;
+
         public MainCoordinator()
         {
             //instancirati sve GUI kontrolere osim logina
             korisnikGUIController = new KorisnikGUIController();
             proizvodGUIController = new ProizvodGUIController();
+            racunGUIController = new RacunGUIController();
         }
-
-        private FrmMain frmMain;
-        private KorisnikGUIController korisnikGUIController;
-        private ProizvodGUIController proizvodGUIController;
-
-        internal void ShowFrmMain(Uloga uloga)
+        internal void ShowFrmMain(Korisnik korisnik)
         {
-            frmMain = new FrmMain(uloga);
+            Korisnik = korisnik;
+            frmMain = new FrmMain(korisnik.Uloga);
             frmMain.AutoSize = true;
             //ShowDefault();
             frmMain.ShowDialog();
@@ -78,6 +82,11 @@ namespace FrmLogin.GUIControllers
         internal void ShowPrikazProizvodaPanel()
         {
             frmMain.ChangePanel(proizvodGUIController.createUCPrikazProizvoda(frmMain.uloga));
+        }
+
+        internal void ShowRacunPanel(UCMode mode, Racun racun = null)
+        {
+            frmMain.ChangePanel(racunGUIController.createUCRacun(mode, racun));
         }
     }
 }
