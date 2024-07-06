@@ -194,6 +194,12 @@ namespace Server
                             response.Message = "Racun je uspesno azuriran";
                         }
                         break;
+
+                    case Operation.ProveriUsername:
+                        {
+                            response.Result = ServerController.Instance.ProveriUsername((string)request.Argument);
+                        }
+                        break;
                 }
                 response.IsSuccessful = true;
             }

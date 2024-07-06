@@ -30,7 +30,7 @@ namespace Common.Domain
             if (field == "ime")
                 return $"lower(ime) like concat('%',lower('{filter}'),'%')";
 
-            if(field == "prezime")
+            if (field == "prezime")
                 return $"lower(prezime) like concat('%',lower('{filter}'),'%')";
 
             throw new NotImplementedException();
@@ -121,7 +121,10 @@ namespace Common.Domain
         public string GetByIdQuery(string use = "")
         {
             if (use == "login")
-                return $"username='{Username}' and password='{Password}'";
+                return $"username = '{Username}' and password = '{Password}'";
+
+            if (use == "username")
+                return $"username = '{Username}'";
 
             return $"sifraKorisnika = {SifraKorisnika}";
         }

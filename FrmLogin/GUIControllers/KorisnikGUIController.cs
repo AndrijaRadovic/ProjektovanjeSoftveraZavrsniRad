@@ -173,6 +173,11 @@ namespace FrmLogin.GUIControllers
                 errors.Add("Username mora imati bar 2 karaktera i to isključivo slova i brojeve");
                 controls.Add(ucProdavac.txtUsername);
             }
+            else if (Communication.Instance.ProveriUsername(ucProdavac.txtUsername.Text) != null)
+            {
+                errors.Add("Korisnik sa unetim username-om već postoji");
+                controls.Add(ucProdavac.txtUsername);
+            }
 
             if (mod == UCMode.Create)
             {
@@ -377,7 +382,7 @@ namespace FrmLogin.GUIControllers
                 MessageBox.Show("Uneta šifra mora imati bar 8 karaktera!", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             Response response = Communication.Instance.PromeniSifru(HashPassword(ucPromenaSifre.txtStaraSifra.Text.Trim()), HashPassword(ucPromenaSifre.txtNovaSifra.Text.Trim()));
             MessageBox.Show(response.Message, (response.IsSuccessful ? "asd" : "dsa"));
         }

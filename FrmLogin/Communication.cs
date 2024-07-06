@@ -216,5 +216,12 @@ namespace FrmLogin
             sender.Send(request);
             return (Response)receiver.Receive();
         }
+
+        internal Korisnik ProveriUsername(string username)
+        {
+            Request request = new Request(Operation.ProveriUsername, username);
+            sender.Send(request);
+            return (Korisnik)((Response)receiver.Receive()).Result;
+        }
     }
 }

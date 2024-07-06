@@ -27,6 +27,7 @@ namespace Common.Communication
         StornirajRacun,
         PretraziRacunePoDatumu,
         NadjiRacunPoId,
-        UpdateRacun
+        UpdateRacun,
+        ProveriUsername
     }
 }

@@ -98,7 +98,7 @@ namespace Server
             return so.Result.Cast<Proizvod>().ToList();
         }
 
-        internal object PretraziRacunePoDatumu(DateTime datum)
+        internal List<Racun> PretraziRacunePoDatumu(DateTime datum)
         {
             PronadjiRacuneSO so = new PronadjiRacuneSO(datum);
             so.ExecuteTemplate();
@@ -109,6 +109,13 @@ namespace Server
         {
             PromeniSifruSO so = new PromeniSifruSO(prijavljeniKorisnik);
             so.ExecuteTemplate();
+        }
+
+        internal Korisnik ProveriUsername(string username)
+        {
+            ProveriUsernameSO so = new ProveriUsernameSO(username);
+            so.ExecuteTemplate();
+            return so.Result;
         }
 
         internal void StornirajRacun(Racun racun)

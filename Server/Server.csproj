@@ -63,6 +63,7 @@
     <Compile Include="SystemOperations\SOProdavac\ObrisiProdavcaSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\PromeniSifruSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\PronadjiKorisnikeSO.cs" />
+    <Compile Include="SystemOperations\SOProdavac\ProveriUsernameSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\UcitajProdavcaSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\IzmeniProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\KreirajProizvodSO.cs" />
