@@ -64,6 +64,13 @@ namespace Server
             return so.Result;
         }
 
+        internal Racun NadjiRacunPoId(int id)
+        {
+            UcitajRacunSO so = new UcitajRacunSO(id);
+            so.ExecuteTemplate();
+            return so.Result;
+        }
+
         internal void ObrisiKorisnika(Korisnik izabraniKorisnik)
         {
             ObrisiProdavcaSO so = new ObrisiProdavcaSO(izabraniKorisnik);
@@ -119,6 +126,12 @@ namespace Server
         internal void UpdateProizvod(Proizvod proizvod)
         {
             IzmeniProizvodSO so = new IzmeniProizvodSO(proizvod);
+            so.ExecuteTemplate();
+        }
+
+        internal void UpdateRacun(Racun racun)
+        {
+            IzmeniRacunSO so = new IzmeniRacunSO(racun);
             so.ExecuteTemplate();
         }
 

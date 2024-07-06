@@ -66,7 +66,7 @@ namespace DBBroker
         public void Delete(IEntity entity, string use = "")
         {
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = $"Delete from {entity.GetTableName(use)} where {entity.GetByIdQuery()}";
+            cmd.CommandText = $"Delete from {entity.GetTableName(use)} where {entity.GetByIdQuery(use)}";
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }

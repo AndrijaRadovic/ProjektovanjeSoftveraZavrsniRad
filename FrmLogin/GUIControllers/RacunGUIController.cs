@@ -24,6 +24,8 @@ namespace FrmLogin.GUIControllers
 
         private BindingList<Racun> racuni = new BindingList<Racun>();
 
+        private Racun racunZaIzmenu;
+
         internal Control createUCRacun(UCMode mode, Racun racun)
         {
             ucRacun = new UCRacun();
@@ -42,10 +44,34 @@ namespace FrmLogin.GUIControllers
 
             if (mode == UCMode.Update)
             {
-
+                racunZaIzmenu = racun;
+                ucRacun.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowPrikazRacunaPanel();
+                ucRacun.btnDodajStavku.Click += DodajStavkuRacuna;
+                ucRacun.btnObrisiStavku.Click += ObrisiStavkuRacuna;
+                ucRacun.btnSacuvajRacun.Click += IzmeniRacun;
             }
 
             return ucRacun;
+        }
+
+        private void IzmeniRacun(object sender, EventArgs e)
+        {
+            Racun racun = new Racun()
+            {
+                SifraRacuna = racunZaIzmenu.SifraRacuna,
+                DatumVreme = DateTime.Now,
+                UkupnaCenaRacuna = ukupnaCena,
+                Korisnik = MainCoordinator.Instance.Korisnik,
+                StavkeRacuna = stavkeRacuna.ToList()
+            };
+
+            foreach (StavkaRacuna sr in racun.StavkeRacuna)
+                sr.Racun = racun;
+
+            Response response = Communication.Instance.UpdateRacun(racun);
+            MessageBox.Show(response.Message);
+
+            ucRacun.btnNazad.PerformClick();
         }
 
         private void ZameniCenuProizvoda(object sender, EventArgs e)
@@ -53,7 +79,7 @@ namespace FrmLogin.GUIControllers
             if (ucRacun.cbProizvod.SelectedIndex == -1)
                 return;
 
-            ucRacun.txtCenaStavke.Text = ((Proizvod)ucRacun.cbProizvod.SelectedItem).Cena.ToString();
+            ucRacun.txtCenaStavke.Text = ((Proizvod)ucRacun.cbProizvod.SelectedItem).Cena.ToString("n2");
         }
 
         private void SacuvajRacun(object sender, EventArgs e)
@@ -124,7 +150,7 @@ namespace FrmLogin.GUIControllers
             };
             stavkeRacuna.Add(stavka);
             ukupnaCena += stavka.UkupnaCenaStavke;
-            ucRacun.txtUkupnaCena.Text = ukupnaCena.ToString();
+            ucRacun.txtUkupnaCena.Text = ukupnaCena.ToString("n2");
 
             ucRacun.cbProizvod.BackColor = Color.White;
         }
@@ -165,16 +191,20 @@ namespace FrmLogin.GUIControllers
         private void prepareFormRacun(UCMode mode, Racun racun)
         {
             ucRacun.cbProizvod.DataSource = Communication.Instance.VratiSveProizvode();
+            ucRacun.cbProizvod.SelectedIndex = -1;
 
             if (mode == UCMode.Create)
             {
-                ucRacun.cbProizvod.SelectedIndex = -1;
                 ucRacun.txtUkupnaCena.Text = "0.00";
             }
 
             if (mode == UCMode.Update)
             {
                 stavkeRacuna = new BindingList<StavkaRacuna>(racun.StavkeRacuna);
+                ucRacun.txtUkupnaCena.Text = racun.UkupnaCenaRacuna.ToString();
+                ucRacun.lblNaslov.Text = "Izmena računa";
+                ukupnaCena = racun.UkupnaCenaRacuna;
+                trenutniIndeks = stavkeRacuna.Count + 1;
             }
 
             prepareDgv(ucRacun.dgvStavkeRacuna);
@@ -212,9 +242,8 @@ namespace FrmLogin.GUIControllers
 
             ucPrikazRacuna.Load += UcitajRacune;
             ucPrikazRacuna.dtpDatumRacuna.ValueChanged += PretraziRacunePoDatumu; 
-            ucPrikazRacuna.cbRacuni.SelectedIndexChanged += PrikaziStavkeIzabranogRacuna; 
+            ucPrikazRacuna.cbRacuni.SelectedIndexChanged += PrikaziStavkeIzabranogRacuna;
             ucPrikazRacuna.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
-            // nije odradjeno
             ucPrikazRacuna.btnIzmeni.Click += PrikaziFormuZaIzmenu;
             ucPrikazRacuna.btnStorniraj.Click += StornirajRacun;
             ucPrikazRacuna.btnRefresh.Click += UcitajRacune;

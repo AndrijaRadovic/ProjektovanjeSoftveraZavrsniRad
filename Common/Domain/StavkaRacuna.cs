@@ -31,6 +31,9 @@ namespace Common.Domain
 
         public string GetByIdQuery(string use = "")
         {
+            if (use == "deleteAll")
+                return $"sifraRacuna = {Racun.SifraRacuna}";
+
             throw new NotImplementedException();
         }
 

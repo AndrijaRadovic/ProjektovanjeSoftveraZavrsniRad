@@ -131,11 +131,6 @@ namespace Common.Domain
             return TableName;
         }
 
-        public string UpdateQuery()
-        {
-            throw new NotImplementedException();
-        }
-
         public string AddColumn()
         {
             return "";

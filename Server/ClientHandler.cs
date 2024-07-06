@@ -181,6 +181,19 @@ namespace Server
                             response.Result = ServerController.Instance.PretraziRacunePoDatumu((DateTime)request.Argument);
                         }
                         break;
+
+                    case Operation.NadjiRacunPoId:
+                        {
+                            response.Result = ServerController.Instance.NadjiRacunPoId((int)request.Argument);
+                        }
+                        break;
+
+                    case Operation.UpdateRacun:
+                        {
+                            ServerController.Instance.UpdateRacun((Racun)request.Argument);
+                            response.Message = "Racun je uspesno azuriran";
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

@@ -208,5 +208,12 @@ namespace FrmLogin
             sender.Send(request);
             return (Racun)((Response)receiver.Receive()).Result;
         }
+
+        internal Response UpdateRacun(Racun racun)
+        {
+            Request request = new Request(Operation.UpdateRacun, racun);
+            sender.Send(request);
+            return (Response)receiver.Receive();
+        }
     }
 }

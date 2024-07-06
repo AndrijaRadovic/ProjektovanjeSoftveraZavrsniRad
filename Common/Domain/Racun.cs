@@ -30,7 +30,7 @@ namespace Common.Domain
 
         public string GetByIdQuery(string use = "")
         {
-            throw new NotImplementedException();
+            return $"sifraRacuna = {SifraRacuna}";
         }
 
         public string GetFilterQuery(string filter, string field = "")
@@ -50,7 +50,28 @@ namespace Common.Domain
 
         public IEntity GetReaderResult(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            if (reader.Read())
+            {
+                Racun racun = new Racun
+                {
+                    SifraRacuna = (int)reader["sifraRacuna"],
+                    DatumVreme = (DateTime)reader["datumVreme"],
+                    UkupnaCenaRacuna = (double)reader["ukupnaCenaRacuna"],
+                    Korisnik = new Korisnik
+                    {
+                        SifraKorisnika = (int)reader["sifraKorisnika"],
+                        Ime = (string)reader["ime"],
+                        Prezime = (string)reader["prezime"],
+                        Pol = (Pol)Enum.Parse(typeof(Pol), (string)reader["pol"]),
+                        Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
+                        Username = (string)reader["username"],
+                        Password = null,
+                        Jmbg = (string)reader["jmbg"]
+                    }
+                };
+                return racun;
+            }
+            return null;
         }
 
         public string GetSearchAttributes()
@@ -106,7 +127,7 @@ namespace Common.Domain
 
         public string UpdateQuery(string field = "")
         {
-            throw new NotImplementedException();
+            return $"datumVreme = '{DatumVreme}', ukupnaCenaRacuna = {UkupnaCenaRacuna}, sifraKorisnika = {Korisnik.SifraKorisnika}";
         }
 
         public override string ToString()
