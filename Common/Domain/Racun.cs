@@ -18,10 +18,7 @@ namespace Common.Domain
 
         public string TableName => "Racun";
         public string DisplayValue => throw new NotImplementedException();
-
         public string PrimaryKey => "sifraRacuna";
-
-        public object IdColumn => "sifraRacuna";
 
         public string AddColumn()
         {
@@ -66,7 +63,9 @@ namespace Common.Domain
                         Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
                         Username = (string)reader["username"],
                         Password = null,
-                        Jmbg = (string)reader["jmbg"]
+                        Jmbg = (string)reader["jmbg"],
+                        Email = (string)reader["email"],
+                        BrojTelefona = (string)reader["brojTelefona"]
                     }
                 };
                 return racun;
@@ -116,7 +115,9 @@ namespace Common.Domain
                         Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
                         Username = (string)reader["username"],
                         Password = null,
-                        Jmbg = (string)reader["jmbg"]
+                        Jmbg = (string)reader["jmbg"],
+                        Email = (string)reader["email"],
+                        BrojTelefona = (string)reader["brojTelefona"]
                     }
                 };
                 entities.Add(racun);
@@ -133,6 +134,11 @@ namespace Common.Domain
         public override string ToString()
         {
             return DatumVreme.ToString("dd/MM/yyyy HH:mm") + " " + Korisnik.Ime + " " + Korisnik.Prezime;
+        }
+
+        public string OrderByQuery()
+        {
+            return "order by datumVreme desc";
         }
     }
 }

@@ -2,6 +2,7 @@
 using Common.Domain;
 using FrmLogin.UserControls;
 using FrmLogin.UserControls.UCProdavac;
+using FrmLogin.UserControls.UCProizvod;
 using FrmLogin.UserControls.UCRacun;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -49,21 +51,21 @@ namespace FrmLogin.GUIControllers
             return ucProdavac;
         }
 
-        private void setTabs()
-        {
-            ucProdavac.txtIme.TabIndex = 0;
-            ucProdavac.txtPrezime.TabIndex = 0;
-            ucProdavac.cbPol.TabIndex = 0;
-            ucProdavac.txtUsername.TabIndex = 0;
-            ucProdavac.txtPassword.TabIndex = 0;
-            ucProdavac.txtJmbg.TabIndex = 0;
-            ucProdavac.btnDodajProdavca.TabIndex = 0;
-            ucProdavac.btnOdustani.TabIndex = 0;
-        }
+        //private void setTabs()
+        //{
+        //    ucProdavac.txtIme.TabIndex = 0;
+        //    ucProdavac.txtPrezime.TabIndex = 0;
+        //    ucProdavac.cbPol.TabIndex = 0;
+        //    ucProdavac.txtUsername.TabIndex = 0;
+        //    ucProdavac.txtPassword.TabIndex = 0;
+        //    ucProdavac.txtJmbg.TabIndex = 0;
+        //    ucProdavac.btnDodajProdavca.TabIndex = 0;
+        //    ucProdavac.btnOdustani.TabIndex = 0;
+        //}
 
         private void SacuvajIzmene(object sender, EventArgs e)
         {
-            if (!ValidationDodajProdavca()) return;
+            if (!ValidationDodajProdavca(UCMode.Update)) return;
 
             Korisnik korisnik = new Korisnik()
             {
@@ -73,18 +75,21 @@ namespace FrmLogin.GUIControllers
                 Pol = (Pol)ucProdavac.cbPol.SelectedItem,
                 Uloga = Uloga.Prodavac,
                 Username = ucProdavac.txtUsername.Text.Trim(),
-                Password = ucProdavac.txtPassword.Text.Trim(),
-                Jmbg = ucProdavac.txtJmbg.Text.Trim()
+                Password = HashPassword(ucProdavac.txtPassword.Text.Trim()),
+                Jmbg = ucProdavac.txtJmbg.Text.Trim(),
+                Email = ucProdavac.txtEmail.Text.Trim(),
+                BrojTelefona = ucProdavac.txtBrTelefona.Text.Trim()
             };
             Response res = Communication.Instance.UpdateKorisnika(korisnik);
             MessageBox.Show(res.Message);
+
+            ucProdavac.btnOdustani.PerformClick();
         }
 
         private void DodajProdavca(object sender, EventArgs e)
         {
-            if (!ValidationDodajProdavca()) return;
+            if (!ValidationDodajProdavca(UCMode.Create)) return;
 
-            //Dodaj hash za sifru
             Korisnik korisnik = new Korisnik()
             {
                 Ime = ucProdavac.txtIme.Text.Trim(),
@@ -92,14 +97,30 @@ namespace FrmLogin.GUIControllers
                 Pol = (Pol)ucProdavac.cbPol.SelectedItem,
                 Uloga = Uloga.Prodavac,
                 Username = ucProdavac.txtUsername.Text.Trim(),
-                Password = ucProdavac.txtPassword.Text.Trim(),
-                Jmbg = ucProdavac.txtJmbg.Text.Trim()
+                Password = HashPassword(ucProdavac.txtPassword.Text.Trim()),
+                Jmbg = ucProdavac.txtJmbg.Text.Trim(),
+                Email = ucProdavac.txtEmail.Text.Trim(),
+                BrojTelefona = ucProdavac.txtBrTelefona.Text.Trim()
             };
 
             Response response = Communication.Instance.DodajProdavca(korisnik);
             MessageBox.Show(response.Message);
 
             ResetForm();
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
 
         private void ResetForm()
@@ -116,9 +137,15 @@ namespace FrmLogin.GUIControllers
             ucProdavac.txtPassword.Clear();
             ucProdavac.txtJmbg.BackColor = Color.White;
             ucProdavac.txtJmbg.Clear();
+            ucProdavac.txtBrTelefona.BackColor = Color.White;
+            ucProdavac.txtBrTelefona.Clear();
+            ucProdavac.txtEmail.BackColor = Color.White;
+            ucProdavac.txtEmail.Clear();
+
+            ucProdavac.txtIme.Focus();
         }
 
-        private bool ValidationDodajProdavca()
+        private bool ValidationDodajProdavca(UCMode mod)
         {
             List<string> errors = new List<string>();
             List<Control> controls = new List<Control>();
@@ -147,17 +174,33 @@ namespace FrmLogin.GUIControllers
                 controls.Add(ucProdavac.txtUsername);
             }
 
-            //Mozda dodati neki regex uslov i/ili hash - dodaj mejl i telefon
-            if (string.IsNullOrEmpty(ucProdavac.txtPassword.Text) || ucProdavac.txtPassword.Text.Length < 8)
+            if (mod == UCMode.Create)
             {
-                errors.Add("Uneta šifra mora imati bar 8 karaktera!");
-                controls.Add(ucProdavac.txtPassword);
+                if (string.IsNullOrEmpty(ucProdavac.txtPassword.Text) || ucProdavac.txtPassword.Text.Length < 8)
+                {
+                    errors.Add("Uneta šifra mora imati bar 8 karaktera!");
+                    controls.Add(ucProdavac.txtPassword);
+                }
             }
 
             if (string.IsNullOrEmpty(ucProdavac.txtJmbg.Text) || ucProdavac.txtJmbg.Text.Length != 13 || !ucProdavac.txtJmbg.Text.All(c => char.IsDigit(c)))
             {
                 errors.Add("JMBG nije ispravno unet!");
                 controls.Add(ucProdavac.txtJmbg);
+            }
+
+            Regex regexBrTelefona = new Regex(@"\+381\d+$");
+            if (!regexBrTelefona.IsMatch(ucProdavac.txtBrTelefona.Text))
+            {
+                errors.Add("Broj telefona mora biti u formatu +381...");
+                controls.Add(ucProdavac.txtBrTelefona);
+            }
+
+            Regex regexEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            if (!string.IsNullOrEmpty(ucProdavac.txtEmail.Text) && !regexEmail.IsMatch(ucProdavac.txtEmail.Text.Trim()))
+            {
+                errors.Add("Email mora biti ili prazan (ako ne zelite da unesete) ili u ispravnom formatu");
+                controls.Add(ucProdavac.txtEmail);
             }
 
             if (errors.Count > 0)
@@ -177,6 +220,8 @@ namespace FrmLogin.GUIControllers
             ucProdavac.txtUsername.BackColor = Color.White;
             ucProdavac.txtPassword.BackColor = Color.White;
             ucProdavac.txtJmbg.BackColor = Color.White;
+            ucProdavac.txtBrTelefona.BackColor = Color.White;
+            ucProdavac.txtEmail.BackColor = Color.White;
 
             string message = "";
             for (int i = 0; i < errors.Count; i++)
@@ -191,10 +236,19 @@ namespace FrmLogin.GUIControllers
         private void PrepareFormProdavac(UCMode mode, Korisnik korisnik)
         {
             ucProdavac.cbPol.DataSource = Enum.GetValues(typeof(Pol));
+            ucProdavac.toolTipBrTelefona.SetToolTip(ucProdavac.txtBrTelefona, "Broj telefona mora biti u formatu \"+381...\"");
+            ucProdavac.toolTipEmail.SetToolTip(ucProdavac.txtEmail, "Email polje nije obavezno");
+
+            ucProdavac.toolTipBrTelefona.ReshowDelay = 500;
+            ucProdavac.toolTipEmail.ReshowDelay = 500;
+
             if (mode == UCMode.Create)
             {
                 //Dodaj naslov na formu
 
+                ucProdavac.txtBrTelefona.ForeColor = Color.Gray;
+                ucProdavac.txtBrTelefona.Text = "+381...";
+                ucProdavac.txtBrTelefona.GotFocus += (s, e) => { if (ucProdavac.txtBrTelefona.Text == "+381...") { ucProdavac.txtBrTelefona.Clear(); ucProdavac.txtBrTelefona.ForeColor = Color.Black; } };
                 ucProdavac.cbPol.SelectedIndex = -1;
 
             }
@@ -203,9 +257,11 @@ namespace FrmLogin.GUIControllers
                 ucProdavac.txtIme.Text = korisnik.Ime;
                 ucProdavac.txtPrezime.Text = korisnik.Prezime;
                 ucProdavac.txtJmbg.Text = korisnik.Jmbg;
-                ucProdavac.txtPassword.Text = korisnik.Password;
+                ucProdavac.txtPassword.Text = "";
                 ucProdavac.txtUsername.Text = korisnik.Username;
                 ucProdavac.cbPol.SelectedIndex = (int)korisnik.Pol;
+                ucProdavac.txtBrTelefona.Text = korisnik.BrojTelefona;
+                ucProdavac.txtEmail.Text = korisnik.Email;
 
                 ucProdavac.txtJmbg.Enabled = false;
                 ucProdavac.cbPol.Enabled = false;
@@ -303,27 +359,6 @@ namespace FrmLogin.GUIControllers
             ucIzmeniProdavca.dgvKorisnici.Columns["TableName"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["DisplayValue"].Visible = false;
             ucIzmeniProdavca.dgvKorisnici.Columns["PrimaryKey"].Visible = false;
-            ucIzmeniProdavca.dgvKorisnici.Columns["IdColumn"].Visible = false;
-
-
-            //ucIzmeniProdavca.dgvKorisnici.Rows.Clear();
-            //ucIzmeniProdavca.dgvKorisnici.Columns.Add("id", "ID");
-            //ucIzmeniProdavca.dgvKorisnici.Columns.Add("ime", "Ime");
-            //ucIzmeniProdavca.dgvKorisnici.Columns.Add("prezime", "Prezime");
-            //ucIzmeniProdavca.dgvKorisnici.Columns.Add("uloga", "Uloga");
-
-            //if (korisnici != null && korisnici.Count >= 1)
-            //{
-            //    foreach (Korisnik k in korisnici)
-            //    {
-            //        ucIzmeniProdavca.dgvKorisnici.Rows.Add(k.SifraKorisnika.ToString(), k.Ime, k.Prezime, k.Uloga.ToString());
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Neuspesna pretraga korisnika");
-            //}
-
         }
 
         internal Control createUCPromenaSifre()
@@ -342,8 +377,8 @@ namespace FrmLogin.GUIControllers
                 MessageBox.Show("Uneta šifra mora imati bar 8 karaktera!", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            Response response = Communication.Instance.PromeniSifru(ucPromenaSifre.txtStaraSifra.Text, ucPromenaSifre.txtNovaSifra.Text);
+            
+            Response response = Communication.Instance.PromeniSifru(HashPassword(ucPromenaSifre.txtStaraSifra.Text.Trim()), HashPassword(ucPromenaSifre.txtNovaSifra.Text.Trim()));
             MessageBox.Show(response.Message, (response.IsSuccessful ? "asd" : "dsa"));
         }
     }

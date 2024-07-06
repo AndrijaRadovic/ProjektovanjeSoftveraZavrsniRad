@@ -16,10 +16,7 @@ namespace Common.Domain
         public string TableName => "Proizvod";
         public TipProizvoda TipProizvoda { get; set; }
         public string DisplayValue => NazivProizvoda;
-
         public string PrimaryKey => "sifraProizvoda";
-
-        public object IdColumn => "sifraProizvoda";
 
         public virtual string AddColumn()
         {
@@ -190,6 +187,11 @@ namespace Common.Domain
         public override string ToString()
         {
             return NazivProizvoda;
+        }
+
+        public string OrderByQuery()
+        {
+            return "";
         }
     }
 }

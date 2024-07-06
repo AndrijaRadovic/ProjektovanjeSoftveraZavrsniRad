@@ -45,10 +45,11 @@ namespace FrmLogin
                     receiver = new Receiver(socket);
                 }
             }
-            catch (SocketException)
+            catch (SocketException ex)
             {
 
                 MessageBox.Show("Greska sa povezivanjem!", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                throw ex;
             }
         }
 

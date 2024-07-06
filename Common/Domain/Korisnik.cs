@@ -19,13 +19,11 @@ namespace Common.Domain
         public string Username { get; set; }
         public string Password { get; set; }
         public string Jmbg { get; set; }
+        public string Email { get; set; }
+        public string BrojTelefona { get; set; }
         public string TableName => "Korisnik";
-
         public string DisplayValue => Username;
-
-        public string PrimaryKey => SifraKorisnika.ToString();
-
-        public object IdColumn => "sifraKorisnika";
+        public string PrimaryKey => "sifraKorisnika";
 
         public string GetFilterQuery(string filter, string field = "")
         {
@@ -35,12 +33,12 @@ namespace Common.Domain
             if(field == "prezime")
                 return $"lower(prezime) like concat('%',lower('{filter}'),'%')";
 
-            return $"lower(ime) like concat('%',lower('{filter}'),'%')";
+            throw new NotImplementedException();
         }
 
         public string GetParameters(string use = "")
         {
-            return "@ime, @prezime, @pol, @uloga, @username, @password, @jmbg";
+            return "@ime, @prezime, @pol, @uloga, @username, @password, @jmbg, @email, @brojTelefona";
         }
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
@@ -61,7 +59,9 @@ namespace Common.Domain
                     Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
                     Username = (string)reader["username"],
                     Password = (string)reader["password"],
-                    Jmbg = (string)reader["jmbg"]
+                    Jmbg = (string)reader["jmbg"],
+                    Email = (string)reader["email"],
+                    BrojTelefona = (string)reader["brojTelefona"]
                 };
                 return korisnik;
             }
@@ -70,9 +70,7 @@ namespace Common.Domain
 
         public string GetSearchAttributes()
         {
-            return "sifraKorisnika, ime, prezime, uloga";
-
-            //return "sifraKorisnika, ime, prezime, uloga, username, password";
+            return "sifraKorisnika, ime, prezime, uloga, email, brojTelefona";
         }
 
         public string JoinQuery()
@@ -89,6 +87,8 @@ namespace Common.Domain
             command.Parameters.AddWithValue("@username", Username);
             command.Parameters.AddWithValue("@password", Password);
             command.Parameters.AddWithValue("@jmbg", Jmbg);
+            command.Parameters.AddWithValue("@email", Email);
+            command.Parameters.AddWithValue("@brojTelefona", BrojTelefona);
         }
 
         public List<IEntity> ReadAllSearch(SqlDataReader reader)
@@ -102,8 +102,8 @@ namespace Common.Domain
                     Ime = (string)reader["ime"],
                     Prezime = (string)reader["prezime"],
                     Uloga = (Uloga)Enum.Parse(typeof(Uloga), (string)reader["uloga"]),
-                    //Username = (string)reader["username"],
-                    //Password = (string)reader["password"]
+                    Email = (string)reader["email"],
+                    BrojTelefona = (string)reader["brojTelefona"]
                 };
                 entities.Add(korisnik);
             }
@@ -115,7 +115,7 @@ namespace Common.Domain
             if (field == "sifra")
                 return $"password = '{Password}'";
 
-            return $"ime = '{Ime}', prezime = '{Prezime}', username = '{Username}', password = '{Password}'";
+            return $"ime = '{Ime}', prezime = '{Prezime}', username = '{Username}', email = '{Email}', brojTelefona = '{BrojTelefona}'";
         }
 
         public string GetByIdQuery(string use = "")
@@ -132,6 +132,11 @@ namespace Common.Domain
         }
 
         public string AddColumn()
+        {
+            return "";
+        }
+
+        public string OrderByQuery()
         {
             return "";
         }

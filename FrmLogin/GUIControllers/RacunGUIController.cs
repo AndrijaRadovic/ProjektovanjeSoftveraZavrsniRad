@@ -219,7 +219,6 @@ namespace FrmLogin.GUIControllers
             ((DataGridView)control).Columns["Racun"].Visible = false;
             ((DataGridView)control).Columns["DisplayValue"].Visible = false;
             ((DataGridView)control).Columns["PrimaryKey"].Visible = false;
-            ((DataGridView)control).Columns["IdColumn"].Visible = false;
 
             ((DataGridView)control).Columns["RedniBroj"].HeaderText = "Redni broj";
             ((DataGridView)control).Columns["UkupnaCenaStavke"].HeaderText = "Ukupna cena stavke";

@@ -195,6 +195,7 @@ namespace Server
                         }
                         break;
                 }
+                response.IsSuccessful = true;
             }
             catch (Exception ex)
             {
@@ -203,7 +204,6 @@ namespace Server
                 response.IsSuccessful = false;
                 response.Message = ex.Message;
             }
-            response.IsSuccessful = true;
 
             return response;
         }

@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,17 +44,42 @@ namespace FrmLogin.GUIControllers
 
         private void Login()
         {
-            Communication.Instance.Connect();
-            Korisnik k = Communication.Instance.Login(frmLogin.txtUsername.Text, frmLogin.txtPassword.Text);
-            if(k != null)
+            try
             {
+                Communication.Instance.Connect();
+            }
+            catch (SocketException)
+            {
+
+                return;
+            }
+
+            //Korisnik k = Communication.Instance.Login(frmLogin.txtUsername.Text, frmLogin.txtPassword.Text);
+            Korisnik k = Communication.Instance.Login(frmLogin.txtUsername.Text, HashPassword(frmLogin.txtPassword.Text.Trim()));
+            if (k != null)
+            {
+                //MessageBox.Show("Sifra: " + k.Password);
                 frmLogin.Hide();
                 MainCoordinator.Instance.ShowFrmMain(k);
                 frmLogin.Close();
             }
             else
             {
-                MessageBox.Show("Neuspesna prijava", "GRESKA");
+                MessageBox.Show("Korisničko ime ili lozinka nisu tačni", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using(SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder sb = new StringBuilder();
+                foreach(byte b in bytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                return sb.ToString();
             }
         }
     }

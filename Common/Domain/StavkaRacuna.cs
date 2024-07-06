@@ -15,18 +15,13 @@ namespace Common.Domain
         public int Kolicina { get; set; }
         public double UkupnaCenaStavke { get; set; }
         public Proizvod Proizvod { get; set; }
-
         public string TableName => "StavkaRacuna";
-
         public string DisplayValue => RedniBroj.ToString();
-
         public string PrimaryKey => "redniBroj";
-
-        public object IdColumn => "redniBroj";
 
         public string AddColumn()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public string GetByIdQuery(string use = "")
@@ -70,6 +65,11 @@ namespace Common.Domain
         public string JoinQuery()
         {
             return " inner join Proizvod on StavkaRacuna.sifraProizvoda = Proizvod.sifraProizvoda";
+        }
+
+        public string OrderByQuery()
+        {
+            return "";
         }
 
         public void PrepareCommand(SqlCommand command, string use = "")

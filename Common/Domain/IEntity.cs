@@ -12,8 +12,6 @@ namespace Common
         string TableName { get; }
         string DisplayValue { get; }
         string PrimaryKey { get; }
-        object IdColumn { get; }
-
         List<IEntity> GetReaderList(SqlDataReader reader);
         IEntity GetReaderResult(SqlDataReader reader);
         string GetParameters(string use = "");
@@ -26,5 +24,6 @@ namespace Common
         List<IEntity> ReadAllSearch(SqlDataReader reader);
         string GetTableName(string use = "");
         string AddColumn();
+        string OrderByQuery();
     }
 }

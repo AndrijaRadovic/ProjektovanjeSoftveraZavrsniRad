@@ -372,7 +372,7 @@ namespace FrmLogin.GUIControllers
             ucPrikazProizvoda.Load += prepareCbTip;
             ucPrikazProizvoda.btnNazad.Click
                 += (s, e) => MainCoordinator.Instance.ShowDefault();
-            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu; 
+            ucPrikazProizvoda.btnIzmeni.Click += PrikaziFormuZaIzmenu;
             ucPrikazProizvoda.btnObrisi.Click += ObrisiProizvod;
             ucPrikazProizvoda.btnPretraga.Click += PretraziPoNazivu;
             ucPrikazProizvoda.cbTip.SelectedIndexChanged += FiltrirajProizvode;
@@ -440,6 +440,8 @@ namespace FrmLogin.GUIControllers
             Proizvod izabraniProizvod = (Proizvod)ucPrikazProizvoda.dgvProizvodi.SelectedRows[0].DataBoundItem;
             Response response = Communication.Instance.ObrisiProizvod(izabraniProizvod);
             ucPrikazProizvoda.btnPretraga.PerformClick();
+            if (!response.IsSuccessful)
+                response.Message = "Sistem nije uspeo da obrise izabrani proizvod";
             MessageBox.Show(response.Message);
         }
 
@@ -473,7 +475,6 @@ namespace FrmLogin.GUIControllers
             ucPrikazProizvoda.dgvProizvodi.Columns["TableName"].Visible = false;
             ucPrikazProizvoda.dgvProizvodi.Columns["DisplayValue"].Visible = false;
             ucPrikazProizvoda.dgvProizvodi.Columns["PrimaryKey"].Visible = false;
-            ucPrikazProizvoda.dgvProizvodi.Columns["IdColumn"].Visible = false;
         }
     }
 }

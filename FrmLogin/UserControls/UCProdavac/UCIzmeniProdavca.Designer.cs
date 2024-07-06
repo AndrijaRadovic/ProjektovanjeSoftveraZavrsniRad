@@ -85,7 +85,7 @@
             this.panel1.Controls.Add(this.dgvKorisnici);
             this.panel1.Location = new System.Drawing.Point(32, 169);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(705, 223);
+            this.panel1.Size = new System.Drawing.Size(738, 223);
             this.panel1.TabIndex = 19;
             // 
             // dgvKorisnici
@@ -101,7 +101,7 @@
             this.dgvKorisnici.RowHeadersWidth = 51;
             this.dgvKorisnici.RowTemplate.Height = 24;
             this.dgvKorisnici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKorisnici.Size = new System.Drawing.Size(705, 223);
+            this.dgvKorisnici.Size = new System.Drawing.Size(738, 223);
             this.dgvKorisnici.TabIndex = 0;
             // 
             // btnOdustani
@@ -117,7 +117,7 @@
             // btnIzmeni
             // 
             this.btnIzmeni.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIzmeni.Location = new System.Drawing.Point(331, 407);
+            this.btnIzmeni.Location = new System.Drawing.Point(350, 407);
             this.btnIzmeni.Name = "btnIzmeni";
             this.btnIzmeni.Size = new System.Drawing.Size(135, 50);
             this.btnIzmeni.TabIndex = 21;
@@ -127,7 +127,7 @@
             // btnObrisi
             // 
             this.btnObrisi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnObrisi.Location = new System.Drawing.Point(602, 407);
+            this.btnObrisi.Location = new System.Drawing.Point(635, 407);
             this.btnObrisi.Name = "btnObrisi";
             this.btnObrisi.Size = new System.Drawing.Size(135, 50);
             this.btnObrisi.TabIndex = 22;
