@@ -16,5 +16,10 @@ namespace FrmLogin.UserControls.UCProdavac
         {
             InitializeComponent();
         }
+
+        private void txtPretraga_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

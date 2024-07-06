@@ -63,7 +63,7 @@
             this.txtBojaFarbe.Location = new System.Drawing.Point(173, 40);
             this.txtBojaFarbe.Name = "txtBojaFarbe";
             this.txtBojaFarbe.Size = new System.Drawing.Size(100, 27);
-            this.txtBojaFarbe.TabIndex = 2;
+            this.txtBojaFarbe.TabIndex = 0;
             // 
             // txtVelicinaPakovanja
             // 
@@ -72,7 +72,7 @@
             this.txtVelicinaPakovanja.Location = new System.Drawing.Point(173, 96);
             this.txtVelicinaPakovanja.Name = "txtVelicinaPakovanja";
             this.txtVelicinaPakovanja.Size = new System.Drawing.Size(100, 27);
-            this.txtVelicinaPakovanja.TabIndex = 3;
+            this.txtVelicinaPakovanja.TabIndex = 1;
             // 
             // label3
             // 

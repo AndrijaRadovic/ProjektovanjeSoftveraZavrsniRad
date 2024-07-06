@@ -39,13 +39,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnDodajStavku = new System.Windows.Forms.Button();
             this.btnNazad = new System.Windows.Forms.Button();
             this.btnSacuvajRacun = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtUkupnaCena = new System.Windows.Forms.TextBox();
             this.btnObrisiStavku = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numKolicina)).BeginInit();
             this.pnlStavke.SuspendLayout();
@@ -70,7 +70,7 @@
             this.cbProizvod.Location = new System.Drawing.Point(83, 5);
             this.cbProizvod.Name = "cbProizvod";
             this.cbProizvod.Size = new System.Drawing.Size(158, 28);
-            this.cbProizvod.TabIndex = 25;
+            this.cbProizvod.TabIndex = 0;
             // 
             // numKolicina
             // 
@@ -83,7 +83,7 @@
             0});
             this.numKolicina.Name = "numKolicina";
             this.numKolicina.Size = new System.Drawing.Size(58, 27);
-            this.numKolicina.TabIndex = 26;
+            this.numKolicina.TabIndex = 1;
             this.numKolicina.Value = new decimal(new int[] {
             1,
             0,
@@ -122,7 +122,7 @@
             this.txtCenaStavke.Location = new System.Drawing.Point(310, 5);
             this.txtCenaStavke.Name = "txtCenaStavke";
             this.txtCenaStavke.Size = new System.Drawing.Size(111, 27);
-            this.txtCenaStavke.TabIndex = 28;
+            this.txtCenaStavke.TabIndex = 1;
             this.txtCenaStavke.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -179,7 +179,17 @@
             this.panel1.Location = new System.Drawing.Point(17, 78);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(766, 39);
-            this.panel1.TabIndex = 33;
+            this.panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(424, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 20);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "RSD";
             // 
             // btnDodajStavku
             // 
@@ -187,7 +197,7 @@
             this.btnDodajStavku.Location = new System.Drawing.Point(628, 3);
             this.btnDodajStavku.Name = "btnDodajStavku";
             this.btnDodajStavku.Size = new System.Drawing.Size(135, 33);
-            this.btnDodajStavku.TabIndex = 34;
+            this.btnDodajStavku.TabIndex = 2;
             this.btnDodajStavku.Text = "Dodaj stavku";
             this.btnDodajStavku.UseVisualStyleBackColor = true;
             // 
@@ -197,7 +207,7 @@
             this.btnNazad.Location = new System.Drawing.Point(17, 363);
             this.btnNazad.Name = "btnNazad";
             this.btnNazad.Size = new System.Drawing.Size(161, 47);
-            this.btnNazad.TabIndex = 35;
+            this.btnNazad.TabIndex = 3;
             this.btnNazad.Text = "Nazad";
             this.btnNazad.UseVisualStyleBackColor = true;
             // 
@@ -207,7 +217,7 @@
             this.btnSacuvajRacun.Location = new System.Drawing.Point(623, 363);
             this.btnSacuvajRacun.Name = "btnSacuvajRacun";
             this.btnSacuvajRacun.Size = new System.Drawing.Size(161, 47);
-            this.btnSacuvajRacun.TabIndex = 36;
+            this.btnSacuvajRacun.TabIndex = 2;
             this.btnSacuvajRacun.Text = "Sačuvaj Račun";
             this.btnSacuvajRacun.UseVisualStyleBackColor = true;
             // 
@@ -237,19 +247,9 @@
             this.btnObrisiStavku.Location = new System.Drawing.Point(328, 363);
             this.btnObrisiStavku.Name = "btnObrisiStavku";
             this.btnObrisiStavku.Size = new System.Drawing.Size(161, 35);
-            this.btnObrisiStavku.TabIndex = 39;
+            this.btnObrisiStavku.TabIndex = 1;
             this.btnObrisiStavku.Text = "Obriši stavku";
             this.btnObrisiStavku.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(424, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 20);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "RSD";
             // 
             // label7
             // 

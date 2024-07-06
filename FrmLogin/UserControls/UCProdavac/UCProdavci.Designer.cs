@@ -131,7 +131,7 @@
             this.btnDodajProdavca.Location = new System.Drawing.Point(240, 391);
             this.btnDodajProdavca.Name = "btnDodajProdavca";
             this.btnDodajProdavca.Size = new System.Drawing.Size(127, 64);
-            this.btnDodajProdavca.TabIndex = 6;
+            this.btnDodajProdavca.TabIndex = 8;
             this.btnDodajProdavca.Text = "Sačuvaj";
             this.btnDodajProdavca.UseVisualStyleBackColor = true;
             // 
@@ -140,7 +140,7 @@
             this.btnOdustani.Location = new System.Drawing.Point(32, 391);
             this.btnOdustani.Name = "btnOdustani";
             this.btnOdustani.Size = new System.Drawing.Size(127, 64);
-            this.btnOdustani.TabIndex = 7;
+            this.btnOdustani.TabIndex = 9;
             this.btnOdustani.Text = "Nazad";
             this.btnOdustani.UseVisualStyleBackColor = true;
             // 
@@ -191,7 +191,7 @@
             this.txtEmail.MaxLength = 40;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(203, 22);
-            this.txtEmail.TabIndex = 15;
+            this.txtEmail.TabIndex = 6;
             // 
             // label8
             // 
@@ -209,7 +209,7 @@
             this.txtBrTelefona.MaxLength = 20;
             this.txtBrTelefona.Name = "txtBrTelefona";
             this.txtBrTelefona.Size = new System.Drawing.Size(203, 22);
-            this.txtBrTelefona.TabIndex = 17;
+            this.txtBrTelefona.TabIndex = 7;
             // 
             // label9
             // 

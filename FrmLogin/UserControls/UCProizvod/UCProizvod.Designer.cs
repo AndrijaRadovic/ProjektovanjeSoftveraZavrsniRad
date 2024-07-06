@@ -77,7 +77,7 @@
             this.txtNaziv.Location = new System.Drawing.Point(177, 127);
             this.txtNaziv.Name = "txtNaziv";
             this.txtNaziv.Size = new System.Drawing.Size(165, 27);
-            this.txtNaziv.TabIndex = 18;
+            this.txtNaziv.TabIndex = 0;
             // 
             // cbTip
             // 
@@ -86,7 +86,7 @@
             this.cbTip.Location = new System.Drawing.Point(177, 193);
             this.cbTip.Name = "cbTip";
             this.cbTip.Size = new System.Drawing.Size(165, 28);
-            this.cbTip.TabIndex = 19;
+            this.cbTip.TabIndex = 2;
             this.cbTip.SelectedIndexChanged += new System.EventHandler(this.cbTip_SelectedIndexChanged);
             // 
             // pnlTip
@@ -95,7 +95,7 @@
             this.pnlTip.Location = new System.Drawing.Point(32, 227);
             this.pnlTip.Name = "pnlTip";
             this.pnlTip.Size = new System.Drawing.Size(310, 165);
-            this.pnlTip.TabIndex = 20;
+            this.pnlTip.TabIndex = 3;
             // 
             // btnNazad
             // 
@@ -103,7 +103,7 @@
             this.btnNazad.Location = new System.Drawing.Point(32, 406);
             this.btnNazad.Name = "btnNazad";
             this.btnNazad.Size = new System.Drawing.Size(138, 56);
-            this.btnNazad.TabIndex = 21;
+            this.btnNazad.TabIndex = 5;
             this.btnNazad.Text = "Nazad";
             this.btnNazad.UseVisualStyleBackColor = true;
             // 
@@ -113,7 +113,7 @@
             this.btnSacuvaj.Location = new System.Drawing.Point(204, 406);
             this.btnSacuvaj.Name = "btnSacuvaj";
             this.btnSacuvaj.Size = new System.Drawing.Size(138, 56);
-            this.btnSacuvaj.TabIndex = 22;
+            this.btnSacuvaj.TabIndex = 4;
             this.btnSacuvaj.Text = "Sačuvaj";
             this.btnSacuvaj.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +133,7 @@
             this.txtCena.Location = new System.Drawing.Point(177, 160);
             this.txtCena.Name = "txtCena";
             this.txtCena.Size = new System.Drawing.Size(165, 27);
-            this.txtCena.TabIndex = 24;
+            this.txtCena.TabIndex = 1;
             // 
             // label4
             // 

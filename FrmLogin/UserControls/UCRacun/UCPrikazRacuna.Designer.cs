@@ -69,14 +69,14 @@
             this.cbRacuni.Location = new System.Drawing.Point(79, 82);
             this.cbRacuni.Name = "cbRacuni";
             this.cbRacuni.Size = new System.Drawing.Size(403, 24);
-            this.cbRacuni.TabIndex = 27;
+            this.cbRacuni.TabIndex = 0;
             // 
             // dtpDatumRacuna
             // 
             this.dtpDatumRacuna.Location = new System.Drawing.Point(488, 83);
             this.dtpDatumRacuna.Name = "dtpDatumRacuna";
             this.dtpDatumRacuna.Size = new System.Drawing.Size(247, 22);
-            this.dtpDatumRacuna.TabIndex = 28;
+            this.dtpDatumRacuna.TabIndex = 1;
             // 
             // pnlStavkeRacuna
             // 
@@ -116,7 +116,7 @@
             this.btnNazad.Location = new System.Drawing.Point(20, 375);
             this.btnNazad.Name = "btnNazad";
             this.btnNazad.Size = new System.Drawing.Size(120, 44);
-            this.btnNazad.TabIndex = 31;
+            this.btnNazad.TabIndex = 5;
             this.btnNazad.Text = "Nazad";
             this.btnNazad.UseVisualStyleBackColor = true;
             // 
@@ -126,7 +126,7 @@
             this.btnStorniraj.Location = new System.Drawing.Point(657, 375);
             this.btnStorniraj.Name = "btnStorniraj";
             this.btnStorniraj.Size = new System.Drawing.Size(120, 44);
-            this.btnStorniraj.TabIndex = 32;
+            this.btnStorniraj.TabIndex = 4;
             this.btnStorniraj.Text = "Storniraj";
             this.btnStorniraj.UseVisualStyleBackColor = true;
             // 
@@ -136,7 +136,7 @@
             this.btnIzmeni.Location = new System.Drawing.Point(342, 375);
             this.btnIzmeni.Name = "btnIzmeni";
             this.btnIzmeni.Size = new System.Drawing.Size(120, 44);
-            this.btnIzmeni.TabIndex = 32;
+            this.btnIzmeni.TabIndex = 3;
             this.btnIzmeni.Text = "Izmeni";
             this.btnIzmeni.UseVisualStyleBackColor = true;
             // 
@@ -147,7 +147,7 @@
             this.btnRefresh.Location = new System.Drawing.Point(741, 82);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(36, 24);
-            this.btnRefresh.TabIndex = 33;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // UCPrikazRacuna

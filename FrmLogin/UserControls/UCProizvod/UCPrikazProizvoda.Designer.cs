@@ -85,7 +85,7 @@
             this.btnPretraga.Location = new System.Drawing.Point(317, 112);
             this.btnPretraga.Name = "btnPretraga";
             this.btnPretraga.Size = new System.Drawing.Size(56, 27);
-            this.btnPretraga.TabIndex = 25;
+            this.btnPretraga.TabIndex = 1;
             this.btnPretraga.UseVisualStyleBackColor = true;
             // 
             // txtPretraga
@@ -94,7 +94,7 @@
             this.txtPretraga.Location = new System.Drawing.Point(101, 112);
             this.txtPretraga.Name = "txtPretraga";
             this.txtPretraga.Size = new System.Drawing.Size(210, 27);
-            this.txtPretraga.TabIndex = 24;
+            this.txtPretraga.TabIndex = 0;
             // 
             // label7
             // 
@@ -112,7 +112,7 @@
             this.btnObrisi.Location = new System.Drawing.Point(618, 407);
             this.btnObrisi.Name = "btnObrisi";
             this.btnObrisi.Size = new System.Drawing.Size(135, 50);
-            this.btnObrisi.TabIndex = 30;
+            this.btnObrisi.TabIndex = 4;
             this.btnObrisi.Text = "Obriši";
             this.btnObrisi.UseVisualStyleBackColor = true;
             // 
@@ -122,7 +122,7 @@
             this.btnIzmeni.Location = new System.Drawing.Point(347, 407);
             this.btnIzmeni.Name = "btnIzmeni";
             this.btnIzmeni.Size = new System.Drawing.Size(135, 50);
-            this.btnIzmeni.TabIndex = 29;
+            this.btnIzmeni.TabIndex = 3;
             this.btnIzmeni.Text = "Izmeni";
             this.btnIzmeni.UseVisualStyleBackColor = true;
             // 
@@ -132,7 +132,7 @@
             this.btnNazad.Location = new System.Drawing.Point(48, 407);
             this.btnNazad.Name = "btnNazad";
             this.btnNazad.Size = new System.Drawing.Size(135, 50);
-            this.btnNazad.TabIndex = 28;
+            this.btnNazad.TabIndex = 5;
             this.btnNazad.Text = "Nazad";
             this.btnNazad.UseVisualStyleBackColor = true;
             // 
@@ -152,7 +152,7 @@
             this.cbTip.Location = new System.Drawing.Point(438, 114);
             this.cbTip.Name = "cbTip";
             this.cbTip.Size = new System.Drawing.Size(121, 24);
-            this.cbTip.TabIndex = 32;
+            this.cbTip.TabIndex = 2;
             // 
             // UCPrikazProizvoda
             // 

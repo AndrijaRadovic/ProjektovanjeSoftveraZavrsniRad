@@ -58,7 +58,8 @@
             this.txtPretraga.Location = new System.Drawing.Point(256, 112);
             this.txtPretraga.Name = "txtPretraga";
             this.txtPretraga.Size = new System.Drawing.Size(210, 27);
-            this.txtPretraga.TabIndex = 16;
+            this.txtPretraga.TabIndex = 1;
+            this.txtPretraga.TextChanged += new System.EventHandler(this.txtPretraga_TextChanged);
             // 
             // btnPretragaIme
             // 
@@ -67,7 +68,7 @@
             this.btnPretragaIme.Location = new System.Drawing.Point(472, 112);
             this.btnPretragaIme.Name = "btnPretragaIme";
             this.btnPretragaIme.Size = new System.Drawing.Size(56, 27);
-            this.btnPretragaIme.TabIndex = 17;
+            this.btnPretragaIme.TabIndex = 2;
             this.btnPretragaIme.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -110,7 +111,7 @@
             this.btnOdustani.Location = new System.Drawing.Point(32, 407);
             this.btnOdustani.Name = "btnOdustani";
             this.btnOdustani.Size = new System.Drawing.Size(135, 50);
-            this.btnOdustani.TabIndex = 20;
+            this.btnOdustani.TabIndex = 5;
             this.btnOdustani.Text = "Nazad";
             this.btnOdustani.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +121,7 @@
             this.btnIzmeni.Location = new System.Drawing.Point(350, 407);
             this.btnIzmeni.Name = "btnIzmeni";
             this.btnIzmeni.Size = new System.Drawing.Size(135, 50);
-            this.btnIzmeni.TabIndex = 21;
+            this.btnIzmeni.TabIndex = 3;
             this.btnIzmeni.Text = "Izmeni";
             this.btnIzmeni.UseVisualStyleBackColor = true;
             // 
@@ -130,7 +131,7 @@
             this.btnObrisi.Location = new System.Drawing.Point(635, 407);
             this.btnObrisi.Name = "btnObrisi";
             this.btnObrisi.Size = new System.Drawing.Size(135, 50);
-            this.btnObrisi.TabIndex = 22;
+            this.btnObrisi.TabIndex = 4;
             this.btnObrisi.Text = "Obriši";
             this.btnObrisi.UseVisualStyleBackColor = true;
             // 
@@ -140,7 +141,7 @@
             this.cbPretraga.Location = new System.Drawing.Point(129, 115);
             this.cbPretraga.Name = "cbPretraga";
             this.cbPretraga.Size = new System.Drawing.Size(121, 24);
-            this.cbPretraga.TabIndex = 23;
+            this.cbPretraga.TabIndex = 0;
             // 
             // UCIzmeniProdavca
             // 

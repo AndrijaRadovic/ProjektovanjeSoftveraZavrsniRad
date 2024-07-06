@@ -66,7 +66,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(326, 119);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(247, 48);
+            this.panel1.Size = new System.Drawing.Size(284, 48);
             this.panel1.TabIndex = 2;
             // 
             // lblStatus

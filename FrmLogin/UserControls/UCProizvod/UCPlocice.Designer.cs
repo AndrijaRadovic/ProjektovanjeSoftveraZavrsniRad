@@ -75,7 +75,7 @@
             this.txtMaterijalPlocice.Location = new System.Drawing.Point(104, 29);
             this.txtMaterijalPlocice.Name = "txtMaterijalPlocice";
             this.txtMaterijalPlocice.Size = new System.Drawing.Size(152, 27);
-            this.txtMaterijalPlocice.TabIndex = 3;
+            this.txtMaterijalPlocice.TabIndex = 0;
             // 
             // txtSirinaPlocice
             // 
@@ -83,7 +83,7 @@
             this.txtSirinaPlocice.Location = new System.Drawing.Point(104, 69);
             this.txtSirinaPlocice.Name = "txtSirinaPlocice";
             this.txtSirinaPlocice.Size = new System.Drawing.Size(152, 27);
-            this.txtSirinaPlocice.TabIndex = 4;
+            this.txtSirinaPlocice.TabIndex = 1;
             // 
             // txtDuzinaPlocice
             // 
@@ -91,7 +91,7 @@
             this.txtDuzinaPlocice.Location = new System.Drawing.Point(104, 111);
             this.txtDuzinaPlocice.Name = "txtDuzinaPlocice";
             this.txtDuzinaPlocice.Size = new System.Drawing.Size(152, 27);
-            this.txtDuzinaPlocice.TabIndex = 5;
+            this.txtDuzinaPlocice.TabIndex = 2;
             // 
             // label4
             // 

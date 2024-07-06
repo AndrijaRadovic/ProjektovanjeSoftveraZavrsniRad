@@ -74,7 +74,7 @@
             this.txtStaraSifra.Name = "txtStaraSifra";
             this.txtStaraSifra.PasswordChar = '♥';
             this.txtStaraSifra.Size = new System.Drawing.Size(197, 27);
-            this.txtStaraSifra.TabIndex = 18;
+            this.txtStaraSifra.TabIndex = 0;
             // 
             // txtNovaSifra
             // 
@@ -83,7 +83,7 @@
             this.txtNovaSifra.Name = "txtNovaSifra";
             this.txtNovaSifra.PasswordChar = '♦';
             this.txtNovaSifra.Size = new System.Drawing.Size(197, 27);
-            this.txtNovaSifra.TabIndex = 19;
+            this.txtNovaSifra.TabIndex = 1;
             // 
             // btnOdustani
             // 
@@ -91,7 +91,7 @@
             this.btnOdustani.Location = new System.Drawing.Point(32, 223);
             this.btnOdustani.Name = "btnOdustani";
             this.btnOdustani.Size = new System.Drawing.Size(119, 47);
-            this.btnOdustani.TabIndex = 20;
+            this.btnOdustani.TabIndex = 3;
             this.btnOdustani.Text = "Nazad";
             this.btnOdustani.UseVisualStyleBackColor = true;
             // 
@@ -101,7 +101,7 @@
             this.btnPotvrdi.Location = new System.Drawing.Point(199, 223);
             this.btnPotvrdi.Name = "btnPotvrdi";
             this.btnPotvrdi.Size = new System.Drawing.Size(119, 47);
-            this.btnPotvrdi.TabIndex = 21;
+            this.btnPotvrdi.TabIndex = 2;
             this.btnPotvrdi.Text = "Potvrdi";
             this.btnPotvrdi.UseVisualStyleBackColor = true;
             // 
