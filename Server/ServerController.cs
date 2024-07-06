@@ -91,6 +91,13 @@ namespace Server
             return so.Result.Cast<Proizvod>().ToList();
         }
 
+        internal object PretraziRacunePoDatumu(DateTime datum)
+        {
+            PronadjiRacuneSO so = new PronadjiRacuneSO(datum);
+            so.ExecuteTemplate();
+            return so.Result.Cast<Racun>().ToList();
+        }
+
         internal void PromeniSifru(Korisnik prijavljeniKorisnik)
         {
             PromeniSifruSO so = new PromeniSifruSO(prijavljeniKorisnik);

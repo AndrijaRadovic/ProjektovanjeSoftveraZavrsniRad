@@ -443,7 +443,6 @@ namespace FrmLogin.GUIControllers
             MessageBox.Show(response.Message);
         }
 
-        // Da li dodati da vuce podatke iz baze umesto iz liste?? (kao kod korisnika)
         private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
         {
             Proizvod proizvod = (Proizvod)ucPrikazProizvoda.dgvProizvodi.SelectedRows[0].DataBoundItem;

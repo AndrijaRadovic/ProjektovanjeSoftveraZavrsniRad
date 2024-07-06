@@ -33,11 +33,12 @@
             this.cbRacuni = new System.Windows.Forms.ComboBox();
             this.dtpDatumRacuna = new System.Windows.Forms.DateTimePicker();
             this.pnlStavkeRacuna = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.dgvStavkeRacuna = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnNazad = new System.Windows.Forms.Button();
             this.btnStorniraj = new System.Windows.Forms.Button();
             this.btnIzmeni = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlStavkeRacuna.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStavkeRacuna)).BeginInit();
             this.SuspendLayout();
@@ -67,14 +68,14 @@
             this.cbRacuni.FormattingEnabled = true;
             this.cbRacuni.Location = new System.Drawing.Point(79, 82);
             this.cbRacuni.Name = "cbRacuni";
-            this.cbRacuni.Size = new System.Drawing.Size(482, 24);
+            this.cbRacuni.Size = new System.Drawing.Size(403, 24);
             this.cbRacuni.TabIndex = 27;
             // 
             // dtpDatumRacuna
             // 
-            this.dtpDatumRacuna.Location = new System.Drawing.Point(577, 83);
+            this.dtpDatumRacuna.Location = new System.Drawing.Point(488, 83);
             this.dtpDatumRacuna.Name = "dtpDatumRacuna";
-            this.dtpDatumRacuna.Size = new System.Drawing.Size(200, 22);
+            this.dtpDatumRacuna.Size = new System.Drawing.Size(247, 22);
             this.dtpDatumRacuna.TabIndex = 28;
             // 
             // pnlStavkeRacuna
@@ -84,16 +85,6 @@
             this.pnlStavkeRacuna.Name = "pnlStavkeRacuna";
             this.pnlStavkeRacuna.Size = new System.Drawing.Size(757, 232);
             this.pnlStavkeRacuna.TabIndex = 29;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 20);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Stavke računa";
             // 
             // dgvStavkeRacuna
             // 
@@ -108,6 +99,16 @@
             this.dgvStavkeRacuna.RowTemplate.Height = 24;
             this.dgvStavkeRacuna.Size = new System.Drawing.Size(757, 232);
             this.dgvStavkeRacuna.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(16, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(115, 20);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Stavke računa";
             // 
             // btnNazad
             // 
@@ -139,10 +140,21 @@
             this.btnIzmeni.Text = "Izmeni";
             this.btnIzmeni.UseVisualStyleBackColor = true;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::FrmLogin.Properties.Resources.reload;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefresh.Location = new System.Drawing.Point(741, 82);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(36, 24);
+            this.btnRefresh.TabIndex = 33;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
             // UCPrikazRacuna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnIzmeni);
             this.Controls.Add(this.btnStorniraj);
             this.Controls.Add(this.btnNazad);
@@ -173,5 +185,6 @@
         internal System.Windows.Forms.Button btnNazad;
         internal System.Windows.Forms.Button btnStorniraj;
         internal System.Windows.Forms.Button btnIzmeni;
+        internal System.Windows.Forms.Button btnRefresh;
     }
 }

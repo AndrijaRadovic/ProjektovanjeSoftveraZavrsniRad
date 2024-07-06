@@ -35,7 +35,7 @@ namespace Common.Domain
 
         public string GetFilterQuery(string filter, string field = "")
         {
-            throw new NotImplementedException();
+            return $"cast(datumVreme as date) = '{filter}'";
         }
 
         public string GetParameters(string use = "")
@@ -111,7 +111,7 @@ namespace Common.Domain
 
         public override string ToString()
         {
-            return DatumVreme.ToString() + " " + Korisnik.Ime + " " + Korisnik.Prezime;
+            return DatumVreme.ToString("dd/MM/yyyy HH:mm") + " " + Korisnik.Ime + " " + Korisnik.Prezime;
         }
     }
 }

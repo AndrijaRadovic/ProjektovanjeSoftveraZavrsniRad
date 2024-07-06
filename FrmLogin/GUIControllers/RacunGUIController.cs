@@ -211,13 +211,13 @@ namespace FrmLogin.GUIControllers
             prepareDgv(ucPrikazRacuna.dgvStavkeRacuna);
 
             ucPrikazRacuna.Load += UcitajRacune;
-            // nije odradjeno
             ucPrikazRacuna.dtpDatumRacuna.ValueChanged += PretraziRacunePoDatumu; 
             ucPrikazRacuna.cbRacuni.SelectedIndexChanged += PrikaziStavkeIzabranogRacuna; 
             ucPrikazRacuna.btnNazad.Click += (s, e) => MainCoordinator.Instance.ShowDefault();
             // nije odradjeno
             ucPrikazRacuna.btnIzmeni.Click += PrikaziFormuZaIzmenu;
             ucPrikazRacuna.btnStorniraj.Click += StornirajRacun;
+            ucPrikazRacuna.btnRefresh.Click += UcitajRacune;
             
             return ucPrikazRacuna;
         }
@@ -260,7 +260,9 @@ namespace FrmLogin.GUIControllers
 
         private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
         {
-            MessageBox.Show("Nije implementirano");
+            Racun racun = (Racun)ucPrikazRacuna.cbRacuni.SelectedItem;
+            racun = Communication.Instance.PretraziRacunePoId(racun.SifraRacuna);
+            MainCoordinator.Instance.ShowRacunPanel(UCMode.Update, racun);
         }
 
         private void PrikaziStavkeIzabranogRacuna(object sender, EventArgs e)
@@ -278,10 +280,15 @@ namespace FrmLogin.GUIControllers
 
         private void PretraziRacunePoDatumu(object sender, EventArgs e)
         {
-            DateTime dt = ucPrikazRacuna.dtpDatumRacuna.Value;
-            MessageBox.Show(dt.ToShortDateString());
+            List<Racun> racuni =  Communication.Instance.PretraziRacunePoDatumu(ucPrikazRacuna.dtpDatumRacuna.Value);
+            if(racuni == null || racuni.Count == 0)
+            {
+                MessageBox.Show("Nema racuna kreiranih tog datuma");
+                return;
+            }
 
-            //Communication.Instance.PretraziRacune
+            ucPrikazRacuna.cbRacuni.DataSource = racuni;
+            ucPrikazRacuna.cbRacuni.SelectedIndex = -1;
         }
 
         private void UcitajRacune(object sender, EventArgs e)

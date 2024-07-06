@@ -205,6 +205,7 @@
   <ItemGroup>
     <None Include="Resources\img\Kolor-Tim-Logo.png" />
     <None Include="Resources\img\Kolor-Tim-Logo-stampa.png" />
+    <Content Include="Resources\img\reload.png" />
     <Content Include="Resources\img\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

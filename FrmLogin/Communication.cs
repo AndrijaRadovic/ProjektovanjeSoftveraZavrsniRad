@@ -194,5 +194,19 @@ namespace FrmLogin
             sender.Send(request);
             return (Response)receiver.Receive();
         }
+
+        internal List<Racun> PretraziRacunePoDatumu(DateTime dateTime)
+        {
+            Request request = new Request(Operation.PretraziRacunePoDatumu, dateTime);
+            sender.Send(request);
+            return (List<Racun>)((Response)receiver.Receive()).Result;
+        }
+
+        internal Racun PretraziRacunePoId(int sifraRacuna)
+        {
+            Request request = new Request(Operation.NadjiRacunPoId, sifraRacuna);
+            sender.Send(request);
+            return (Racun)((Response)receiver.Receive()).Result;
+        }
     }
 }

@@ -175,6 +175,12 @@ namespace Server
                             response.Message = "Racun je uspesno storniran";
                         }
                         break;
+
+                    case Operation.PretraziRacunePoDatumu:
+                        {
+                            response.Result = ServerController.Instance.PretraziRacunePoDatumu((DateTime)request.Argument);
+                        }
+                        break;
                 }
             }
             catch (Exception ex)

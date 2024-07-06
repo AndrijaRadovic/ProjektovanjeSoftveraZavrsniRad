@@ -24,6 +24,8 @@ namespace Common.Communication
         NadjiProizvodPoId,
         DodajRacun,
         VratiSveRacune,
-        StornirajRacun
+        StornirajRacun,
+        PretraziRacunePoDatumu,
+        NadjiRacunPoId
     }
 }
