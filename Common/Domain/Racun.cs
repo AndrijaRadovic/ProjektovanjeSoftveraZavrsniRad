@@ -15,6 +15,7 @@ namespace Common.Domain
         public double UkupnaCenaRacuna { get; set; }
         public Korisnik Korisnik { get; set; }
         public List<StavkaRacuna> StavkeRacuna { get; set; }
+        public StatusRacuna StatusRacuna { get; set; }
 
         public string TableName => "Racun";
         public string DisplayValue => throw new NotImplementedException();
@@ -37,7 +38,7 @@ namespace Common.Domain
 
         public string GetParameters(string use = "")
         {
-            return "@datumVreme, @ukupnaCenaRacuna, @sifraKorisnika";
+            return "@datumVreme, @ukupnaCenaRacuna, @sifraKorisnika, @statusRacuna";
         }
 
         public List<IEntity> GetReaderList(SqlDataReader reader)
@@ -54,6 +55,7 @@ namespace Common.Domain
                     SifraRacuna = (int)reader["sifraRacuna"],
                     DatumVreme = (DateTime)reader["datumVreme"],
                     UkupnaCenaRacuna = (double)reader["ukupnaCenaRacuna"],
+                    StatusRacuna = (StatusRacuna)Enum.Parse(typeof(StatusRacuna), (string)reader["statusRacuna"]),
                     Korisnik = new Korisnik
                     {
                         SifraKorisnika = (int)reader["sifraKorisnika"],
@@ -93,6 +95,7 @@ namespace Common.Domain
             command.Parameters.AddWithValue("@datumVreme", DatumVreme);
             command.Parameters.AddWithValue("@ukupnaCenaRacuna", UkupnaCenaRacuna);
             command.Parameters.AddWithValue("@sifraKorisnika", Korisnik.SifraKorisnika);
+            command.Parameters.AddWithValue("@statusRacuna", StatusRacuna.ToString());
         }
 
         public List<IEntity> ReadAllSearch(SqlDataReader reader)
@@ -106,6 +109,7 @@ namespace Common.Domain
                     SifraRacuna = (int)reader["sifraRacuna"],
                     DatumVreme = (DateTime)reader["datumVreme"],
                     UkupnaCenaRacuna = (double)reader["ukupnaCenaRacuna"],
+                    StatusRacuna = (StatusRacuna)Enum.Parse(typeof(StatusRacuna), (string)reader["statusRacuna"]),
                     Korisnik = new Korisnik
                     {
                         SifraKorisnika = (int)reader["sifraKorisnika"],
@@ -128,12 +132,15 @@ namespace Common.Domain
 
         public string UpdateQuery(string field = "")
         {
-            return $"datumVreme = '{DatumVreme}', ukupnaCenaRacuna = {UkupnaCenaRacuna}, sifraKorisnika = {Korisnik.SifraKorisnika}";
+            if (field == "statusRacuna")
+                return $"statusRacuna = '{StatusRacuna.Storniran.ToString()}'";
+
+            return $"datumVreme = '{DatumVreme}', ukupnaCenaRacuna = {UkupnaCenaRacuna}, sifraKorisnika = {Korisnik.SifraKorisnika}, statusRacuna = '{StatusRacuna.ToString()}'";
         }
 
         public override string ToString()
         {
-            return DatumVreme.ToString("dd/MM/yyyy HH:mm") + " " + Korisnik.Ime + " " + Korisnik.Prezime;
+            return DatumVreme.ToString("dd/MM/yyyy HH:mm") + " " + Korisnik.Ime + " " + Korisnik.Prezime + " Status: " + StatusRacuna;
         }
 
         public string OrderByQuery()

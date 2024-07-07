@@ -222,6 +222,7 @@ namespace FrmLogin.GUIControllers
 
             ucProizvod.txtNaziv.BackColor = Color.White;
             ucProizvod.cbTip.BackColor = Color.White;
+            ucProizvod.txtCena.BackColor = Color.White;
 
             if (string.IsNullOrEmpty(ucProizvod.txtNaziv.Text))
             {
@@ -240,6 +241,11 @@ namespace FrmLogin.GUIControllers
                 errors.Add("Cena mora biti broj veći od 0");
                 controls.Add(ucProizvod.txtCena);
             }
+            else if (ucProizvod.txtCena.Text.Contains(","))
+            {
+                errors.Add("Umesto znaka \",\" morate koristiti znak \".\"");
+                controls.Add(ucProizvod.txtCena);
+            }
 
             if (izabraniTip == TipProizvoda.Plocice)
             {
@@ -252,11 +258,26 @@ namespace FrmLogin.GUIControllers
                     errors.Add("Duzina plocice mora biti broj");
                     controls.Add(ucPlocice.txtDuzinaPlocice);
                 }
+                else if (ucPlocice.txtDuzinaPlocice.Text.Contains(","))
+                {
+                    if (!errors.Contains("Umesto znaka \",\" morate koristiti znak \".\""))
+                        errors.Add("Umesto znaka \",\" morate koristiti znak \".\"");
+
+                    controls.Add(ucPlocice.txtDuzinaPlocice);
+                }
+
                 if (!(double.TryParse(ucPlocice.txtSirinaPlocice.Text, out a)))
                 {
                     errors.Add("Sirina plocice mora biti broj");
                     controls.Add(ucPlocice.txtSirinaPlocice);
                 }
+                else if (ucPlocice.txtSirinaPlocice.Text.Contains(","))
+                {
+                    if (!errors.Contains("Umesto znaka \",\" morate koristiti znak \".\""))
+                        errors.Add("Umesto znaka \",\" morate koristiti znak \".\"");
+                    controls.Add(ucPlocice.txtSirinaPlocice);
+                }
+
                 if (string.IsNullOrEmpty(ucPlocice.txtMaterijalPlocice.Text))
                 {
                     errors.Add("Morate uneti materijal plocice");
@@ -278,6 +299,12 @@ namespace FrmLogin.GUIControllers
                 if (!double.TryParse(ucFarba.txtVelicinaPakovanja.Text, out a))
                 {
                     errors.Add("Velicina pakovanja mora biti broj");
+                    controls.Add(ucFarba.txtVelicinaPakovanja);
+                }
+                else if (ucFarba.txtVelicinaPakovanja.Text.Contains(","))
+                {
+                    if (!errors.Contains("Umesto znaka \",\" morate koristiti znak \".\""))
+                        errors.Add("Umesto znaka \",\" morate koristiti znak \".\"");
                     controls.Add(ucFarba.txtVelicinaPakovanja);
                 }
             }
@@ -306,9 +333,10 @@ namespace FrmLogin.GUIControllers
         {
 
             string message = "";
-            for (int i = 0; i < errors.Count; i++)
+            for (int i = 0; i < controls.Count; i++)
             {
-                message += errors[i] + "\n";
+                if (i < errors.Count)
+                    message += errors[i] + "\n";
                 controls[i].BackColor = Color.LightSalmon;
             }
 
@@ -441,7 +469,7 @@ namespace FrmLogin.GUIControllers
             Response response = Communication.Instance.ObrisiProizvod(izabraniProizvod);
             ucPrikazProizvoda.btnPretraga.PerformClick();
             if (!response.IsSuccessful)
-                response.Message = "Sistem nije uspeo da obrise izabrani proizvod";
+                response.Message = "Sistem nije uspeo da obriše izabrani proizvod";
             MessageBox.Show(response.Message);
         }
 

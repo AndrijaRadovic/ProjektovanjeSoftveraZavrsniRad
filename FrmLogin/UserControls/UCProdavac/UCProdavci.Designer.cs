@@ -50,6 +50,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.toolTipEmail = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipBrTelefona = new System.Windows.Forms.ToolTip(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtIme
@@ -221,6 +223,10 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "Br. telefona";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // UCProdavci
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -246,6 +252,7 @@
             this.Controls.Add(this.txtIme);
             this.Name = "UCProdavci";
             this.Size = new System.Drawing.Size(400, 477);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,5 +280,6 @@
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.ToolTip toolTipEmail;
         internal System.Windows.Forms.ToolTip toolTipBrTelefona;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

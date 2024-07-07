@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace FrmLogin.GUIControllers
 {
@@ -27,7 +28,6 @@ namespace FrmLogin.GUIControllers
         internal Control CreateUCProdavac(UCMode mode, Korisnik korisnik = null)
         {
             ucProdavac = new UCProdavci();
-            //setTabs();
             //ucProdavac.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             //ucProdavac.Dock = DockStyle.Right;
             //ucProdavac.Dock = DockStyle.Top;
@@ -43,25 +43,12 @@ namespace FrmLogin.GUIControllers
             else if (mode == UCMode.Update)
             {
                 korisnikZaIzmenu = korisnik;
-                //ucProdavac.btnOdustani.Text = "Nazad";
                 ucProdavac.btnDodajProdavca.Click += SacuvajIzmene;
                 ucProdavac.btnOdustani.Click += (s, e) => MainCoordinator.Instance.ShowPretragaProdavca();
             }
 
             return ucProdavac;
         }
-
-        //private void setTabs()
-        //{
-        //    ucProdavac.txtIme.TabIndex = 0;
-        //    ucProdavac.txtPrezime.TabIndex = 0;
-        //    ucProdavac.cbPol.TabIndex = 0;
-        //    ucProdavac.txtUsername.TabIndex = 0;
-        //    ucProdavac.txtPassword.TabIndex = 0;
-        //    ucProdavac.txtJmbg.TabIndex = 0;
-        //    ucProdavac.btnDodajProdavca.TabIndex = 0;
-        //    ucProdavac.btnOdustani.TabIndex = 0;
-        //}
 
         private void SacuvajIzmene(object sender, EventArgs e)
         {
@@ -152,9 +139,12 @@ namespace FrmLogin.GUIControllers
 
             if (string.IsNullOrEmpty(ucProdavac.txtIme.Text) || ucProdavac.txtIme.Text.Length < 2 || !ucProdavac.txtIme.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
+                //ucProdavac.errorProvider1.SetError(ucProdavac.txtIme, "Unesite ime");
                 errors.Add("Ime mora imati bar 2 karaktera i to isključivo slova!");
                 controls.Add(ucProdavac.txtIme);
             }
+            //else
+            //    ucProdavac.errorProvider1.Clear();
 
             if (string.IsNullOrEmpty(ucProdavac.txtPrezime.Text) || ucProdavac.txtPrezime.Text.Length < 2 || !ucProdavac.txtPrezime.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
@@ -173,7 +163,7 @@ namespace FrmLogin.GUIControllers
                 errors.Add("Username mora imati bar 2 karaktera i to isključivo slova i brojeve");
                 controls.Add(ucProdavac.txtUsername);
             }
-            else if (Communication.Instance.ProveriUsername(ucProdavac.txtUsername.Text) != null)
+            else if (mod == UCMode.Create && Communication.Instance.ProveriUsername(ucProdavac.txtUsername.Text) != null)
             {
                 errors.Add("Korisnik sa unetim username-om već postoji");
                 controls.Add(ucProdavac.txtUsername);
@@ -312,6 +302,10 @@ namespace FrmLogin.GUIControllers
 
             Korisnik izabraniKorisnik = (Korisnik)ucIzmeniProdavca.dgvKorisnici.SelectedRows[0].DataBoundItem;
             Response response = Communication.Instance.ObrisiKorisnika(izabraniKorisnik);
+            if (!response.IsSuccessful)
+            {
+                response.Message = "Sistem nije uspeo da obriše izabranog korisnika";
+            }
             ucIzmeniProdavca.btnPretragaIme.PerformClick();
             MessageBox.Show(response.Message);
         }

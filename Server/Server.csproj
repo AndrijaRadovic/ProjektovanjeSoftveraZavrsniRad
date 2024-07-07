@@ -71,7 +71,6 @@
     <Compile Include="SystemOperations\SOProizvod\PronadjiProizvodeSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\UcitajProizvodeSO.cs" />
     <Compile Include="SystemOperations\SOProizvod\UcitajProizvodSO.cs" />
-    <Compile Include="SystemOperations\SOProizvod\ZapamtiProizvodSO.cs" />
     <Compile Include="SystemOperations\SOProdavac\KreirajProdavcaSO.cs" />
     <Compile Include="SystemOperations\SORacun\IzmeniRacunSO.cs" />
     <Compile Include="SystemOperations\SORacun\KreirajRacunSO.cs" />
@@ -80,8 +79,6 @@
     <Compile Include="SystemOperations\SORacun\StornirajRacunSO.cs" />
     <Compile Include="SystemOperations\SORacun\UcitajRacuneSO.cs" />
     <Compile Include="SystemOperations\SORacun\UcitajRacunSO.cs" />
-    <Compile Include="SystemOperations\SOProdavac\ZapamtiProdavcaSO.cs" />
-    <Compile Include="SystemOperations\SORacun\ZapamtiRacunSO.cs" />
     <Compile Include="SystemOperations\SystemOperationBase.cs" />
     <EmbeddedResource Include="FrmServer.resx">
       <DependentUpon>FrmServer.cs</DependentUpon>

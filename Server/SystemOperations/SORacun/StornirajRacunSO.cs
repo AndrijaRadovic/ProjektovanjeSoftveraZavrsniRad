@@ -19,30 +19,13 @@ namespace Server.SystemOperations.SORacun
         public override void ExecuteConcreteOperation()
         {
             int id = broker.AddWithId(racun);
+            broker.Update(racun, "statusRacuna");
 
             foreach (StavkaRacuna sr in racun.StavkeRacuna)
             {
                 sr.Racun.SifraRacuna = id;
                 broker.Add(sr);
             }
-
-            // Druga opcija (ako mora ovde da se stornira)
-
-            //List<StavkaRacuna> noveStavke = new List<StavkaRacuna>(racun.StavkeRacuna);
-
-            //foreach (StavkaRacuna stavka in noveStavke)
-            //{
-            //    stavka.Kolicina *= -1;
-            //    stavka.UkupnaCenaStavke *= -1;
-            //}
-
-            //Racun stornoRacun = new Racun
-            //{
-            //    DatumVreme = DateTime.Now,
-            //    UkupnaCenaRacuna = racun.UkupnaCenaRacuna * -1,
-            //    // Korisnik = racun.Instance.Korisnik,           // Korisnik bi svakako morao da se podesi na frontu
-            //    StavkeRacuna = noveStavke
-            //};
         }
     }
 }

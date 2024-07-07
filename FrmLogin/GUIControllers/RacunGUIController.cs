@@ -62,7 +62,8 @@ namespace FrmLogin.GUIControllers
                 DatumVreme = DateTime.Now,
                 UkupnaCenaRacuna = ukupnaCena,
                 Korisnik = MainCoordinator.Instance.Korisnik,
-                StavkeRacuna = stavkeRacuna.ToList()
+                StavkeRacuna = stavkeRacuna.ToList(),
+                StatusRacuna = StatusRacuna.Izmenjen
             };
 
             foreach (StavkaRacuna sr in racun.StavkeRacuna)
@@ -95,7 +96,8 @@ namespace FrmLogin.GUIControllers
                 DatumVreme = DateTime.Now,
                 UkupnaCenaRacuna = ukupnaCena,
                 Korisnik = MainCoordinator.Instance.Korisnik,
-                StavkeRacuna = stavkeRacuna.ToList()
+                StavkeRacuna = stavkeRacuna.ToList(),
+                StatusRacuna = StatusRacuna.Aktivan
             };
 
             foreach (StavkaRacuna sr in racun.StavkeRacuna)
@@ -144,15 +146,34 @@ namespace FrmLogin.GUIControllers
             StavkaRacuna stavka = new StavkaRacuna
             {
                 Proizvod = (Proizvod)ucRacun.cbProizvod.SelectedItem,
-                RedniBroj = trenutniIndeks++,
+                //RedniBroj = trenutniIndeks++,
                 Kolicina = (int)ucRacun.numKolicina.Value,
                 UkupnaCenaStavke = ((Proizvod)ucRacun.cbProizvod.SelectedItem).Cena * (double)ucRacun.numKolicina.Value
             };
-            stavkeRacuna.Add(stavka);
+
+            DodajStavkuUListu(stavka);
+            ucRacun.dgvStavkeRacuna.Refresh();
+
             ukupnaCena += stavka.UkupnaCenaStavke;
             ucRacun.txtUkupnaCena.Text = ukupnaCena.ToString("n2");
 
             ucRacun.cbProizvod.BackColor = Color.White;
+        }
+
+        private void DodajStavkuUListu(StavkaRacuna stavka)
+        {
+            foreach(StavkaRacuna sr in stavkeRacuna)
+            {
+                if(sr.Proizvod.SifraProizvoda == stavka.Proizvod.SifraProizvoda)
+                {
+                    sr.Kolicina += stavka.Kolicina;
+                    sr.UkupnaCenaStavke += stavka.UkupnaCenaStavke;
+                    return;
+                }
+            }
+
+            stavka.RedniBroj = trenutniIndeks++;
+            stavkeRacuna.Add(stavka);
         }
 
         private bool ValidacijaForme()
@@ -213,6 +234,7 @@ namespace FrmLogin.GUIControllers
         private void prepareDgv(Control control)
         {
             ((DataGridView)control).DataSource = stavkeRacuna;
+            ((DataGridView)control).AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             //((DataGridView)control).Columns.Remove("Racun");
             ((DataGridView)control).Columns["TableName"].Visible = false;
@@ -230,8 +252,11 @@ namespace FrmLogin.GUIControllers
         internal Control createUCPrikazRacuna(Uloga uloga)
         {
             ucPrikazRacuna = new UCPrikazRacuna();
-            
-            if(uloga == Uloga.Prodavac)
+            //ucPrikazRacuna.dtpDatumRacuna.Format = DateTimePickerFormat.Custom;
+            //ucPrikazRacuna.dtpDatumRacuna.CustomFormat = "dddd dd/MM/yyyy";
+
+
+            if (uloga == Uloga.Prodavac)
             {
                 ucPrikazRacuna.btnIzmeni.Visible = false;
                 ucPrikazRacuna.btnStorniraj.Visible = false;
@@ -258,9 +283,16 @@ namespace FrmLogin.GUIControllers
                 return;
             }
 
-            if(MessageBox.Show("Da li ste sigurni da želite da stornirate račun?", "Storniranje računa", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            Racun izabraniRacun = (Racun)ucPrikazRacuna.cbRacuni.SelectedItem;
+
+            if (izabraniRacun.StatusRacuna == StatusRacuna.Storno || izabraniRacun.StatusRacuna == StatusRacuna.Storniran)
             {
-                Racun izabraniRacun = (Racun)ucPrikazRacuna.cbRacuni.SelectedItem;
+                MessageBox.Show("Nije moguće stornirati stornirane i storno račune", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (MessageBox.Show("Da li ste sigurni da želite da stornirate račun?", "Storniranje računa", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
                 List<StavkaRacuna> noveStavke = new List<StavkaRacuna>(izabraniRacun.StavkeRacuna);
 
                 foreach (StavkaRacuna stavka in noveStavke)
@@ -271,14 +303,14 @@ namespace FrmLogin.GUIControllers
 
                 Racun stornoRacun = new Racun
                 {
+                    SifraRacuna = izabraniRacun.SifraRacuna,
                     DatumVreme = DateTime.Now,
                     UkupnaCenaRacuna = izabraniRacun.UkupnaCenaRacuna * -1,
                     Korisnik = MainCoordinator.Instance.Korisnik,
-                    StavkeRacuna = noveStavke
+                    StavkeRacuna = noveStavke,
+                    StatusRacuna = StatusRacuna.Storno
                 };
 
-                //Response response = Communication.Instance.DodajRacun(stornoRacun);
-                //MessageBox.Show(response.Message);
                 Response response = Communication.Instance.StornirajRacun(stornoRacun);
                 MessageBox.Show(response.Message);
             }
@@ -289,6 +321,13 @@ namespace FrmLogin.GUIControllers
         private void PrikaziFormuZaIzmenu(object sender, EventArgs e)
         {
             Racun racun = (Racun)ucPrikazRacuna.cbRacuni.SelectedItem;
+
+            if(racun.StatusRacuna != StatusRacuna.Aktivan)
+            {
+                MessageBox.Show("Moguće je izmeniti samo aktivan račun", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             racun = Communication.Instance.PretraziRacunePoId(racun.SifraRacuna);
             MainCoordinator.Instance.ShowRacunPanel(UCMode.Update, racun);
         }

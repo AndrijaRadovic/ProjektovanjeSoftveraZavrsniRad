@@ -54,18 +54,16 @@ namespace FrmLogin.GUIControllers
                 return;
             }
 
-            //Korisnik k = Communication.Instance.Login(frmLogin.txtUsername.Text, frmLogin.txtPassword.Text);
             Korisnik k = Communication.Instance.Login(frmLogin.txtUsername.Text, HashPassword(frmLogin.txtPassword.Text.Trim()));
             if (k != null)
             {
-                //MessageBox.Show("Sifra: " + k.Password);
                 frmLogin.Hide();
                 MainCoordinator.Instance.ShowFrmMain(k);
                 frmLogin.Close();
             }
             else
             {
-                MessageBox.Show("Korisničko ime ili lozinka nisu tačni", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Neuspešna prijava", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

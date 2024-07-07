@@ -56,6 +56,8 @@ namespace FrmLogin.Forms
 
         private void Odjava()
         {
+            Communication.Instance.Close();
+
             Process.Start(Process.GetCurrentProcess().MainModule.FileName);
 
             Environment.Exit(0);

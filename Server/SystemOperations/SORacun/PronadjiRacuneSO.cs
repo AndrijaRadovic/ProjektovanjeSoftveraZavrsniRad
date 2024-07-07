@@ -27,7 +27,6 @@ namespace Server.SystemOperations.SORacun
                 ((Racun)entity).StavkeRacuna = broker.GetAllByFilter(new StavkaRacuna(), ((Racun)entity).SifraRacuna.ToString(), "sifraRacuna").Cast<StavkaRacuna>().ToList();
             }
 
-            // Sme li ovo
             foreach (IEntity entity in Result)
             {
                 foreach (StavkaRacuna stavka in ((Racun)entity).StavkeRacuna)

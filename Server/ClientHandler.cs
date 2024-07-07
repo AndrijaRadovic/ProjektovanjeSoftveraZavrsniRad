@@ -43,6 +43,7 @@ namespace Server
             }
             catch (Exception ex)
             {
+                ServerCommunication.clients.Remove(this);
                 Debug.WriteLine(">>> " + ex.Message);
             }
         }
@@ -57,6 +58,16 @@ namespace Server
                     case Operation.Login:
                         {
                             response.Result = ServerController.Instance.Login((Korisnik)request.Argument);
+                            foreach(ClientHandler ch in ServerCommunication.clients)
+                            {
+                                if(ch.prijavljeniKorisnik != null && response.Result != null && ch.prijavljeniKorisnik.SifraKorisnika == ((Korisnik)response.Result).SifraKorisnika)
+                                {
+                                    response.Message = "Ovaj korisnik je vec prijavljen";
+                                    response.Result = null;
+                                    response.IsSuccessful = false;
+                                    return response;
+                                }
+                            }
                             this.prijavljeniKorisnik = (Korisnik)response.Result;
                         }
                         break;
