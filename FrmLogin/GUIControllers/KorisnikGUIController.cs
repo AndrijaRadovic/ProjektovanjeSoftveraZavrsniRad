@@ -28,10 +28,6 @@ namespace FrmLogin.GUIControllers
         internal Control CreateUCProdavac(UCMode mode, Korisnik korisnik = null)
         {
             ucProdavac = new UCProdavci();
-            //ucProdavac.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            //ucProdavac.Dock = DockStyle.Right;
-            //ucProdavac.Dock = DockStyle.Top;
-            //ucProdavac.Dock = DockStyle.Right;
 
             PrepareFormProdavac(mode, korisnik);
 
@@ -289,9 +285,16 @@ namespace FrmLogin.GUIControllers
 
         private void ObrisiProdavca(object sender, EventArgs e)
         {
+
             if (ucIzmeniProdavca.dgvKorisnici.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Mora biti izabran tacno jedan korisnik", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (((Korisnik)ucIzmeniProdavca.dgvKorisnici.SelectedRows[0].DataBoundItem).Uloga == Uloga.Administrator)
+            {
+                MessageBox.Show("Nije moguce obrisati administratora", "GRESKA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
